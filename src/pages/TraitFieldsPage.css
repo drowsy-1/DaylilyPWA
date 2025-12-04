@@ -1,0 +1,189 @@
+.trait-fields-page {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+
+.trait-fields-header {
+  margin-bottom: 2rem;
+}
+
+.trait-fields-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.trait-fields-header p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 1rem;
+}
+
+.trait-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trait-area {
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.area-header {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: rgba(100, 150, 200, 0.15);
+  border: none;
+  color: inherit;
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 0.2s;
+}
+
+.area-header:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.expand-icon {
+  font-size: 0.9rem;
+  width: 20px;
+  display: inline-block;
+}
+
+.area-name {
+  flex: 1;
+}
+
+.area-count {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.trait-groups {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trait-group {
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(100, 150, 200, 0.15);
+}
+
+.group-header {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: none;
+  color: inherit;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.group-header:hover {
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.group-name {
+  flex: 1;
+}
+
+.group-count {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.trait-list {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trait-item {
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 0.2s;
+}
+
+.trait-item:hover {
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.trait-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.trait-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.trait-field {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  font-family: 'Courier New', monospace;
+}
+
+.trait-type {
+  font-size: 0.85rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(100, 150, 200, 0.2);
+  border-radius: 12px;
+  white-space: nowrap;
+}
+
+@media (min-width: 768px) {
+  .trait-fields-page {
+    padding: 2rem;
+  }
+
+  .trait-fields-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .trait-areas {
+    gap: 1.5rem;
+  }
+
+  .trait-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .trait-list {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}

@@ -1,0 +1,33 @@
+.app {
+  min-height: 100vh;
+  padding-bottom: 80px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app.light {
+  background-color: #e8f0f8;
+  color: #1a1a1a;
+}
+
+.app.dark {
+  background-color: #1a1a1a;
+  color: #e8f0f8;
+}
+
+.content {
+  padding: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: inherit;
+}
+
+@media (min-width: 768px) {
+  .app {
+    padding-bottom: 90px;
+  }
+  
+  .content {
+    max-width: 800px;
+    padding: 2rem;
+  }
+}
