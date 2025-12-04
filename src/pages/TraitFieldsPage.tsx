@@ -2,11 +2,7 @@ import { useState } from 'react';
 import './TraitFieldsPage.css';
 import { traitData } from '../data/traitData';
 
-interface TraitFieldsPageProps {
-  isDark: boolean;
-}
-
-function TraitFieldsPage({ isDark }: TraitFieldsPageProps) {
+function TraitFieldsPage() {
   const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set());
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 

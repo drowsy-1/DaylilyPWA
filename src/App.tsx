@@ -55,7 +55,7 @@ function App() {
       ) : currentPage === 'trait-fields' ? (
         <>
           <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
-          <TraitFieldsPage isDark={isDark} />
+          <TraitFieldsPage />
         </>
       ) : null}
 
