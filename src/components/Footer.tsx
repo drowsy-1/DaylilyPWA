@@ -44,9 +44,31 @@ function Footer({ isMenuOpen, onToggleMenu, onNavigate }: FooterProps) {
       )}
       
       <footer className="footer">
-        <button className="footer-btn" aria-label="Home">
-          <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="16" cy="16" r="14" />
+        <button className="footer-btn" onClick={() => onNavigate('home')} aria-label="Home">
+          <svg width="38" height="38" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+            <defs>
+              <path id="petal" d="M50 5C 42 22, 44 36, 46 52L 54 52C 56 36, 58 22, 50 5 Z" />
+              <path id="sepal" d="M50 0C 38 18, 40 38, 44 56L 56 56C 60 38, 62 18, 50 0 Z" />
+            </defs>
+            
+            {/* Alternating petals and sepals */}
+            <use href="#petal" transform="rotate(0 50 50)" />
+            <use href="#sepal" transform="rotate(60 50 50)" />
+            <use href="#petal" transform="rotate(120 50 50)" />
+            <use href="#sepal" transform="rotate(180 50 50)" />
+            <use href="#petal" transform="rotate(240 50 50)" />
+            <use href="#sepal" transform="rotate(300 50 50)" />
+            
+            {/* Center circle */}
+            <circle cx="50" cy="50" r="4.5" />
+            
+            {/* Stamens */}
+            <line x1="50" y1="50" x2="50" y2="32" />
+            <circle cx="50" cy="31" r="1.6" />
+            <line x1="46" y1="50" x2="43" y2="36" />
+            <circle cx="42.5" cy="35" r="1.6" />
+            <line x1="54" y1="50" x2="57" y2="36" />
+            <circle cx="57.5" cy="35" r="1.6" />
           </svg>
         </button>
         
