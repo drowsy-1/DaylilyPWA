@@ -28,6 +28,10 @@
   transform: scale(1.05);
 }
 
+.app.dark .theme-toggle svg {
+  stroke: #ffffff;
+}
+
 @media (min-width: 768px) {
   .header {
     max-width: 800px;

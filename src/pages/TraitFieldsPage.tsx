@@ -89,6 +89,12 @@ function TraitFieldsPage() {
           );
         })}
       </div>
+
+      <div className="trait-actions">
+        <button className="add-edit-btn" onClick={() => console.log('Add/Edit trait')}>
+          + Add / Edit Custom Trait
+        </button>
+      </div>
     </div>
   );
 }

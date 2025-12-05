@@ -187,3 +187,43 @@
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   }
 }
+
+.trait-actions {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding: 0 1rem;
+}
+
+.add-edit-btn {
+  width: 100%;
+  padding: 1.25rem;
+  background: rgba(100, 150, 200, 0.2);
+  border: 2px dashed rgba(100, 150, 200, 0.5);
+  border-radius: 12px;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-edit-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.7);
+  transform: translateY(-2px);
+}
+
+.add-edit-btn:active {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .trait-actions {
+    padding: 0 2rem;
+  }
+  
+  .add-edit-btn {
+    padding: 1.5rem;
+    font-size: 1.1rem;
+  }
+}

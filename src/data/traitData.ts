@@ -21,13 +21,15 @@ export const traitData: TraitArea[] = [
       {
         name: 'Core Information',
         traits: [
+          { field: 'type', label: 'Type', type: 'select' },
           { field: 'variety_name', label: 'Variety Name', type: 'text' },
+          { field: 'nickname', label: 'Nickname', type: 'text' },
           { field: 'seedling_number', label: 'Seedling Number', type: 'text' },
-          { field: 'registration_number', label: 'Registration Number', type: 'text' },
-          { field: 'hybridizer', label: 'Hybridizer', type: 'text' },
+          { field: 'location', label: 'Location', type: 'text' },
           { field: 'year_introduced', label: 'Year Introduced', type: 'number' },
+          { field: 'first_year_on_record', label: '1st Year on Record', type: 'number' },
           { field: 'ploidy', label: 'Ploidy', type: 'select' },
-          { field: 'foliage_type', label: 'Foliage Type', type: 'select' },
+          { field: 'hybridizer_name', label: 'Hybridizer Name', type: 'text' },
         ],
       },
     ],
@@ -38,6 +40,7 @@ export const traitData: TraitArea[] = [
       {
         name: 'Foliage Characteristics',
         traits: [
+          { field: 'foliage_type', label: 'Foliage Type', type: 'select' },
           { field: 'foliage_height', label: 'Foliage Height', type: 'number' },
           { field: 'foliage_color', label: 'Foliage Color', type: 'text' },
           { field: 'foliage_density', label: 'Foliage Density', type: 'select' },
@@ -47,12 +50,15 @@ export const traitData: TraitArea[] = [
           { field: 'leaf_cross_section', label: 'Leaf Cross Section', type: 'select' },
           { field: 'leaf_glossiness', label: 'Leaf Glossiness', type: 'select' },
           { field: 'spring_sickness_present', label: 'Spring Sickness Present', type: 'boolean' },
+          { field: 'drought_dormancy', label: 'Drought Dormancy', type: 'boolean' },
+          { field: 'early_fall_dormancy', label: 'Early Fall Dormancy', type: 'boolean' },
+          { field: 'late_season_foliage_quality', label: 'Late Season Foliage Quality', type: 'select' },
         ],
       },
       {
         name: 'Clump & Growth Habits',
         traits: [
-          { field: 'clump_size', label: 'Clump Size', type: 'select' },
+          { field: 'relative_clump_size', label: 'Relative Clump Size', type: 'select' },
           { field: 'fan_count', label: 'Fan Count', type: 'number' },
           { field: 'fan_multiplication_rate', label: 'Fan Multiplication Rate', type: 'select' },
           { field: 'fan_fragility', label: 'Fan Fragility', type: 'boolean' },
@@ -61,16 +67,12 @@ export const traitData: TraitArea[] = [
           { field: 'container_performance', label: 'Container Performance', type: 'select' },
         ],
       },
-    ],
-  },
-  {
-    name: '3. Scape Characteristics',
-    groups: [
       {
         name: 'Scape Physical Traits',
         traits: [
           { field: 'scape_height', label: 'Scape Height (inches)', type: 'number' },
-          { field: 'scape_strength', label: 'Scape Strength (1-10)', type: 'rating' },
+          { field: 'scape_strength_rigidity', label: 'Scape Strength Rigidity (1-10)', type: 'rating' },
+          { field: 'scape_base_connection_strength', label: 'Scape Base Connection Strength', type: 'select' },
           { field: 'scape_color', label: 'Scape Color', type: 'text' },
           { field: 'scape_angle', label: 'Scape Angle', type: 'select' },
           { field: 'scape_distance_from_foliage', label: 'Scape Distance from Foliage', type: 'select' },
@@ -83,33 +85,35 @@ export const traitData: TraitArea[] = [
           { field: 'branch_form', label: 'Branch Form', type: 'select' },
           { field: 'branch_spacing', label: 'Branch Spacing', type: 'select' },
           { field: 'alternating_branches', label: 'Alternating Branches', type: 'boolean' },
-          { field: 'terminal_budding', label: 'Terminal Budding', type: 'boolean' },
           { field: 'lateral_budding', label: 'Lateral Budding', type: 'boolean' },
           { field: 'self_branching_secondary', label: 'Self Branching Secondary', type: 'boolean' },
         ],
       },
-    ],
-  },
-  {
-    name: '4. Bud Traits',
-    groups: [
       {
-        name: 'Bud Characteristics',
+        name: 'Bud Traits',
         traits: [
           { field: 'bud_count_per_scape', label: 'Bud Count per Scape', type: 'number' },
           { field: 'bud_spacing', label: 'Bud Spacing', type: 'select' },
           { field: 'bud_size', label: 'Bud Size', type: 'select' },
-          { field: 'bud_color', label: 'Bud Color', type: 'text' },
+          { field: 'bud_exterior_color', label: 'Bud Exterior Color', type: 'text' },
           { field: 'bud_bumps_thrips_indicator', label: 'Bud Bumps (Thrips Indicator)', type: 'boolean' },
-          { field: 'bud_building_type', label: 'Bud Building Type', type: 'select' },
+          { field: 'terminal_budding', label: 'Terminal Budding', type: 'boolean' },
           { field: 'bud_building_in_adverse_conditions', label: 'Bud Building in Adverse Conditions', type: 'boolean' },
           { field: 'bud_drop_tendency', label: 'Bud Drop Tendency', type: 'select' },
+        ],
+      },
+      {
+        name: 'Rebloom Characteristics',
+        traits: [
+          { field: 'rebloom', label: 'Rebloom', type: 'boolean' },
+          { field: 'instant_rebloom', label: 'Instant Rebloom', type: 'boolean' },
+          { field: 'rebloom_timing', label: 'Rebloom Timing', type: 'select' },
         ],
       },
     ],
   },
   {
-    name: '5. Bloom Timing & Behavior',
+    name: '3. Bloom Timing & Behavior',
     groups: [
       {
         name: 'Season & Duration',
@@ -122,19 +126,11 @@ export const traitData: TraitArea[] = [
         ],
       },
       {
-        name: 'Rebloom Characteristics',
-        traits: [
-          { field: 'rebloom', label: 'Rebloom', type: 'boolean' },
-          { field: 'instant_rebloom', label: 'Instant Rebloom', type: 'boolean' },
-          { field: 'rebloom_timing', label: 'Rebloom Timing', type: 'select' },
-        ],
-      },
-      {
         name: 'Daily Bloom Behavior',
         traits: [
           { field: 'opening_speed', label: 'Opening Speed', type: 'select' },
           { field: 'opening_time_of_day', label: 'Opening Time of Day', type: 'time' },
-          { field: 'sun_open_failures', label: 'Sun Open Failures', type: 'boolean' },
+          { field: 'open_failures', label: 'Open Failures', type: 'boolean' },
           { field: 'closing_time', label: 'Closing Time', type: 'time' },
           { field: 'rain_response', label: 'Rain Response', type: 'select' },
         ],
@@ -142,7 +138,7 @@ export const traitData: TraitArea[] = [
     ],
   },
   {
-    name: '6. Flower Morphology',
+    name: '4. Flower Characteristics',
     groups: [
       {
         name: 'Main Form Classification',
@@ -220,11 +216,6 @@ export const traitData: TraitArea[] = [
           { field: 'sculpting_type', label: 'Sculpting Type', type: 'select' },
         ],
       },
-    ],
-  },
-  {
-    name: '7. Color Characteristics',
-    groups: [
       {
         name: 'Base Color',
         traits: [
@@ -257,9 +248,9 @@ export const traitData: TraitArea[] = [
         name: 'Edge/Picotee',
         traits: [
           { field: 'edge_color', label: 'Edge Color', type: 'text' },
-          { field: 'edge_width', label: 'Edge Width', type: 'number' },
-          { field: 'edge_type', label: 'Edge Type', type: 'select' },
-          { field: 'edge_consistency', label: 'Edge Consistency', type: 'select' },
+          { field: 'edge_width_color', label: 'Edge Width', type: 'number' },
+          { field: 'edge_type_color', label: 'Edge Type', type: 'select' },
+          { field: 'edge_consistency_color', label: 'Edge Consistency', type: 'select' },
         ],
       },
       {
@@ -301,7 +292,33 @@ export const traitData: TraitArea[] = [
     ],
   },
   {
-    name: '8. Reproductive Traits',
+    name: '5. Parentage',
+    groups: [
+      {
+        name: 'Main Parentage',
+        traits: [
+          { field: 'pod_parent', label: 'Pod Parent', type: 'text' },
+          { field: 'pollen_parent', label: 'Pollen Parent', type: 'text' },
+          { field: 'registered_pedigree', label: 'Registered Pedigree', type: 'text' },
+        ],
+      },
+    ],
+  },
+  {
+    name: '6. Inventory',
+    groups: [
+      {
+        name: 'Inventory Management',
+        traits: [
+          { field: 'availability', label: 'Availability', type: 'select' },
+          { field: 'price', label: 'Price', type: 'number' },
+          { field: 'status', label: 'Status', type: 'select' },
+        ],
+      },
+    ],
+  },
+  {
+    name: '7. Reproductive Traits',
     groups: [
       {
         name: 'Pollen Fertility',
