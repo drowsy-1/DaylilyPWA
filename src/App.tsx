@@ -6,15 +6,21 @@ import TabGroup from './components/TabGroup';
 import ObservationsTab from './components/ObservationsTab';
 import Footer from './components/Footer';
 import TraitFieldsPage from './pages/TraitFieldsPage';
+import ObservationCyclesPage from './pages/ObservationCyclesPage';
+import InventoryPage from './pages/InventoryPage';
+import { getInventoryStats } from './data/mockInventory';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
-type Page = 'home' | 'trait-fields';
+type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('observations');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState<Page>('home');
+
+  // Get real inventory stats
+  const inventoryStats = getInventoryStats();
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -33,6 +39,14 @@ function App() {
     setIsMenuOpen(false);
   };
 
+  const handleTabChange = (tab: Tab) => {
+    if (tab === 'inventory') {
+      handleNavigate('inventory');
+    } else {
+      setActiveTab(tab);
+    }
+  };
+
   return (
     <div className={`app ${isDark ? 'dark' : 'light'}`}>
       {currentPage === 'home' ? (
@@ -41,21 +55,31 @@ function App() {
           <WorkspaceOverview 
             name="Demo Daylilies" 
             location="place, state"
-            varieties={0}
-            seedlings={0}
-            totalActive={0}
+            varieties={inventoryStats.hybridizers.riceJA + inventoryStats.hybridizers.reeder + inventoryStats.hybridizers.mahieu}
+            seedlings={inventoryStats.total - (inventoryStats.hybridizers.riceJA + inventoryStats.hybridizers.reeder + inventoryStats.hybridizers.mahieu)}
+            totalActive={inventoryStats.inStock}
           />
-          <TabGroup activeTab={activeTab} onTabChange={setActiveTab} />
+          <TabGroup activeTab={activeTab} onTabChange={handleTabChange} />
           
           <main className="content">
             {activeTab === 'observations' && <ObservationsTab />}
-            {activeTab === 'inventory' && <div>Inventory Content</div>}
+            {activeTab === 'breeding' && <div>Breeding Content</div>}
           </main>
         </>
       ) : currentPage === 'trait-fields' ? (
         <>
           <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
           <TraitFieldsPage />
+        </>
+      ) : currentPage === 'observation-cycles' ? (
+        <>
+          <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
+          <ObservationCyclesPage />
+        </>
+      ) : currentPage === 'inventory' ? (
+        <>
+          <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
+          <InventoryPage onNavigate={handleNavigate} />
         </>
       ) : null}
 

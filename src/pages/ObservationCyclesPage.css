@@ -1,0 +1,898 @@
+.observation-cycles-page {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+}
+
+.cycles-header {
+  margin-bottom: 2rem;
+}
+
+.cycles-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.cycles-header p {
+  margin: 0;
+  opacity: 0.8;
+  font-size: 1rem;
+}
+
+.cycles-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 12px;
+  margin-bottom: 2rem;
+  border: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.control-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.toggle-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.toggle-control input[type="checkbox"] {
+  display: none;
+}
+
+.toggle-slider {
+  width: 44px;
+  height: 24px;
+  background: rgba(100, 150, 200, 0.3);
+  border-radius: 12px;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-control input[type="checkbox"]:checked + .toggle-slider {
+  background: rgba(100, 150, 200, 0.8);
+}
+
+.toggle-control input[type="checkbox"]:checked + .toggle-slider::before {
+  transform: translateX(20px);
+}
+
+.toggle-label {
+  font-weight: 500;
+  color: inherit;
+}
+
+.reset-defaults-btn {
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px solid rgba(100, 150, 200, 0.4);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.reset-defaults-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+  transform: translateY(-1px);
+}
+
+.control-stats {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trait-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.trait-area {
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.area-header {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: rgba(100, 150, 200, 0.15);
+  border: none;
+  color: inherit;
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 0.2s;
+}
+
+.area-header:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.expand-icon {
+  font-size: 0.9rem;
+  width: 20px;
+  display: inline-block;
+}
+
+.area-name {
+  flex: 1;
+}
+
+.area-count {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.timing-btn {
+  background: rgba(100, 150, 200, 0.3);
+  border: 1px solid rgba(100, 150, 200, 0.5);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.timing-btn:hover {
+  background: rgba(100, 150, 200, 0.4);
+  transform: translateY(-1px);
+}
+
+.timing-btn.small {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.trait-groups {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trait-group {
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(100, 150, 200, 0.15);
+}
+
+.group-header {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: none;
+  color: inherit;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: background-color 0.2s;
+}
+
+.group-header:hover {
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.group-name {
+  flex: 1;
+}
+
+.group-count {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.trait-list {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trait-item {
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 0.2s;
+}
+
+.trait-item:hover {
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.trait-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.trait-name {
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.trait-timing {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  font-style: italic;
+}
+
+/* Time Selector Modal */
+.time-selector-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 200;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.time-selector-panel {
+  background: inherit;
+  border-radius: 20px;
+  border: 2px solid rgba(100, 150, 200, 0.5);
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+.app.light .time-selector-panel {
+  background: #e8f0f8;
+}
+
+.app.dark .time-selector-panel {
+  background: #1a1a1a;
+}
+
+.selector-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.3);
+}
+
+.selector-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.close-btn {
+  background: rgba(100, 150, 200, 0.2);
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+}
+
+.time-grid {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.year-selector h4,
+.season-selector h4,
+.month-selector h4,
+.week-selector h4 {
+  margin: 0 0 0.75rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.year-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.year-header h4 {
+  margin: 0;
+}
+
+.add-year-btn {
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px solid rgba(100, 150, 200, 0.4);
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.add-year-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+  transform: translateY(-1px);
+}
+
+.year-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.5rem;
+}
+
+.year-btn {
+  padding: 0.75rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.year-btn:hover {
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.year-btn.selected {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.season-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.season-btn {
+  padding: 0.75rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.season-btn:hover {
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.season-btn.selected {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.month-btn {
+  padding: 0.75rem 0.5rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  font-size: 0.85rem;
+}
+
+.month-btn:hover {
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.month-btn.selected {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.week-indicator {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: rgba(100, 150, 200, 0.6);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  color: white;
+}
+
+.week-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.week-header h4 {
+  margin: 0;
+}
+
+.week-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.week-action-btn {
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px solid rgba(100, 150, 200, 0.4);
+  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+}
+
+.week-action-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+}
+
+.week-summary {
+  margin-top: 0.75rem;
+  padding: 0.5rem;
+  background: rgba(100, 150, 200, 0.1);
+  border-radius: 6px;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.week-buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+.week-btn {
+  padding: 0.5rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.8rem;
+}
+
+.week-btn:hover {
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.week-btn.selected {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.selector-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid rgba(100, 150, 200, 0.3);
+}
+
+.cancel-btn,
+.save-btn {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid rgba(100, 150, 200, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.cancel-btn {
+  background: none;
+  color: inherit;
+}
+
+.cancel-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.save-btn {
+  background: rgba(100, 150, 200, 0.3);
+  color: inherit;
+}
+
+.save-btn:hover {
+  background: rgba(100, 150, 200, 0.4);
+  transform: translateY(-1px);
+}
+
+@media (min-width: 768px) {
+  .observation-cycles-page {
+    padding: 2rem;
+  }
+
+  .cycles-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .trait-areas {
+    gap: 1.5rem;
+  }
+
+  .trait-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 0.75rem;
+  }
+
+  .month-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .trait-list {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  }
+}
+
+/* Trait item controls */
+.trait-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.1);
+}
+
+.trait-item.hidden-field {
+  opacity: 0.5;
+  background: rgba(200, 100, 100, 0.05);
+}
+
+.trait-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.trait-name {
+  font-weight: 500;
+  color: inherit;
+}
+
+.trait-timing {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  color: inherit;
+}
+
+.trait-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-top: -0.25rem; /* Pull the controls up to align with trait name */
+}
+
+.mini-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.8rem;
+}
+
+.mini-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.mini-toggle-slider {
+  width: 32px;
+  height: 18px;
+  background: rgba(100, 150, 200, 0.3);
+  border-radius: 9px;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.mini-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.mini-toggle input[type="checkbox"]:checked + .mini-toggle-slider {
+  background: rgba(255, 165, 0, 0.8);
+}
+
+.mini-toggle input[type="checkbox"]:checked + .mini-toggle-slider::before {
+  transform: translateX(14px);
+}
+
+.mini-toggle-label {
+  font-weight: 500;
+  color: inherit;
+}
+
+.hide-btn {
+  background: none;
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 6px;
+  padding: 0.25rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  color: rgba(200, 100, 100, 0.8);
+}
+
+.hide-btn:hover {
+  background: rgba(200, 100, 100, 0.1);
+  border-color: rgba(200, 100, 100, 0.5);
+}
+
+.hide-btn.show-btn {
+  color: rgba(100, 150, 200, 0.8);
+  border-color: rgba(100, 150, 200, 0.3);
+}
+
+.hide-btn.show-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+/* Time selector cycle options */
+.cycle-options {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  background: rgba(100, 150, 200, 0.05);
+}
+
+.cycle-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.cycle-toggle input[type="checkbox"] {
+  display: none;
+}
+
+.cycle-toggle-slider {
+  width: 44px;
+  height: 24px;
+  background: rgba(100, 150, 200, 0.3);
+  border-radius: 12px;
+  position: relative;
+  transition: background-color 0.3s;
+}
+
+.cycle-toggle-slider::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: white;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.cycle-toggle input[type="checkbox"]:checked + .cycle-toggle-slider {
+  background: rgba(255, 165, 0, 0.8);
+}
+
+.cycle-toggle input[type="checkbox"]:checked + .cycle-toggle-slider::before {
+  transform: translateX(20px);
+}
+
+.cycle-toggle-label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cycle-toggle-label small {
+  opacity: 0.7;
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cycles-controls {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+  }
+  
+  .control-stats {
+    justify-content: space-between;
+  }
+  
+  .trait-controls {
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: flex-end;
+  }
+  
+  .trait-item {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+}
+/* Hide confirmation dialog */
+.confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.confirmation-dialog {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.confirmation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  background: rgba(200, 100, 100, 0.05);
+}
+
+.confirmation-header h3 {
+  margin: 0;
+  color: rgba(200, 100, 100, 0.9);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.confirmation-content {
+  padding: 2rem;
+}
+
+.confirmation-content p {
+  margin: 0 0 1rem 0;
+  line-height: 1.5;
+}
+
+.confirmation-content p:last-child {
+  margin-bottom: 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.confirmation-actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid rgba(100, 150, 200, 0.2);
+  background: rgba(100, 150, 200, 0.05);
+  justify-content: flex-end;
+}
+
+.cancel-btn {
+  background: none;
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.cancel-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.confirm-btn {
+  background: rgba(200, 100, 100, 0.8);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.confirm-btn:hover {
+  background: rgba(200, 100, 100, 0.9);
+  transform: translateY(-1px);
+}

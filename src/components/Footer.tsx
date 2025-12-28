@@ -3,20 +3,21 @@ import './Footer.css';
 interface FooterProps {
   isMenuOpen: boolean;
   onToggleMenu: () => void;
-  onNavigate: (page: 'home' | 'trait-fields') => void;
+  onNavigate: (page: 'home' | 'trait-fields' | 'observation-cycles' | 'inventory') => void;
 }
 
 function Footer({ isMenuOpen, onToggleMenu, onNavigate }: FooterProps) {
   const menuItems = [
-    { label: 'Logout', action: () => console.log('Logout') },
-    { label: 'Account', action: () => console.log('Account') },
-    { label: 'Settings', action: () => console.log('Settings') },
-    { label: 'Observation Cycle', action: () => console.log('Observation Cycle') },
-    { label: 'Trait Fields', action: () => onNavigate('trait-fields') },
+    { label: 'Home', action: () => onNavigate('home') },
     { label: 'Observations', action: () => onNavigate('home') },
-    { label: 'Inventory', action: () => console.log('Inventory') },
+    { label: 'Inventory', action: () => onNavigate('inventory') },
     { label: 'Breeding', action: () => console.log('Breeding') },
     { label: 'Store', action: () => console.log('Store') },
+    { label: 'Trait Fields', action: () => onNavigate('trait-fields') },
+    { label: 'Observation Cycle', action: () => onNavigate('observation-cycles') },
+    { label: 'Settings', action: () => console.log('Settings') },
+    { label: 'Account', action: () => console.log('Account') },
+    { label: 'Logout', action: () => console.log('Logout') },
   ];
 
   return (
