@@ -67,7 +67,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'first_year_on_record', 
             label: '1st Year on Record', 
-            type: 'number',
+            type: 'number', // int four digits
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
           { 
@@ -95,19 +95,19 @@ export const traitData: TraitArea[] = [
           { 
             field: 'foliage_type', 
             label: 'Foliage Type', 
-            type: 'select', // evergreen, semi evergreen, dormant
+            type: 'select', // evergreen, semi-evergreen, dormant
             defaultTiming: { season: 'Spring' }
           },
           { 
             field: 'foliage_height', 
             label: 'Foliage Height', 
-            type: 'number',
+            type: 'number', // int inches
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'foliage_color', 
             label: 'Foliage Color', 
-            type: 'select', // yellow/yellow-green/light green/medium green/dark green/blue green
+            type: 'select', // yellow/yellow-green/light green/medium green/dark green/blue green/variegated/other
             defaultTiming: { season: 'Spring' }
           },
           { 
@@ -119,7 +119,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'foliage_architecture', 
             label: 'Foliage Architecture', 
-            type: 'select', // heavily weeping, weeping, gently weeping, upright
+            type: 'select', // heavily weeping, weeping, gently weeping, upright, vertical/straight
             defaultTiming: { season: 'Spring' }
           },
           { 
@@ -208,13 +208,13 @@ export const traitData: TraitArea[] = [
           { 
             field: 'transplant_recovery_speed', 
             label: 'Transplant Recovery Speed', 
-            type: 'select', // stunt, very slow, slow, average, good, very good
+            type: 'select', // stunted, slow, average, good, very good
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
           { 
             field: 'container_performance', 
             label: 'Container Performance', 
-            type: 'select', // very poor - very good
+            type: 'rating', // 1-10 very poor - very good
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
         ],
@@ -225,19 +225,19 @@ export const traitData: TraitArea[] = [
           { 
             field: 'scape_height', 
             label: 'Scape Height (inches)', 
-            type: 'number',
+            type: 'number', // int inches
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'scape_strength_rigidity', 
             label: 'Scape Strength Rigidity', 
-            type: 'rating', // 1-10
+            type: 'rating', // 1-10 low to high
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'scape_base_connection_strength', 
             label: 'Scape Base Connection Strength', 
-            type: 'select', // very poor - very good
+            type: 'rating', // 1-10 very poor - very good
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -254,7 +254,7 @@ export const traitData: TraitArea[] = [
           },
           { 
             field: 'scape_tip_distance_from_foliage', 
-            label: 'Scape Tip Distance from Foliage', 
+            label: 'Scape Tip Distance above Foliage', 
             type: 'number', // calculated = scape height - foliage height
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
@@ -266,7 +266,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'branch_count', 
             label: 'Branch Count', 
-            type: 'number',
+            type: 'number', //int 
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -282,19 +282,19 @@ export const traitData: TraitArea[] = [
             defaultTiming: { season: 'Summer' }
           },
           { 
-            field: 'alternating_branches', 
+            field: 'alternating_branches', // may need to be removed (might be redundant)
             label: 'Alternating Branches', 
-            type: 'boolean',
+            type: 'boolean', 
             defaultTiming: { season: 'Summer' }
           },
           { 
-            field: 'lateral_budding', 
+            field: 'lateral_budding', // bud building?
             label: 'Lateral Budding', 
             type: 'boolean',
             defaultTiming: { season: 'Summer' }
           },
           { 
-            field: 'self_branching_secondary', 
+            field: 'self_branching_secondary', // bracting tendency
             label: 'Self Branching Secondary', 
             type: 'boolean',
             defaultTiming: { season: 'Summer' }
@@ -307,7 +307,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'bud_count_per_scape', 
             label: 'Bud Count per Scape', 
-            type: 'number',
+            type: 'number', // int 
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -334,8 +334,8 @@ export const traitData: TraitArea[] = [
             type: 'rating', // 1-10 few to many
             defaultTiming: { season: 'Spring' }
           },
-          { 
-            field: 'terminal_budding', 
+            { 
+              field: 'terminal_budding', // bud building
             label: 'Terminal Budding', 
             type: 'boolean',
             defaultTiming: { season: 'Summer' }
@@ -349,7 +349,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'bud_drop_tendency', 
             label: 'Bud Drop Tendency', 
-            type: 'select', // low-high
+            type: 'rating', // 1-5 low-high
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -417,7 +417,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'opening_speed', 
             label: 'Opening Speed', 
-            type: 'select', // slow medium fast
+            type: 'rating', // 1-5 slow medium fast
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -575,7 +575,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'petal_matching_uniformity', 
             label: 'Petal Matching Uniformity', 
-            type: 'rating', // 1-10
+            type: 'rating', // 1-5 not uniform - identical
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -628,10 +628,15 @@ export const traitData: TraitArea[] = [
           { 
             field: 'color_fade_speed', 
             label: 'Color Fade Speed', 
-            type: 'select', // none, slow, medium, high
+            type: 'rating', // 1-5 none, slow, medium, high
             defaultTiming: { season: 'Summer' }
           },
-          { field: 'fade_to_color', label: 'Fade to Color', type: 'text' },
+          {
+            field: 'fade_to_color',
+            label: 'Fade to Color',
+            type: 'text',
+            defaultTiming: { season: 'Summer' }
+          },
           { 
             field: 'sunburn_on_petals', 
             label: 'Sunburn on Petals', 
@@ -647,13 +652,13 @@ export const traitData: TraitArea[] = [
           { 
             field: 'color_intensity_in_heat', 
             label: 'Color Intensity in Heat', 
-            type: 'select', // low to high
+            type: 'rating', // 1-5  low to high
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'color_intensity_in_cool', 
             label: 'Color Intensity in Cool', 
-            type: 'select', // low to high
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -669,8 +674,14 @@ export const traitData: TraitArea[] = [
         traits: [
           { 
             field: 'edge_type', 
-            label: 'Edge Type', 
-            type: 'select',
+            label: 'Edge Type (Structural)', 
+            type: 'select', // plain, ruffled, teeth
+            defaultTiming: { season: 'Summer' }
+          },
+          { 
+            field: 'edge_color_type', 
+            label: 'Edge Color Type', 
+            type: 'select', // wire, picotee, border, multiple
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -682,7 +693,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'edge_formation_depth', 
             label: 'Edge Formation Depth', 
-            type: 'select',
+            type: 'rating', // 1-5 low, medium, high, extreme
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -706,7 +717,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'edge_consistency', 
             label: 'Edge Consistency', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -735,7 +746,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'sculpting_type', 
             label: 'Sculpting Type', 
-            type: 'select',
+            type: 'select', // midrib cristate, other cristate, barbed/bearded cristate, severe bearding, other/multiple
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -769,7 +780,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'eye_or_watermark_present', 
             label: 'Eye or Watermark Present', 
-            type: 'boolean',
+            type: 'select', // self, subtle watermark, watermark, distinct watermark, subtle eye, eye, distinct eye
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -781,31 +792,37 @@ export const traitData: TraitArea[] = [
           { 
             field: 'eye_size', 
             label: 'Eye Size', 
-            type: 'select',
+            type: 'rating', // 1-5 small to large
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'eye_shape', 
             label: 'Eye Shape', 
-            type: 'select',
+            type: 'select', // round, oval, angular, irregular, delta v double barbed
             defaultTiming: { season: 'Summer' }
           },
           { 
-            field: 'eye_pattern', 
-            label: 'Eye Pattern', 
-            type: 'select',
+            field: 'eye_patterned', 
+            label: 'Eye Patterned', 
+            type: 'boolean',
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'eye_definition', 
             label: 'Eye Definition', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'eye_visibility_in_sun', 
             label: 'Eye Visibility in Sun', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high
+            defaultTiming: { season: 'Summer' }
+          },
+          { 
+            field: 'eye_visibility_under_blacklight', 
+            label: 'Eye Visibility Under Blacklight', 
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -816,19 +833,13 @@ export const traitData: TraitArea[] = [
           { 
             field: 'throat_color', 
             label: 'Throat Color', 
-            type: 'text',
+            type: 'select', // yellow, yellow-gold, gold, yellow-green, green, gold-green
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'throat_size', 
             label: 'Throat Size', 
-            type: 'select',
-            defaultTiming: { season: 'Summer' }
-          },
-          { 
-            field: 'throat_pattern', 
-            label: 'Throat Pattern', 
-            type: 'select',
+            type: 'rating', // 1-5 small to large
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -851,7 +862,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'veining_intensity', 
             label: 'Veining Intensity', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -863,7 +874,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'midrib_width', 
             label: 'Midrib Width', 
-            type: 'number',
+            type: 'rating', // 1-5 thin to wide
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -887,7 +898,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'color_saturation_uniformity', 
             label: 'Color Saturation Uniformity', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -898,13 +909,13 @@ export const traitData: TraitArea[] = [
           { 
             field: 'fade_resistance', 
             label: 'Fade Resistance', 
-            type: 'select',
+            type: 'rating', // 1-5 very low to very high
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'color_fade_speed', 
             label: 'Color Fade Speed', 
-            type: 'select',
+            type: 'rating', // 1-5 none, slow, medium, high
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -922,19 +933,19 @@ export const traitData: TraitArea[] = [
           { 
             field: 'heat_fade_resistance', 
             label: 'Heat Fade Resistance', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'color_intensity_in_heat', 
             label: 'Color Intensity in Heat', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'color_intensity_in_cool', 
             label: 'Color Intensity in Cool', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high',
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -984,7 +995,7 @@ export const traitData: TraitArea[] = [
           { 
             field: 'availability', 
             label: 'Availability', 
-            type: 'select',
+            type: 'select', // display, held for increase, limited, available
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
           { 
@@ -1012,25 +1023,25 @@ export const traitData: TraitArea[] = [
           { 
             field: 'pollen_fertility', 
             label: 'Pollen Fertility', 
-            type: 'select',
+            type: 'rating', // 1-5 very low to very high
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'pollen_production_consistency', 
             label: 'Pollen Production Consistency', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high',
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'pollen_viability_in_heat', 
             label: 'Pollen Viability in Heat', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high,
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'pollen_storage_ability', 
             label: 'Pollen Storage Ability', 
-            type: 'text',
+            type: 'rating', // 1-5 low to high
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
           { 
@@ -1059,19 +1070,19 @@ export const traitData: TraitArea[] = [
           { 
             field: 'pod_fertility', 
             label: 'Pod Fertility', 
-            type: 'select',
+            type: 'rating', // 0-5 very low to very high
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'pod_set_reliability', 
             label: 'Pod Set Reliability', 
-            type: 'select',
+            type: 'rating', // 0-5 low to high',
             defaultTiming: { season: 'Summer' }
           },
           { 
             field: 'pod_set_in_heat', 
             label: 'Pod Set in Heat', 
-            type: 'select',
+            type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -1104,12 +1115,6 @@ export const traitData: TraitArea[] = [
             type: 'number',
             defaultTiming: { season: 'Fall' }
           },
-          { 
-            field: 'conversion_parent', 
-            label: 'Conversion Parent', 
-            type: 'text',
-            defaultTiming: { excludeFromAutomaticCycle: true }
-          },
         ],
       },
       {
@@ -1124,13 +1129,13 @@ export const traitData: TraitArea[] = [
           { 
             field: 'pod_size', 
             label: 'Pod Size', 
-            type: 'select',
+            type: 'rating', // 1-5 extra small, small, medium, large, extra large
             defaultTiming: { season: 'Fall' }
           },
           { 
             field: 'pod_shape', 
             label: 'Pod Shape', 
-            type: 'text',
+            type: 'select', // round, ovular, elongated, Oblanceolate
             defaultTiming: { season: 'Fall' }
           },
           { 
@@ -1142,13 +1147,13 @@ export const traitData: TraitArea[] = [
           { 
             field: 'seed_size', 
             label: 'Seed Size', 
-            type: 'select',
+            type: 'rating', // 1-5 extra small, small, medium, large, extra large
             defaultTiming: { season: 'Fall' }
           },
           { 
-            field: 'seed_color', 
-            label: 'Seed Color', 
-            type: 'text',
+            field: 'seed_fullness', 
+            label: 'Seed Fullness', 
+            type: 'rating', // 1-5 crinkly, semi full, full
             defaultTiming: { season: 'Fall' }
           },
         ],
