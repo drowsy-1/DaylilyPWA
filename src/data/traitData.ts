@@ -633,7 +633,7 @@ export const traitData: TraitArea[] = [
           },
           { field: 'fade_to_color', 
             label: 'Fade to Color', 
-            type: 'text' ,
+            type: 'text',
             defaultTiming: { season: 'Summer' }
           },
           { 

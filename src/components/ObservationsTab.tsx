@@ -1,18 +1,22 @@
 import './ObservationsTab.css';
 
-function ObservationsTab() {
+interface ObservationsTabProps {
+  onNavigate: (page: 'add-note' | 'add-plant' | 'continue-observation') => void;
+}
+
+function ObservationsTab({ onNavigate }: ObservationsTabProps) {
   return (
     <div className="observations-tab">
       <div className="action-buttons">
-        <button className="action-btn">
+        <button className="action-btn" onClick={() => onNavigate('add-plant')}>
           <span className="btn-icon">+</span>
           Add Seedling / Variety
         </button>
-        <button className="action-btn">
+        <button className="action-btn" onClick={() => onNavigate('continue-observation')}>
           <span className="btn-icon">+</span>
           Continue Observation
         </button>
-        <button className="action-btn">
+        <button className="action-btn" onClick={() => onNavigate('add-note')}>
           <span className="btn-icon">+</span>
           Add Notes
         </button>

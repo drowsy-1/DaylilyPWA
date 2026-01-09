@@ -1,0 +1,381 @@
+.add-note-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-color, #f5f5f5);
+}
+
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.page-header h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.back-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.header-spacer {
+  width: 40px;
+}
+
+.page-content {
+  flex: 1;
+  padding: 1.5rem 1.25rem;
+  padding-bottom: 100px;
+  overflow-y: auto;
+}
+
+.auto-timestamp {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 0.85rem;
+}
+
+.timestamp-icon {
+  font-size: 1rem;
+}
+
+.timestamp-text {
+  font-weight: 500;
+}
+
+.timestamp-label {
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
+
+.form-section {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.form-input,
+.form-select,
+.form-textarea {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: var(--card-bg, #fff);
+  color: inherit;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.form-select {
+  cursor: pointer;
+}
+
+/* Tags */
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(100, 150, 200, 0.2);
+  border-radius: 20px;
+  font-size: 0.85rem;
+}
+
+.tag-remove {
+  background: none;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.6;
+  padding: 0;
+  line-height: 1;
+  margin-left: 0.25rem;
+}
+
+.tag-remove:hover {
+  opacity: 1;
+}
+
+.tag-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tag-input {
+  flex: 1;
+}
+
+.add-tag-btn {
+  padding: 0.875rem 1.25rem;
+  background: rgba(100, 150, 200, 0.2);
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.add-tag-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+}
+
+/* Selection Buttons */
+.selection-buttons {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.selection-btn {
+  flex: 1;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  background: var(--card-bg, #fff);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.selection-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.selection-btn.active {
+  background: rgba(100, 150, 200, 0.25);
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+/* Date/Season Row */
+.date-season-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.date-input {
+  flex: 1;
+}
+
+.season-select {
+  flex: 1;
+}
+
+/* Photo Upload */
+.photo-upload-area {
+  margin-bottom: 0.75rem;
+}
+
+.photo-input {
+  display: none;
+}
+
+.photo-upload-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  border: 2px dashed rgba(100, 150, 200, 0.4);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: inherit;
+  transition: all 0.2s;
+  background: var(--card-bg, #fff);
+}
+
+.photo-upload-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.upload-icon {
+  font-size: 1.5rem;
+}
+
+.photo-previews {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.photo-preview {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-photo {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-photo:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Page Footer */
+.page-footer {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  margin: 0 -1.25rem;
+  margin-top: auto;
+  background: var(--card-bg, #fff);
+  border-top: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.cancel-btn,
+.save-btn {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-btn {
+  background: transparent;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  color: inherit;
+}
+
+.cancel-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.save-btn {
+  background: rgba(100, 150, 200, 0.3);
+  border: 2px solid rgba(100, 150, 200, 0.4);
+  color: inherit;
+}
+
+.save-btn:hover {
+  background: rgba(100, 150, 200, 0.45);
+}
+
+/* Dark mode */
+.dark .add-note-page {
+  background: var(--bg-color, #0f0f1a);
+}
+
+.dark .page-header,
+.dark .page-footer {
+  background: var(--card-bg, #1a1a2e);
+}
+
+.dark .form-input,
+.dark .form-select,
+.dark .form-textarea,
+.dark .selection-btn,
+.dark .photo-upload-btn {
+  background: var(--card-bg, #1a1a2e);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .page-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    padding-bottom: 120px;
+  }
+
+  .page-footer {
+    margin: 0 -1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .date-season-row {
+    flex-direction: column;
+  }
+}

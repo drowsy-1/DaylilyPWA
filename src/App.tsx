@@ -8,19 +8,44 @@ import Footer from './components/Footer';
 import TraitFieldsPage from './pages/TraitFieldsPage';
 import ObservationCyclesPage from './pages/ObservationCyclesPage';
 import InventoryPage from './pages/InventoryPage';
+import AddNotePage from './pages/AddNotePage';
+import AddPlantPage from './pages/AddPlantPage';
+import AddVarietyPage from './pages/AddVarietyPage';
+import AddSeedlingPage from './pages/AddSeedlingPage';
 import { getInventoryStats } from './data/mockInventory';
+import type { NoteData } from './pages/AddNotePage';
+import type { VarietyData } from './pages/AddVarietyPage';
+import type { SeedlingData } from './pages/AddSeedlingPage';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
-type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory';
+type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group' | 'continue-observation';
 
 function App() {
   const [isDark, setIsDark] = useState(false);
   const [activeTab, setActiveTab] = useState<Tab>('observations');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState<Page>('home');
+  const [notes, setNotes] = useState<NoteData[]>([]);
+  const [varieties, setVarieties] = useState<VarietyData[]>([]);
+  const [seedlings, setSeedlings] = useState<SeedlingData[]>([]);
 
   // Get real inventory stats
   const inventoryStats = getInventoryStats();
+
+  const handleSaveNote = (note: NoteData) => {
+    setNotes([note, ...notes]);
+    console.log('Note saved:', note);
+  };
+
+  const handleSaveVariety = (variety: VarietyData) => {
+    setVarieties([variety, ...varieties]);
+    console.log('Variety saved:', variety);
+  };
+
+  const handleSaveSeedling = (seedling: SeedlingData) => {
+    setSeedlings([seedling, ...seedlings]);
+    console.log('Seedling saved:', seedling);
+  };
 
   useEffect(() => {
     if (isMenuOpen) {
@@ -62,7 +87,7 @@ function App() {
           <TabGroup activeTab={activeTab} onTabChange={handleTabChange} />
           
           <main className="content">
-            {activeTab === 'observations' && <ObservationsTab />}
+            {activeTab === 'observations' && <ObservationsTab onNavigate={handleNavigate} />}
             {activeTab === 'breeding' && <div>Breeding Content</div>}
           </main>
         </>
@@ -81,6 +106,14 @@ function App() {
           <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
           <InventoryPage onNavigate={handleNavigate} />
         </>
+      ) : currentPage === 'add-note' ? (
+        <AddNotePage onNavigate={handleNavigate} onSave={handleSaveNote} />
+      ) : currentPage === 'add-plant' ? (
+        <AddPlantPage onNavigate={handleNavigate} />
+      ) : currentPage === 'add-variety' ? (
+        <AddVarietyPage onNavigate={handleNavigate} onSave={handleSaveVariety} />
+      ) : currentPage === 'add-seedling' ? (
+        <AddSeedlingPage onNavigate={handleNavigate} onSave={handleSaveSeedling} />
       ) : null}
 
       <Footer 
