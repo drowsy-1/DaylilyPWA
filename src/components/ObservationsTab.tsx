@@ -4,8 +4,18 @@ function ObservationsTab() {
   return (
     <div className="observations-tab">
       <div className="action-buttons">
-        <button className="action-btn">+ variety / seedling</button>
-        <button className="action-btn">continue observation</button>
+        <button className="action-btn">
+          <span className="btn-icon">+</span>
+          Add Seedling / Variety
+        </button>
+        <button className="action-btn">
+          <span className="btn-icon">+</span>
+          Continue Observation
+        </button>
+        <button className="action-btn">
+          <span className="btn-icon">+</span>
+          Add Notes
+        </button>
       </div>
 
       <section className="activity-section">

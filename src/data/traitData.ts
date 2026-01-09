@@ -631,10 +631,9 @@ export const traitData: TraitArea[] = [
             type: 'rating', // 1-5 none, slow, medium, high
             defaultTiming: { season: 'Summer' }
           },
-          {
-            field: 'fade_to_color',
-            label: 'Fade to Color',
-            type: 'text',
+          { field: 'fade_to_color', 
+            label: 'Fade to Color', 
+            type: 'text' ,
             defaultTiming: { season: 'Summer' }
           },
           { 
