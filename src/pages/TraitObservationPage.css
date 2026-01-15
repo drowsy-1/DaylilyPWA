@@ -1,0 +1,289 @@
+.trait-observation-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-color, #e8f0f8);
+  padding-bottom: 100px;
+}
+
+/* Header */
+.observation-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background: var(--card-bg, #fff);
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.trait-observation-page .back-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.trait-observation-page .back-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.observation-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.season-toggle {
+  display: flex;
+  background: rgba(100, 150, 200, 0.15);
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
+.toggle-option {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.toggle-option.active {
+  background: var(--card-bg, #fff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Identity Card */
+.identity-card {
+  margin: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  border: 2px solid rgba(100, 150, 200, 0.25);
+}
+
+.identity-type {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #5a8ac0;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.identity-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.identity-subtitle {
+  font-size: 0.9rem;
+  opacity: 0.75;
+}
+
+.identity-location {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-top: 0.5rem;
+}
+
+/* Trait info */
+.trait-info {
+  padding: 0 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* Trait Areas */
+.trait-areas {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.trait-area {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  overflow: hidden;
+}
+
+.area-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.area-header:hover {
+  background: rgba(100, 150, 200, 0.08);
+}
+
+.area-expand {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.area-name {
+  flex: 1;
+}
+
+.area-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #5a8ac0;
+  background: rgba(100, 150, 200, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+
+.area-content {
+  padding: 0 0.5rem 0.75rem;
+}
+
+/* Trait Groups */
+.trait-group {
+  margin-top: 0.5rem;
+}
+
+.group-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(100, 150, 200, 0.08);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.group-header:hover {
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.group-expand {
+  font-size: 0.65rem;
+  opacity: 0.5;
+}
+
+.group-name {
+  flex: 1;
+}
+
+.group-count {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.group-content {
+  padding: 1rem 0.5rem;
+}
+
+/* Traits Grid */
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .traits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Footer - inline, not fixed */
+.observation-footer {
+  margin: 1.5rem 1rem;
+  padding: 0;
+}
+
+.save-btn {
+  width: 100%;
+  padding: 1rem;
+  background: rgba(100, 180, 100, 0.25);
+  border: 2px solid rgba(100, 180, 100, 0.4);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-btn:hover {
+  background: rgba(100, 180, 100, 0.4);
+  border-color: rgba(100, 180, 100, 0.6);
+}
+
+/* Dark mode */
+.dark .trait-observation-page {
+  background: #1a1a1a;
+}
+
+.dark .observation-header,
+.dark .identity-card,
+.dark .trait-area,
+.dark .toggle-option.active {
+  background: #2a2a2a;
+}
+
+.dark .identity-type {
+  color: #7ab0e0;
+}
+
+.dark .area-count {
+  color: #7ab0e0;
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.dark .group-header {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.dark .group-header:hover {
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.dark .save-btn {
+  background: rgba(100, 180, 100, 0.2);
+  border-color: rgba(100, 180, 100, 0.35);
+}
+
+.dark .save-btn:hover {
+  background: rgba(100, 180, 100, 0.35);
+  border-color: rgba(100, 180, 100, 0.5);
+}

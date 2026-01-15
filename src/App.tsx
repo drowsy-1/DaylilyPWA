@@ -12,13 +12,20 @@ import AddNotePage from './pages/AddNotePage';
 import AddPlantPage from './pages/AddPlantPage';
 import AddVarietyPage from './pages/AddVarietyPage';
 import AddSeedlingPage from './pages/AddSeedlingPage';
+import TraitObservationPage from './pages/TraitObservationPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
 import type { SeedlingData } from './pages/AddSeedlingPage';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
-type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group' | 'continue-observation';
+type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group' | 'continue-observation' | 'trait-observation';
+
+interface ObservationContext {
+  plantType: 'variety' | 'seedling';
+  plantId: string;
+  plantData: VarietyData | SeedlingData;
+}
 
 function App() {
   const [isDark, setIsDark] = useState(false);
@@ -28,6 +35,7 @@ function App() {
   const [notes, setNotes] = useState<NoteData[]>([]);
   const [varieties, setVarieties] = useState<VarietyData[]>([]);
   const [seedlings, setSeedlings] = useState<SeedlingData[]>([]);
+  const [observationContext, setObservationContext] = useState<ObservationContext | null>(null);
 
   // Get real inventory stats
   const inventoryStats = getInventoryStats();
@@ -45,6 +53,17 @@ function App() {
   const handleSaveSeedling = (seedling: SeedlingData) => {
     setSeedlings([seedling, ...seedlings]);
     console.log('Seedling saved:', seedling);
+  };
+
+  const handleSaveObservations = (observations: Record<string, any>) => {
+    console.log('Observations saved:', observations);
+    // TODO: Save observations to state/storage
+  };
+
+  const handleNavigateWithContext = (page: Page, context: ObservationContext) => {
+    setObservationContext(context);
+    setCurrentPage(page);
+    setIsMenuOpen(false);
   };
 
   useEffect(() => {
@@ -111,9 +130,25 @@ function App() {
       ) : currentPage === 'add-plant' ? (
         <AddPlantPage onNavigate={handleNavigate} />
       ) : currentPage === 'add-variety' ? (
-        <AddVarietyPage onNavigate={handleNavigate} onSave={handleSaveVariety} />
+        <AddVarietyPage
+          onNavigate={handleNavigate}
+          onSave={handleSaveVariety}
+          onNavigateWithContext={handleNavigateWithContext}
+        />
       ) : currentPage === 'add-seedling' ? (
-        <AddSeedlingPage onNavigate={handleNavigate} onSave={handleSaveSeedling} />
+        <AddSeedlingPage
+          onNavigate={handleNavigate}
+          onSave={handleSaveSeedling}
+          onNavigateWithContext={handleNavigateWithContext}
+        />
+      ) : currentPage === 'trait-observation' && observationContext ? (
+        <TraitObservationPage
+          plantType={observationContext.plantType}
+          plantId={observationContext.plantId}
+          plantData={observationContext.plantData}
+          onNavigate={handleNavigate}
+          onSave={handleSaveObservations}
+        />
       ) : null}
 
       <Footer 

@@ -2,6 +2,7 @@ export interface Trait {
   field: string;
   label: string;
   type?: string;
+  options?: string[];
   defaultTiming?: {
     year?: number;
     season?: string;
@@ -28,10 +29,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Core Information',
         traits: [
-          { 
-            field: 'type', 
-            label: 'Type', 
-            type: 'select', // seedling / variety
+          {
+            field: 'type',
+            label: 'Type',
+            type: 'select',
+            options: ['seedling', 'variety'],
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
           { 
@@ -70,10 +72,11 @@ export const traitData: TraitArea[] = [
             type: 'number', // int four digits
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
-          { 
-            field: 'ploidy', 
-            label: 'Ploidy', 
-            type: 'select', // diploid/tetraploid/triploid/other/unknown
+          {
+            field: 'ploidy',
+            label: 'Ploidy',
+            type: 'select',
+            options: ['diploid', 'tetraploid', 'triploid', 'other', 'unknown'],
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
           { 
@@ -92,10 +95,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Foliage Characteristics',
         traits: [
-          { 
-            field: 'foliage_type', 
-            label: 'Foliage Type', 
-            type: 'select', // evergreen, semi-evergreen, dormant
+          {
+            field: 'foliage_type',
+            label: 'Foliage Type',
+            type: 'select',
+            options: ['evergreen', 'semi-evergreen', 'dormant'],
             defaultTiming: { season: 'Spring' }
           },
           { 
@@ -104,10 +108,11 @@ export const traitData: TraitArea[] = [
             type: 'number', // int inches
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'foliage_color', 
-            label: 'Foliage Color', 
-            type: 'select', // yellow/yellow-green/light green/medium green/dark green/blue green/variegated/other
+          {
+            field: 'foliage_color',
+            label: 'Foliage Color',
+            type: 'select',
+            options: ['yellow', 'yellow-green', 'light green', 'medium green', 'dark green', 'blue green', 'variegated', 'other'],
             defaultTiming: { season: 'Spring' }
           },
           { 
@@ -116,34 +121,39 @@ export const traitData: TraitArea[] = [
             type: 'rating', // 1-5 low to high
             defaultTiming: { season: 'Spring' }
           },
-          { 
-            field: 'foliage_architecture', 
-            label: 'Foliage Architecture', 
-            type: 'select', // heavily weeping, weeping, gently weeping, upright, vertical/straight
+          {
+            field: 'foliage_architecture',
+            label: 'Foliage Architecture',
+            type: 'select',
+            options: ['heavily weeping', 'weeping', 'gently weeping', 'upright', 'vertical/straight'],
             defaultTiming: { season: 'Spring' }
           },
-          { 
-            field: 'foliage_thickness', 
-            label: 'Foliage Thickness (Width)', 
-            type: 'select', // grassile, thin, medium, wider, very wide
+          {
+            field: 'foliage_thickness',
+            label: 'Foliage Thickness (Width)',
+            type: 'select',
+            options: ['grassile', 'thin', 'medium', 'wider', 'very wide'],
             defaultTiming: { season: 'Spring' }
           },
-          { 
-            field: 'foliage_edge_undulation', 
-            label: 'Foliage Edge Undulation', 
-            type: 'select', // straight, mild, medium, pronounced
+          {
+            field: 'foliage_edge_undulation',
+            label: 'Foliage Edge Undulation',
+            type: 'select',
+            options: ['straight', 'mild', 'medium', 'pronounced'],
             defaultTiming: { season: 'Spring' }
           },
-          { 
-            field: 'leaf_cross_section', 
-            label: 'Leaf Cross Section', 
-            type: 'select', // flat, angled, v shaped
+          {
+            field: 'leaf_cross_section',
+            label: 'Leaf Cross Section',
+            type: 'select',
+            options: ['flat', 'angled', 'v shaped'],
             defaultTiming: { season: 'Spring' }
           },
-          { 
-            field: 'leaf_glossiness', 
-            label: 'Leaf Glossiness', 
-            type: 'select', // dull, medium, glossy, powdered
+          {
+            field: 'leaf_glossiness',
+            label: 'Leaf Glossiness',
+            type: 'select',
+            options: ['dull', 'medium', 'glossy', 'powdered'],
             defaultTiming: { season: 'Spring' }
           },
           { 
@@ -181,10 +191,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Clump & Growth Habits',
         traits: [
-          { 
-            field: 'relative_clump_size', 
-            label: 'Relative Clump Size', 
-            type: 'select', // extra small, small, medium, large, very large
+          {
+            field: 'relative_clump_size',
+            label: 'Relative Clump Size',
+            type: 'select',
+            options: ['extra small', 'small', 'medium', 'large', 'very large'],
             defaultTiming: { season: 'Spring' }
           },
           { 
@@ -199,16 +210,18 @@ export const traitData: TraitArea[] = [
             type: 'number', // calculated = fall / spring
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
-          { 
-            field: 'fan_fragility', 
-            label: 'Fan Fragility', 
-            type: 'select', // fragile, average, sturdy
+          {
+            field: 'fan_fragility',
+            label: 'Fan Fragility',
+            type: 'select',
+            options: ['fragile', 'average', 'sturdy'],
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
-          { 
-            field: 'transplant_recovery_speed', 
-            label: 'Transplant Recovery Speed', 
-            type: 'select', // stunted, slow, average, good, very good
+          {
+            field: 'transplant_recovery_speed',
+            label: 'Transplant Recovery Speed',
+            type: 'select',
+            options: ['stunted', 'slow', 'average', 'good', 'very good'],
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
           { 
@@ -240,10 +253,11 @@ export const traitData: TraitArea[] = [
             type: 'rating', // 1-10 very poor - very good
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'scape_color', 
-            label: 'Scape Color', 
-            type: 'select', // yellow green, medium green, dark green, brown green, near black, black
+          {
+            field: 'scape_color',
+            label: 'Scape Color',
+            type: 'select',
+            options: ['yellow green', 'medium green', 'dark green', 'brown green', 'near black', 'black'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -269,16 +283,18 @@ export const traitData: TraitArea[] = [
             type: 'number', //int 
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'branch_form', 
-            label: 'Branch Form', 
-            type: 'select', // witches broom, tight y, regular, candelabra
+          {
+            field: 'branch_form',
+            label: 'Branch Form',
+            type: 'select',
+            options: ['witches broom', 'tight y', 'regular', 'candelabra'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'branch_spacing', 
-            label: 'Branch Spacing', 
-            type: 'select', // low medium high
+          {
+            field: 'branch_spacing',
+            label: 'Branch Spacing',
+            type: 'select',
+            options: ['low', 'medium', 'high'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -310,16 +326,18 @@ export const traitData: TraitArea[] = [
             type: 'number', // int 
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'bud_spacing', 
-            label: 'Bud Spacing', 
-            type: 'select', // tight, average, spaced
+          {
+            field: 'bud_spacing',
+            label: 'Bud Spacing',
+            type: 'select',
+            options: ['tight', 'average', 'spaced'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'bud_size', 
-            label: 'Bud Size', 
-            type: 'select', // small medium large
+          {
+            field: 'bud_size',
+            label: 'Bud Size',
+            type: 'select',
+            options: ['small', 'medium', 'large'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -379,10 +397,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Season & Duration',
         traits: [
-          { 
-            field: 'bloom_season', 
-            label: 'Bloom Season', 
-            type: 'select', // extra early, early, early mid, mid, mid late, late, very late
+          {
+            field: 'bloom_season',
+            label: 'Bloom Season',
+            type: 'select',
+            options: ['extra early', 'early', 'early mid', 'mid', 'mid late', 'late', 'very late'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -420,34 +439,39 @@ export const traitData: TraitArea[] = [
             type: 'rating', // 1-5 slow medium fast
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'opening_time_of_day', 
-            label: 'Opening Time of Day', 
-            type: 'select', // midnight, early morning, morning, late morning, late afternoon, early evening, evening, late evening, night
+          {
+            field: 'opening_time_of_day',
+            label: 'Opening Time of Day',
+            type: 'select',
+            options: ['midnight', 'early morning', 'morning', 'late morning', 'late afternoon', 'early evening', 'evening', 'late evening', 'night'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'open_failures', 
-            label: 'Open Failures', 
-            type: 'select', // none, few, some, many
+          {
+            field: 'open_failures',
+            label: 'Open Failures',
+            type: 'select',
+            options: ['none', 'few', 'some', 'many'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'wilt_time', 
-            label: 'Wilt Time', 
-            type: 'select', // midnight, early morning, morning, late morning, late afternoon, early evening, evening, late evening, night
+          {
+            field: 'wilt_time',
+            label: 'Wilt Time',
+            type: 'select',
+            options: ['midnight', 'early morning', 'morning', 'late morning', 'late afternoon', 'early evening', 'evening', 'late evening', 'night'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'rain_response', 
-            label: 'Rain Response', 
-            type: 'select', // none, delayed open, no open
+          {
+            field: 'rain_response',
+            label: 'Rain Response',
+            type: 'select',
+            options: ['none', 'delayed open', 'no open'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'petal_rain_tolerance', 
-            label: 'Petal Rain Tolerance', 
-            type: 'select', // no damage, minimal damaged edges, damaged edges, some damage, damaged, severe damage
+          {
+            field: 'petal_rain_tolerance',
+            label: 'Petal Rain Tolerance',
+            type: 'select',
+            options: ['no damage', 'minimal damaged edges', 'damaged edges', 'some damage', 'damaged', 'severe damage'],
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -460,10 +484,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Main Form Classification',
         traits: [
-          { 
-            field: 'form_type', 
-            label: 'Form Type', 
-            type: 'select', // unusual form, standard, rounded, spider
+          {
+            field: 'form_type',
+            label: 'Form Type',
+            type: 'select',
+            options: ['unusual form', 'standard', 'rounded', 'spider'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -472,10 +497,11 @@ export const traitData: TraitArea[] = [
             type: 'number',
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'double_type', 
-            label: 'Double Type', 
-            type: 'select', // stigma transformation, hose n hose
+          {
+            field: 'double_type',
+            label: 'Double Type',
+            type: 'select',
+            options: ['stigma transformation', 'hose n hose'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -484,10 +510,11 @@ export const traitData: TraitArea[] = [
             type: 'number', // calculated = length : width
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
-          { 
-            field: 'unusual_form_subtype', 
-            label: 'Unusual Form Subtype', 
-            type: 'select', // crispate, pinched crispate, twisted crispate, quilled crispate, cascade, spatulate
+          {
+            field: 'unusual_form_subtype',
+            label: 'Unusual Form Subtype',
+            type: 'select',
+            options: ['crispate', 'pinched crispate', 'twisted crispate', 'quilled crispate', 'cascade', 'spatulate'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -496,10 +523,11 @@ export const traitData: TraitArea[] = [
             type: 'number',
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'polymerous_avg_petal_count', 
-            label: 'Polymerous Avg Petal Count', 
-            type: 'select', // 3,4,5,6,7,8
+          {
+            field: 'polymerous_avg_petal_count',
+            label: 'Polymerous Avg Petal Count',
+            type: 'select',
+            options: ['3', '4', '5', '6', '7', '8'],
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -537,10 +565,11 @@ export const traitData: TraitArea[] = [
             type: 'number',
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'flower_depth', 
-            label: 'Flower Depth', 
-            type: 'select', // flat, some, average, deep, trumpet
+          {
+            field: 'flower_depth',
+            label: 'Flower Depth',
+            type: 'select',
+            options: ['flat', 'some', 'average', 'deep', 'trumpet'],
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -548,28 +577,32 @@ export const traitData: TraitArea[] = [
       {
         name: 'Shape & Posture',
         traits: [
-          { 
-            field: 'petal_shape', 
-            label: 'Petal Shape', 
-            type: 'select', // wider towards base, mid section, tip
+          {
+            field: 'petal_shape',
+            label: 'Petal Shape',
+            type: 'select',
+            options: ['wider towards base', 'mid section', 'tip'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'recurved_petals', 
-            label: 'Recurved Petals', 
-            type: 'select', // no, some, strongly
+          {
+            field: 'recurved_petals',
+            label: 'Recurved Petals',
+            type: 'select',
+            options: ['no', 'some', 'strongly'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'flower_orientation', 
-            label: 'Flower Orientation', 
-            type: 'select', // sideways, upright, vertically
+          {
+            field: 'flower_orientation',
+            label: 'Flower Orientation',
+            type: 'select',
+            options: ['sideways', 'upright', 'vertically'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'bloom_symmetry', 
-            label: 'Bloom Symmetry', 
-            type: 'select', // bilaterally or radially
+          {
+            field: 'bloom_symmetry',
+            label: 'Bloom Symmetry',
+            type: 'select',
+            options: ['bilaterally', 'radially'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -583,10 +616,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Surface & Color Stability',
         traits: [
-          { 
-            field: 'petal_texture', 
-            label: 'Petal Texture', 
-            type: 'select', // slick / smooth / less smooth / coarse
+          {
+            field: 'petal_texture',
+            label: 'Petal Texture',
+            type: 'select',
+            options: ['slick', 'smooth', 'less smooth', 'coarse'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -595,10 +629,11 @@ export const traitData: TraitArea[] = [
             type: 'rating', // 1-10 low to high
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'diamond_dusting', 
-            label: 'Diamond Dusting', 
-            type: 'select', // no, low, medium, high
+          {
+            field: 'diamond_dusting',
+            label: 'Diamond Dusting',
+            type: 'select',
+            options: ['no', 'low', 'medium', 'high'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -671,16 +706,18 @@ export const traitData: TraitArea[] = [
       {
         name: 'Edge Characteristics',
         traits: [
-          { 
-            field: 'edge_type', 
-            label: 'Edge Type (Structural)', 
-            type: 'select', // plain, ruffled, teeth
+          {
+            field: 'edge_type',
+            label: 'Edge Type (Structural)',
+            type: 'select',
+            options: ['plain', 'ruffled', 'teeth'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'edge_color_type', 
-            label: 'Edge Color Type', 
-            type: 'select', // wire, picotee, border, multiple
+          {
+            field: 'edge_color_type',
+            label: 'Edge Color Type',
+            type: 'select',
+            options: ['wire', 'picotee', 'border', 'multiple'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -730,22 +767,25 @@ export const traitData: TraitArea[] = [
             type: 'boolean',
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'pleating_depth', 
-            label: 'Pleating Depth', 
+          {
+            field: 'pleating_depth',
+            label: 'Pleating Depth',
             type: 'select',
+            options: ['shallow', 'medium', 'deep'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'pleating_coverage', 
-            label: 'Pleating Coverage', 
+          {
+            field: 'pleating_coverage',
+            label: 'Pleating Coverage',
             type: 'select',
+            options: ['partial', 'moderate', 'full'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'sculpting_type', 
-            label: 'Sculpting Type', 
-            type: 'select', // midrib cristate, other cristate, barbed/bearded cristate, severe bearding, other/multiple
+          {
+            field: 'sculpting_type',
+            label: 'Sculpting Type',
+            type: 'select',
+            options: ['midrib cristate', 'other cristate', 'barbed/bearded cristate', 'severe bearding', 'other/multiple'],
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -759,16 +799,18 @@ export const traitData: TraitArea[] = [
             type: 'text',
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'color_intensity', 
-            label: 'Color Intensity', 
+          {
+            field: 'color_intensity',
+            label: 'Color Intensity',
             type: 'select',
+            options: ['pale', 'light', 'medium', 'saturated', 'deep'],
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'color_pattern', 
-            label: 'Color Pattern', 
+          {
+            field: 'color_pattern',
+            label: 'Color Pattern',
             type: 'select',
+            options: ['solid', 'bitone', 'bicolor', 'polychrome', 'blend'],
             defaultTiming: { season: 'Summer' }
           },
         ],
@@ -776,10 +818,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Eye Zone',
         traits: [
-          { 
-            field: 'eye_or_watermark_present', 
-            label: 'Eye or Watermark Present', 
-            type: 'select', // self, subtle watermark, watermark, distinct watermark, subtle eye, eye, distinct eye
+          {
+            field: 'eye_or_watermark_present',
+            label: 'Eye or Watermark Present',
+            type: 'select',
+            options: ['self', 'subtle watermark', 'watermark', 'distinct watermark', 'subtle eye', 'eye', 'distinct eye'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -794,10 +837,11 @@ export const traitData: TraitArea[] = [
             type: 'rating', // 1-5 small to large
             defaultTiming: { season: 'Summer' }
           },
-          { 
-            field: 'eye_shape', 
-            label: 'Eye Shape', 
-            type: 'select', // round, oval, angular, irregular, delta v double barbed
+          {
+            field: 'eye_shape',
+            label: 'Eye Shape',
+            type: 'select',
+            options: ['round', 'oval', 'angular', 'irregular', 'delta v double barbed'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -829,10 +873,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Throat',
         traits: [
-          { 
-            field: 'throat_color', 
-            label: 'Throat Color', 
-            type: 'select', // yellow, yellow-gold, gold, yellow-green, green, gold-green
+          {
+            field: 'throat_color',
+            label: 'Throat Color',
+            type: 'select',
+            options: ['yellow', 'yellow-gold', 'gold', 'yellow-green', 'green', 'gold-green'],
             defaultTiming: { season: 'Summer' }
           },
           { 
@@ -991,10 +1036,11 @@ export const traitData: TraitArea[] = [
       {
         name: 'Inventory Management',
         traits: [
-          { 
-            field: 'availability', 
-            label: 'Availability', 
-            type: 'select', // display, held for increase, limited, available
+          {
+            field: 'availability',
+            label: 'Availability',
+            type: 'select',
+            options: ['display', 'held for increase', 'limited', 'available'],
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
           { 
@@ -1003,10 +1049,11 @@ export const traitData: TraitArea[] = [
             type: 'number',
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
-          { 
-            field: 'status', 
-            label: 'Status', 
+          {
+            field: 'status',
+            label: 'Status',
             type: 'select',
+            options: ['active', 'culled', 'sold', 'deceased', 'gifted'],
             defaultTiming: { excludeFromAutomaticCycle: true }
           },
         ],
@@ -1131,10 +1178,11 @@ export const traitData: TraitArea[] = [
             type: 'rating', // 1-5 extra small, small, medium, large, extra large
             defaultTiming: { season: 'Fall' }
           },
-          { 
-            field: 'pod_shape', 
-            label: 'Pod Shape', 
-            type: 'select', // round, ovular, elongated, Oblanceolate
+          {
+            field: 'pod_shape',
+            label: 'Pod Shape',
+            type: 'select',
+            options: ['round', 'ovular', 'elongated', 'oblanceolate'],
             defaultTiming: { season: 'Fall' }
           },
           { 

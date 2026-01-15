@@ -2,9 +2,31 @@ import { useState } from 'react';
 import { mockInventoryData } from '../data/mockInventory';
 import './AddVarietyPage.css';
 
+type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group' | 'continue-observation' | 'trait-observation';
+
+interface ObservationContext {
+  plantType: 'variety' | 'seedling';
+  plantId: string;
+  plantData: VarietyData | SeedlingData;
+}
+
+interface SeedlingData {
+  id: string;
+  seedlingNumber: string;
+  year: number;
+  podParent: string;
+  pollenParent: string;
+  crossId: string;
+  location: string;
+  nickname: string;
+  photos: File[];
+  dateAdded: string;
+}
+
 interface AddVarietyPageProps {
   onNavigate: (page: 'home' | 'add-plant') => void;
   onSave: (variety: VarietyData) => void;
+  onNavigateWithContext?: (page: Page, context: ObservationContext) => void;
 }
 
 export interface VarietyData {
@@ -55,7 +77,7 @@ const searchVarieties = (query: string) => {
     .slice(0, 10);
 };
 
-function AddVarietyPage({ onNavigate, onSave }: AddVarietyPageProps) {
+function AddVarietyPage({ onNavigate, onSave, onNavigateWithContext }: AddVarietyPageProps) {
   const [step, setStep] = useState<Step>('search');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<typeof mockInventoryData>([]);
@@ -167,6 +189,48 @@ function AddVarietyPage({ onNavigate, onSave }: AddVarietyPageProps) {
     };
     onSave(varietyData);
     onNavigate('home');
+  };
+
+  const handleSaveAndObserve = () => {
+    const varietyData: VarietyData = {
+      id: crypto.randomUUID(),
+      name: varietyName,
+      hybridizer,
+      year: year ? parseInt(year) : null,
+      scape_height: scapeHeight ? parseFloat(scapeHeight) : null,
+      bloom_size: bloomSize ? parseFloat(bloomSize) : null,
+      bloom_season: bloomSeason,
+      ploidy,
+      foliage_type: foliageType,
+      bloom_habit: '',
+      bud_count: budCount ? parseInt(budCount) : null,
+      branches: branches ? parseInt(branches) : null,
+      seedling_num: '',
+      color_description: colorDescription,
+      parentage,
+      image_url: '',
+      fragrance,
+      form,
+      awards,
+      sculpting: '',
+      notes,
+      rebloom,
+      region: '',
+      city: '',
+      state: '',
+      country: '',
+      location,
+      photos,
+      dateAdded: new Date().toISOString()
+    };
+    onSave(varietyData);
+    if (onNavigateWithContext) {
+      onNavigateWithContext('trait-observation', {
+        plantType: 'variety',
+        plantId: varietyData.id,
+        plantData: varietyData
+      });
+    }
   };
 
   const handleBack = () => {
@@ -592,28 +656,16 @@ function AddVarietyPage({ onNavigate, onSave }: AddVarietyPageProps) {
             </div>
 
             <div className="observation-categories">
-              <button className="category-btn" onClick={handleSave}>
+              <button className="category-btn save-btn-highlight" onClick={handleSave}>
                 <span className="category-icon">🌱</span>
                 <span className="category-label">Save & Add Observations Later</span>
               </button>
 
-              <div className="category-divider">or continue with seasonal flow:</div>
+              <div className="category-divider">or add observations now:</div>
 
-              <button className="category-btn">
-                <span className="category-icon">🌿</span>
-                <span className="category-label">Spring Observations</span>
-                <span className="category-arrow">→</span>
-              </button>
-
-              <button className="category-btn">
-                <span className="category-icon">🌸</span>
-                <span className="category-label">Summer / Bloom Observations</span>
-                <span className="category-arrow">→</span>
-              </button>
-
-              <button className="category-btn">
-                <span className="category-icon">🍂</span>
-                <span className="category-label">Fall Observations</span>
+              <button className="category-btn" onClick={handleSaveAndObserve}>
+                <span className="category-icon">📋</span>
+                <span className="category-label">Add Trait Observations</span>
                 <span className="category-arrow">→</span>
               </button>
             </div>

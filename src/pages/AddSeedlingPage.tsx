@@ -2,9 +2,18 @@ import { useState, useEffect } from 'react';
 import { mockInventoryData } from '../data/mockInventory';
 import './AddSeedlingPage.css';
 
+type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group' | 'continue-observation' | 'trait-observation';
+
+interface ObservationContext {
+  plantType: 'variety' | 'seedling';
+  plantId: string;
+  plantData: any;
+}
+
 interface AddSeedlingPageProps {
   onNavigate: (page: 'home' | 'add-plant') => void;
   onSave: (seedling: SeedlingData) => void;
+  onNavigateWithContext?: (page: Page, context: ObservationContext) => void;
 }
 
 export interface SeedlingData {
@@ -65,7 +74,7 @@ const getNextSeedlingNumber = (crossId: string, year: number): string => {
   return `${shortYear}-${crossId.split('-')[1]}-${String(nextNum).padStart(3, '0')}`;
 };
 
-function AddSeedlingPage({ onNavigate, onSave }: AddSeedlingPageProps) {
+function AddSeedlingPage({ onNavigate, onSave, onNavigateWithContext }: AddSeedlingPageProps) {
   const currentYear = new Date().getFullYear();
 
   const [step, setStep] = useState<Step>('year');
@@ -154,6 +163,29 @@ function AddSeedlingPage({ onNavigate, onSave }: AddSeedlingPageProps) {
     };
     onSave(seedlingData);
     onNavigate('home');
+  };
+
+  const handleSaveAndObserve = () => {
+    const seedlingData: SeedlingData = {
+      id: crypto.randomUUID(),
+      seedlingNumber,
+      year: selectedYear,
+      podParent,
+      pollenParent,
+      crossId: selectedCross?.id || 'manual',
+      location,
+      nickname,
+      photos,
+      dateAdded: new Date().toISOString()
+    };
+    onSave(seedlingData);
+    if (onNavigateWithContext) {
+      onNavigateWithContext('trait-observation', {
+        plantType: 'seedling',
+        plantId: seedlingData.id,
+        plantData: seedlingData
+      });
+    }
   };
 
   const handleBack = () => {
@@ -451,23 +483,11 @@ function AddSeedlingPage({ onNavigate, onSave }: AddSeedlingPageProps) {
                 <span className="category-label">Save & Add Observations Later</span>
               </button>
 
-              <div className="category-divider">or continue with seasonal flow:</div>
+              <div className="category-divider">or add observations now:</div>
 
-              <button className="category-btn">
-                <span className="category-icon">🌿</span>
-                <span className="category-label">Spring Observations</span>
-                <span className="category-arrow">→</span>
-              </button>
-
-              <button className="category-btn">
-                <span className="category-icon">🌸</span>
-                <span className="category-label">Summer / Bloom Observations</span>
-                <span className="category-arrow">→</span>
-              </button>
-
-              <button className="category-btn">
-                <span className="category-icon">🍂</span>
-                <span className="category-label">Fall Observations</span>
+              <button className="category-btn" onClick={handleSaveAndObserve}>
+                <span className="category-icon">📋</span>
+                <span className="category-label">Add Trait Observations</span>
                 <span className="category-arrow">→</span>
               </button>
             </div>
