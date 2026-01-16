@@ -12,14 +12,16 @@ import AddNotePage from './pages/AddNotePage';
 import AddPlantPage from './pages/AddPlantPage';
 import AddVarietyPage from './pages/AddVarietyPage';
 import AddSeedlingPage from './pages/AddSeedlingPage';
+import AddSeedlingGroupPage from './pages/AddSeedlingGroupPage';
 import TraitObservationPage from './pages/TraitObservationPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
 import type { SeedlingData } from './pages/AddSeedlingPage';
+import type { SeedlingGroupData } from './pages/AddSeedlingGroupPage';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
-type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group' | 'continue-observation' | 'trait-observation';
+type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-observation' | 'trait-observation';
 
 interface ObservationContext {
   plantType: 'variety' | 'seedling';
@@ -35,6 +37,7 @@ function App() {
   const [notes, setNotes] = useState<NoteData[]>([]);
   const [varieties, setVarieties] = useState<VarietyData[]>([]);
   const [seedlings, setSeedlings] = useState<SeedlingData[]>([]);
+  const [seedlingGroups, setSeedlingGroups] = useState<SeedlingGroupData[]>([]);
   const [observationContext, setObservationContext] = useState<ObservationContext | null>(null);
 
   // Get real inventory stats
@@ -53,6 +56,11 @@ function App() {
   const handleSaveSeedling = (seedling: SeedlingData) => {
     setSeedlings([seedling, ...seedlings]);
     console.log('Seedling saved:', seedling);
+  };
+
+  const handleSaveSeedlingGroup = (seedlingsData: SeedlingGroupData[]) => {
+    setSeedlingGroups([...seedlingsData, ...seedlingGroups]);
+    console.log('Seedling group saved:', seedlingsData);
   };
 
   const handleSaveObservations = (observations: Record<string, any>) => {
@@ -140,6 +148,11 @@ function App() {
           onNavigate={handleNavigate}
           onSave={handleSaveSeedling}
           onNavigateWithContext={handleNavigateWithContext}
+        />
+      ) : currentPage === 'add-seedling-group' ? (
+        <AddSeedlingGroupPage
+          onNavigate={handleNavigate}
+          onSaveSeedlingGroup={handleSaveSeedlingGroup}
         />
       ) : currentPage === 'trait-observation' && observationContext ? (
         <TraitObservationPage

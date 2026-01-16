@@ -440,12 +440,12 @@
 }
 
 .category-btn:first-child {
-  background: rgba(100, 200, 150, 0.15);
-  border-color: rgba(100, 200, 150, 0.3);
+  background: rgba(100, 150, 200, 0.15);
+  border-color: rgba(100, 150, 200, 0.3);
 }
 
 .category-btn:first-child:hover {
-  background: rgba(100, 200, 150, 0.25);
+  background: rgba(100, 150, 200, 0.25);
 }
 
 .category-icon {

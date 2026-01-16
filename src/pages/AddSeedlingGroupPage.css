@@ -1,0 +1,738 @@
+.add-seedling-group-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-color, #f5f5f5);
+}
+
+/* Header */
+.add-seedling-group-page .page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.add-seedling-group-page .page-header h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.add-seedling-group-page .back-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.add-seedling-group-page .back-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.header-spacer {
+  width: 40px;
+}
+
+/* Page Content */
+.add-seedling-group-page .page-content {
+  flex: 1;
+  padding: 1.5rem 1.25rem;
+  padding-bottom: 100px;
+  overflow-y: auto;
+}
+
+/* Step Content */
+.add-seedling-group-page .step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.step-description {
+  margin: 0;
+  font-size: 0.95rem;
+  opacity: 0.8;
+  text-align: center;
+}
+
+.step-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.step-hint {
+  font-size: 0.9rem;
+  color: inherit;
+  opacity: 0.7;
+  margin: 0;
+}
+
+/* Year Options - matches AddSeedlingPage */
+.add-seedling-group-page .year-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.add-seedling-group-page .year-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.add-seedling-group-page .year-btn:hover {
+  background: rgba(100, 150, 200, 0.08);
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+.add-seedling-group-page .year-btn.active {
+  background: rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.add-seedling-group-page .year-btn.other-year {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.year-badge {
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.25rem 0.5rem;
+  background: rgba(100, 200, 150, 0.2);
+  border-radius: 12px;
+  color: inherit;
+}
+
+.manual-year-input {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Cross Selection */
+.crosses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.add-seedling-group-page .cross-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.add-seedling-group-page .cross-btn:hover {
+  background: rgba(100, 150, 200, 0.08);
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+.add-seedling-group-page .cross-btn.active {
+  background: rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.add-seedling-group-page .cross-btn.manual {
+  border-style: dashed;
+  opacity: 0.9;
+}
+
+.cross-label {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.cross-id {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  background: rgba(100, 150, 200, 0.15);
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* Manual Cross Inputs */
+.manual-cross-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 10px;
+  margin-top: 0.5rem;
+}
+
+/* Form Elements - matches AddSeedlingPage */
+.form-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(100, 150, 200, 0.25);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--card-bg, #fff);
+  color: inherit;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.form-input::placeholder {
+  color: inherit;
+  opacity: 0.5;
+}
+
+.location-input {
+  font-size: 1rem;
+}
+
+/* Count Input */
+.count-input-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.count-btn {
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 50%;
+  background: var(--card-bg, #fff);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.count-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.count-btn:active {
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.count-input {
+  width: 5rem;
+  padding: 0.75rem;
+  border: 2px solid rgba(100, 150, 200, 0.25);
+  border-radius: 8px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  background: var(--card-bg, #fff);
+  color: inherit;
+}
+
+.count-input:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.count-preview {
+  text-align: center;
+  font-size: 0.85rem;
+  opacity: 0.7;
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border-radius: 8px;
+}
+
+/* Observation Step */
+.observation-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Seedling Header */
+.seedling-header {
+  padding: 1.25rem;
+  background: rgba(100, 150, 200, 0.15);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.seedling-progress {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  margin-bottom: 0.5rem;
+}
+
+.seedling-number {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.seedling-cross {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.seedling-location {
+  font-size: 0.85rem;
+  opacity: 0.6;
+  margin-top: 0.5rem;
+}
+
+/* Season Toggle Row */
+.season-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.toggle-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.season-toggle {
+  display: flex;
+  background: rgba(100, 150, 200, 0.15);
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+
+.toggle-option {
+  padding: 0.4rem 0.75rem;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.toggle-option.active {
+  background: var(--card-bg, #fff);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+}
+
+/* Trait Info */
+.trait-info {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+/* Trait Areas */
+.trait-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.trait-area {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  overflow: hidden;
+}
+
+.area-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.area-header:hover {
+  background: rgba(100, 150, 200, 0.08);
+}
+
+.area-expand {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.area-name {
+  flex: 1;
+}
+
+.area-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: inherit;
+  opacity: 0.7;
+  background: rgba(100, 150, 200, 0.15);
+  padding: 0.2rem 0.6rem;
+  border-radius: 12px;
+}
+
+.area-content {
+  padding: 0 0.5rem 0.75rem;
+}
+
+/* Trait Groups */
+.trait-group {
+  margin-top: 0.5rem;
+}
+
+.group-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: rgba(100, 150, 200, 0.08);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+
+.group-header:hover {
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.group-expand {
+  font-size: 0.65rem;
+  opacity: 0.5;
+}
+
+.group-name {
+  flex: 1;
+}
+
+.group-count {
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.group-content {
+  padding: 1rem 0.5rem;
+}
+
+/* Traits Grid */
+.traits-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 480px) {
+  .traits-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Photo Section */
+.photo-section {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+
+.section-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+  margin-bottom: 0.75rem;
+}
+
+.photo-upload-area {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.photo-input {
+  display: none;
+}
+
+.photo-upload-btn {
+  flex: 1;
+  min-width: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 2px dashed rgba(100, 150, 200, 0.4);
+  border-radius: 10px;
+  background: var(--card-bg, #fff);
+  cursor: pointer;
+  transition: all 0.2s;
+  color: inherit;
+}
+
+.photo-upload-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.upload-icon {
+  font-size: 1.25rem;
+}
+
+.photo-upload-btn span:last-child {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Photo Previews */
+.photo-previews {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.photo-preview {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.photo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.remove-photo {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.remove-photo:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* Observation Footer */
+.observation-footer {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.nav-btn {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.prev-btn {
+  background: transparent;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  color: inherit;
+}
+
+.prev-btn:hover:not(:disabled) {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.prev-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.next-btn {
+  background: rgba(100, 150, 200, 0.3);
+  border: 2px solid rgba(100, 150, 200, 0.4);
+  color: inherit;
+}
+
+.next-btn:hover:not(:disabled) {
+  background: rgba(100, 150, 200, 0.45);
+}
+
+.next-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Save and Exit Button */
+.save-exit-btn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 0.75rem;
+  background: transparent;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-exit-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.save-exit-btn.primary {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+.save-exit-btn.primary:hover {
+  background: rgba(100, 150, 200, 0.45);
+}
+
+/* Page Footer */
+.add-seedling-group-page .page-footer {
+  display: flex;
+  gap: 0.75rem;
+  padding: 1.25rem;
+  margin: 1rem -1.25rem 0;
+  margin-bottom: 80px;
+  background: var(--card-bg, #fff);
+  border-top: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.cancel-btn {
+  flex: 1;
+  padding: 1rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  color: inherit;
+}
+
+.cancel-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.page-footer .next-btn {
+  flex: 1;
+}
+
+/* Dark mode */
+.dark .add-seedling-group-page {
+  background: var(--bg-color, #0f0f1a);
+}
+
+.dark .add-seedling-group-page .page-header,
+.dark .add-seedling-group-page .page-footer,
+.dark .add-seedling-group-page .year-btn,
+.dark .add-seedling-group-page .cross-btn,
+.dark .form-input,
+.dark .count-input,
+.dark .count-btn,
+.dark .photo-upload-btn,
+.dark .trait-area,
+.dark .photo-section,
+.dark .toggle-option.active {
+  background: var(--card-bg, #1a1a2e);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .add-seedling-group-page .page-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    padding-bottom: 100px;
+  }
+
+  .add-seedling-group-page .page-footer {
+    margin: 1rem -1.5rem 0;
+    margin-bottom: 80px;
+  }
+}

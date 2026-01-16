@@ -1,9 +1,9 @@
 import './AddPlantPage.css';
 
-type AddPlantOption = 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group';
+type AddPlantOption = 'add-variety' | 'add-seedling' | 'add-seedling-group';
 
 interface AddPlantPageProps {
-  onNavigate: (page: 'home' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group') => void;
+  onNavigate: (page: 'home' | 'add-variety' | 'add-seedling' | 'add-seedling-group') => void;
 }
 
 function AddPlantPage({ onNavigate }: AddPlantPageProps) {
@@ -22,11 +22,6 @@ function AddPlantPage({ onNavigate }: AddPlantPageProps) {
       id: 'add-seedling-group',
       label: 'Add New Seedling Group',
       description: 'Add multiple seedlings from the same cross'
-    },
-    {
-      id: 'continue-seedling-group',
-      label: 'Continue Seedling Group',
-      description: 'Resume adding to an existing group'
     }
   ];
 
