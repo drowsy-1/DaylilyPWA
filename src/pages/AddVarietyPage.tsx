@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { mockInventoryData } from '../data/mockInventory';
+import type { Page } from '../types';
 import './AddVarietyPage.css';
-
-type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group' | 'continue-observation' | 'trait-observation';
 
 interface ObservationContext {
   plantType: 'variety' | 'seedling';

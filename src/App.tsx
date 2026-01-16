@@ -19,9 +19,9 @@ import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
 import type { SeedlingData } from './pages/AddSeedlingPage';
 import type { SeedlingGroupData } from './pages/AddSeedlingGroupPage';
+import type { Page } from './types';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
-type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-observation' | 'trait-observation';
 
 interface ObservationContext {
   plantType: 'variety' | 'seedling';

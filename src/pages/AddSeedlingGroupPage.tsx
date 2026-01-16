@@ -3,9 +3,8 @@ import { mockInventoryData } from '../data/mockInventory';
 import { traitData } from '../data/traitData';
 import type { Trait } from '../data/traitData';
 import TraitField from '../components/TraitField';
+import type { Page } from '../types';
 import './AddSeedlingGroupPage.css';
-
-type Page = 'home' | 'add-plant' | 'add-seedling-group';
 
 interface AddSeedlingGroupPageProps {
   onNavigate: (page: Page) => void;

@@ -4,9 +4,8 @@ import type { Trait } from '../data/traitData';
 import TraitField from '../components/TraitField';
 import type { VarietyData } from './AddVarietyPage';
 import type { SeedlingData } from './AddSeedlingPage';
+import type { Page } from '../types';
 import './TraitObservationPage.css';
-
-type Page = 'home' | 'trait-fields' | 'observation-cycles' | 'inventory' | 'add-note' | 'add-plant' | 'add-variety' | 'add-seedling' | 'add-seedling-group' | 'continue-seedling-group' | 'continue-observation' | 'trait-observation';
 
 interface TraitObservationPageProps {
   plantType: 'variety' | 'seedling';
