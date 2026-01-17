@@ -248,11 +248,15 @@
   box-sizing: border-box;
 }
 
+.inventory-controls .search-input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .filter-controls {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
-  width: 100%;
 }
 
 .filter-btn {
@@ -280,12 +284,6 @@
   background: rgba(100, 150, 200, 0.4);
   border-color: rgba(100, 150, 200, 0.6);
   font-weight: 600;
-}
-
-.search-control {
-  flex: 1;
-  width: 100%;
-  min-width: 0;
 }
 
 .search-input {
@@ -686,20 +684,6 @@
 
   .inventory-header h1 {
     font-size: 2.5rem;
-  }
-
-  .inventory-controls {
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .filter-controls {
-    flex-shrink: 0;
-  }
-
-  .search-control {
-    max-width: 400px;
   }
 
   .inventory-stats {

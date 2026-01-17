@@ -13,6 +13,9 @@ import AddPlantPage from './pages/AddPlantPage';
 import AddVarietyPage from './pages/AddVarietyPage';
 import AddSeedlingPage from './pages/AddSeedlingPage';
 import AddSeedlingGroupPage from './pages/AddSeedlingGroupPage';
+import ContinueVarietyPage from './pages/ContinueVarietyPage';
+import ContinueSeedlingPage from './pages/ContinueSeedlingPage';
+import ContinueSeedlingGroupPage from './pages/ContinueSeedlingGroupPage';
 import TraitObservationPage from './pages/TraitObservationPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
@@ -61,6 +64,14 @@ function App() {
   const handleSaveSeedlingGroup = (seedlingsData: SeedlingGroupData[]) => {
     setSeedlingGroups([...seedlingsData, ...seedlingGroups]);
     console.log('Seedling group saved:', seedlingsData);
+  };
+
+  const handleUpdateSeedlingGroup = (updatedSeedlings: SeedlingGroupData[]) => {
+    // Update existing seedlings in the seedlingGroups array
+    const updatedIds = new Set(updatedSeedlings.map(s => s.id));
+    const remainingGroups = seedlingGroups.filter(s => !updatedIds.has(s.id));
+    setSeedlingGroups([...updatedSeedlings, ...remainingGroups]);
+    console.log('Seedling group updated:', updatedSeedlings);
   };
 
   const handleSaveObservations = (observations: Record<string, any>) => {
@@ -153,6 +164,24 @@ function App() {
         <AddSeedlingGroupPage
           onNavigate={handleNavigate}
           onSaveSeedlingGroup={handleSaveSeedlingGroup}
+        />
+      ) : currentPage === 'continue-variety' ? (
+        <ContinueVarietyPage
+          onNavigate={handleNavigate}
+          varieties={varieties}
+          onNavigateWithContext={handleNavigateWithContext}
+        />
+      ) : currentPage === 'continue-seedling' ? (
+        <ContinueSeedlingPage
+          onNavigate={handleNavigate}
+          seedlings={seedlings}
+          onNavigateWithContext={handleNavigateWithContext}
+        />
+      ) : currentPage === 'continue-seedling-group' ? (
+        <ContinueSeedlingGroupPage
+          onNavigate={handleNavigate}
+          seedlingGroups={seedlingGroups}
+          onUpdateSeedlingGroup={handleUpdateSeedlingGroup}
         />
       ) : currentPage === 'trait-observation' && observationContext ? (
         <TraitObservationPage

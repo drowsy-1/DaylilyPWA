@@ -1,0 +1,215 @@
+.continue-variety-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-color, #f5f5f5);
+}
+
+.continue-variety-page .page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.continue-variety-page .page-header h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.continue-variety-page .back-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.continue-variety-page .back-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.continue-variety-page .back-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.continue-variety-page .header-spacer {
+  width: 40px;
+}
+
+.continue-variety-page .page-content {
+  flex: 1;
+  padding: 1.5rem 1.25rem;
+  padding-bottom: 100px;
+  overflow-y: auto;
+}
+
+.continue-variety-page .step-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Search Section */
+.continue-variety-page .search-section {
+  margin-bottom: 0.5rem;
+}
+
+.continue-variety-page .search-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: var(--card-bg, #fff);
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.continue-variety-page .search-input:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.continue-variety-page .results-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+  margin-bottom: 0.25rem;
+}
+
+/* Varieties List */
+.continue-variety-page .varieties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.continue-variety-page .variety-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border: 2px solid rgba(100, 150, 200, 0.15);
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.continue-variety-page .variety-item:hover {
+  background: rgba(100, 150, 200, 0.08);
+  border-color: rgba(100, 150, 200, 0.3);
+  transform: translateY(-1px);
+}
+
+.continue-variety-page .variety-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.continue-variety-page .variety-name {
+  font-weight: 500;
+}
+
+.continue-variety-page .variety-meta {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.continue-variety-page .variety-arrow {
+  opacity: 0.5;
+}
+
+/* Empty State */
+.continue-variety-page .empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 12px;
+}
+
+.continue-variety-page .empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.continue-variety-page .empty-state h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.continue-variety-page .empty-state p {
+  margin: 0 0 1.5rem 0;
+  opacity: 0.7;
+  font-size: 0.95rem;
+}
+
+.continue-variety-page .add-btn {
+  padding: 0.875rem 1.5rem;
+  background: rgba(100, 150, 200, 0.2);
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: inherit;
+  transition: all 0.2s;
+}
+
+.continue-variety-page .add-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+}
+
+/* No Results */
+.continue-variety-page .no-results {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 12px;
+}
+
+.continue-variety-page .no-results p {
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* Dark mode */
+.dark .continue-variety-page {
+  background: var(--bg-color, #0f0f1a);
+}
+
+.dark .continue-variety-page .page-header,
+.dark .continue-variety-page .search-input,
+.dark .continue-variety-page .variety-item {
+  background: var(--card-bg, #1a1a2e);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .continue-variety-page .page-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+}

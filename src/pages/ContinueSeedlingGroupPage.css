@@ -1,4 +1,4 @@
-.add-seedling-group-page {
+.continue-seedling-group-page {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -6,7 +6,7 @@
 }
 
 /* Header */
-.add-seedling-group-page .page-header {
+.continue-seedling-group-page .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,13 +18,13 @@
   z-index: 10;
 }
 
-.add-seedling-group-page .page-header h1 {
+.continue-seedling-group-page .page-header h1 {
   margin: 0;
   font-size: 1.15rem;
   font-weight: 600;
 }
 
-.add-seedling-group-page .back-btn {
+.continue-seedling-group-page .back-btn {
   background: none;
   border: none;
   padding: 0.5rem;
@@ -38,16 +38,21 @@
   transition: background 0.2s;
 }
 
-.add-seedling-group-page .back-btn:hover {
+.continue-seedling-group-page .back-btn:hover {
   background: rgba(100, 150, 200, 0.1);
 }
 
-.header-spacer {
+.continue-seedling-group-page .back-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.continue-seedling-group-page .header-spacer {
   width: 40px;
 }
 
 /* Page Content */
-.add-seedling-group-page .page-content {
+.continue-seedling-group-page .page-content {
   flex: 1;
   padding: 1.5rem 1.25rem;
   padding-bottom: 100px;
@@ -55,99 +60,54 @@
 }
 
 /* Step Content */
-.add-seedling-group-page .step-content {
+.continue-seedling-group-page .step-content {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
 }
 
-.step-description {
-  margin: 0;
-  font-size: 0.95rem;
-  opacity: 0.8;
-  text-align: center;
+/* Search Section */
+.continue-seedling-group-page .search-section {
+  margin-bottom: 0.5rem;
 }
 
-.step-label {
+.continue-seedling-group-page .search-input {
+  width: 100%;
+  padding: 1rem 1.25rem;
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 12px;
+  font-size: 1rem;
+  background: var(--card-bg, #fff);
+  color: inherit;
+  box-sizing: border-box;
+}
+
+.continue-seedling-group-page .search-input:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+.continue-seedling-group-page .results-label {
   font-size: 0.85rem;
   font-weight: 500;
   opacity: 0.7;
+  margin-bottom: 0.25rem;
 }
 
-.step-hint {
-  font-size: 0.9rem;
-  color: inherit;
-  opacity: 0.7;
-  margin: 0;
-}
-
-/* Year Options - matches AddSeedlingPage */
-.add-seedling-group-page .year-options {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.add-seedling-group-page .year-btn {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1rem 1.25rem;
-  background: var(--card-bg, #fff);
-  border: 2px solid rgba(100, 150, 200, 0.2);
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 500;
-  color: inherit;
-  transition: all 0.2s;
-}
-
-.add-seedling-group-page .year-btn:hover {
-  background: rgba(100, 150, 200, 0.08);
-  border-color: rgba(100, 150, 200, 0.4);
-}
-
-.add-seedling-group-page .year-btn.active {
-  background: rgba(100, 150, 200, 0.2);
-  border-color: rgba(100, 150, 200, 0.5);
-}
-
-.add-seedling-group-page .year-btn.other-year {
-  font-size: 0.95rem;
-  opacity: 0.8;
-}
-
-.year-badge {
-  font-size: 0.75rem;
-  font-weight: 500;
-  padding: 0.25rem 0.5rem;
-  background: rgba(100, 150, 200, 0.2);
-  border-radius: 12px;
-  color: inherit;
-}
-
-.manual-year-input {
-  margin-top: 0.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-/* Cross Selection */
-.crosses-list {
+/* Groups List */
+.continue-seedling-group-page .groups-list {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.add-seedling-group-page .cross-btn {
+.continue-seedling-group-page .group-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  justify-content: space-between;
   padding: 1rem 1.25rem;
   background: var(--card-bg, #fff);
-  border: 2px solid rgba(100, 150, 200, 0.2);
+  border: 2px solid rgba(100, 150, 200, 0.15);
   border-radius: 10px;
   cursor: pointer;
   text-align: left;
@@ -155,162 +115,104 @@
   transition: all 0.2s;
 }
 
-.add-seedling-group-page .cross-btn:hover {
+.continue-seedling-group-page .group-item:hover {
   background: rgba(100, 150, 200, 0.08);
-  border-color: rgba(100, 150, 200, 0.4);
+  border-color: rgba(100, 150, 200, 0.3);
+  transform: translateY(-1px);
 }
 
-.add-seedling-group-page .cross-btn.active {
-  background: rgba(100, 150, 200, 0.2);
-  border-color: rgba(100, 150, 200, 0.5);
+.continue-seedling-group-page .group-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
 
-.add-seedling-group-page .cross-btn.manual {
-  border-style: dashed;
-  opacity: 0.9;
-}
-
-.cross-label {
-  flex: 1;
-  font-size: 0.95rem;
+.continue-seedling-group-page .group-cross {
   font-weight: 500;
 }
 
-.cross-id {
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 0.25rem 0.5rem;
-  background: rgba(100, 150, 200, 0.15);
-  border-radius: 6px;
-  white-space: nowrap;
-}
-
-/* Manual Cross Inputs */
-.manual-cross-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  padding: 1rem;
-  background: rgba(100, 150, 200, 0.08);
-  border-radius: 10px;
-  margin-top: 0.5rem;
-}
-
-/* Form Elements - matches AddSeedlingPage */
-.form-section {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-
-.form-label {
+.continue-seedling-group-page .group-meta {
   font-size: 0.85rem;
-  font-weight: 500;
-  opacity: 0.8;
+  opacity: 0.7;
 }
 
-.form-input {
-  width: 100%;
-  padding: 0.875rem 1rem;
-  border: 2px solid rgba(100, 150, 200, 0.25);
-  border-radius: 8px;
-  font-size: 1rem;
-  background: var(--card-bg, #fff);
-  color: inherit;
-  transition: border-color 0.2s;
-  box-sizing: border-box;
-}
-
-.form-input:focus {
-  outline: none;
-  border-color: rgba(100, 150, 200, 0.5);
-}
-
-.form-input::placeholder {
-  color: inherit;
+.continue-seedling-group-page .group-arrow {
   opacity: 0.5;
 }
 
-.location-input {
-  font-size: 1rem;
-}
-
-/* Count Input */
-.count-input-wrapper {
+/* Empty State */
+.continue-seedling-group-page .empty-state {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 12px;
 }
 
-.count-btn {
-  width: 3rem;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.continue-seedling-group-page .empty-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.continue-seedling-group-page .empty-state h2 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+}
+
+.continue-seedling-group-page .empty-state p {
+  margin: 0 0 1.5rem 0;
+  opacity: 0.7;
+  font-size: 0.95rem;
+}
+
+.continue-seedling-group-page .add-btn {
+  padding: 0.875rem 1.5rem;
+  background: rgba(100, 150, 200, 0.2);
   border: 2px solid rgba(100, 150, 200, 0.3);
-  border-radius: 50%;
-  background: var(--card-bg, #fff);
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: inherit;
+  border-radius: 10px;
   cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: inherit;
   transition: all 0.2s;
 }
 
-.count-btn:hover {
-  background: rgba(100, 150, 200, 0.1);
-  border-color: rgba(100, 150, 200, 0.5);
+.continue-seedling-group-page .add-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
 }
 
-.count-btn:active {
-  background: rgba(100, 150, 200, 0.2);
-}
-
-.count-input {
-  width: 5rem;
-  padding: 0.75rem;
-  border: 2px solid rgba(100, 150, 200, 0.25);
-  border-radius: 8px;
-  font-size: 1.5rem;
-  font-weight: 700;
+/* No Results */
+.continue-seedling-group-page .no-results {
   text-align: center;
-  background: var(--card-bg, #fff);
-  color: inherit;
+  padding: 2rem;
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 12px;
 }
 
-.count-input:focus {
-  outline: none;
-  border-color: rgba(100, 150, 200, 0.5);
-}
-
-.count-preview {
-  text-align: center;
-  font-size: 0.85rem;
+.continue-seedling-group-page .no-results p {
+  margin: 0;
   opacity: 0.7;
-  padding: 0.75rem 1rem;
-  background: rgba(100, 150, 200, 0.1);
-  border-radius: 8px;
 }
 
 /* Observation Step */
-.observation-step {
+.continue-seedling-group-page .observation-step {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
 /* Seedling Header */
-.seedling-header {
+.continue-seedling-group-page .seedling-header {
   padding: 1.25rem;
   background: rgba(100, 150, 200, 0.15);
   border-radius: 12px;
   text-align: center;
 }
 
-.seedling-progress {
+.continue-seedling-group-page .seedling-progress {
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -319,45 +221,45 @@
   margin-bottom: 0.5rem;
 }
 
-.seedling-number {
+.continue-seedling-group-page .seedling-number {
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
 }
 
-.seedling-cross {
+.continue-seedling-group-page .seedling-cross {
   font-size: 0.9rem;
   opacity: 0.8;
 }
 
-.seedling-location {
+.continue-seedling-group-page .seedling-location {
   font-size: 0.85rem;
   opacity: 0.6;
   margin-top: 0.5rem;
 }
 
 /* Season Toggle Row */
-.season-toggle-row {
+.continue-seedling-group-page .season-toggle-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.5rem 0;
 }
 
-.toggle-label {
+.continue-seedling-group-page .toggle-label {
   font-size: 0.9rem;
   font-weight: 500;
   opacity: 0.8;
 }
 
-.season-toggle {
+.continue-seedling-group-page .season-toggle {
   display: flex;
   background: rgba(100, 150, 200, 0.15);
   border-radius: 8px;
   padding: 0.25rem;
 }
 
-.toggle-option {
+.continue-seedling-group-page .toggle-option {
   padding: 0.4rem 0.75rem;
   border: none;
   background: transparent;
@@ -369,33 +271,33 @@
   transition: all 0.2s;
 }
 
-.toggle-option.active {
+.continue-seedling-group-page .toggle-option.active {
   background: var(--card-bg, #fff);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 /* Trait Info */
-.trait-info {
+.continue-seedling-group-page .trait-info {
   font-size: 0.85rem;
   opacity: 0.7;
   font-weight: 500;
 }
 
 /* Trait Areas */
-.trait-areas {
+.continue-seedling-group-page .trait-areas {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
 }
 
-.trait-area {
+.continue-seedling-group-page .trait-area {
   background: var(--card-bg, #fff);
   border-radius: 12px;
   border: 2px solid rgba(100, 150, 200, 0.2);
   overflow: hidden;
 }
 
-.area-header {
+.continue-seedling-group-page .area-header {
   width: 100%;
   display: flex;
   align-items: center;
@@ -411,20 +313,20 @@
   transition: background 0.2s;
 }
 
-.area-header:hover {
+.continue-seedling-group-page .area-header:hover {
   background: rgba(100, 150, 200, 0.08);
 }
 
-.area-expand {
+.continue-seedling-group-page .area-expand {
   font-size: 0.75rem;
   opacity: 0.6;
 }
 
-.area-name {
+.continue-seedling-group-page .area-name {
   flex: 1;
 }
 
-.area-count {
+.continue-seedling-group-page .area-count {
   font-size: 0.8rem;
   font-weight: 600;
   color: inherit;
@@ -434,16 +336,16 @@
   border-radius: 12px;
 }
 
-.area-content {
+.continue-seedling-group-page .area-content {
   padding: 0 0.5rem 0.75rem;
 }
 
 /* Trait Groups */
-.trait-group {
+.continue-seedling-group-page .trait-group {
   margin-top: 0.5rem;
 }
 
-.group-header {
+.continue-seedling-group-page .group-header {
   width: 100%;
   display: flex;
   align-items: center;
@@ -460,43 +362,43 @@
   transition: background 0.2s;
 }
 
-.group-header:hover {
+.continue-seedling-group-page .group-header:hover {
   background: rgba(100, 150, 200, 0.15);
 }
 
-.group-expand {
+.continue-seedling-group-page .group-expand {
   font-size: 0.65rem;
   opacity: 0.5;
 }
 
-.group-name {
+.continue-seedling-group-page .group-name {
   flex: 1;
 }
 
-.group-count {
+.continue-seedling-group-page .group-count {
   font-size: 0.75rem;
   opacity: 0.6;
 }
 
-.group-content {
+.continue-seedling-group-page .group-content {
   padding: 1rem 0.5rem;
 }
 
 /* Traits Grid */
-.traits-grid {
+.continue-seedling-group-page .traits-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
 
 @media (max-width: 480px) {
-  .traits-grid {
+  .continue-seedling-group-page .traits-grid {
     grid-template-columns: 1fr;
   }
 }
 
 /* Photo Section */
-.photo-section {
+.continue-seedling-group-page .photo-section {
   background: var(--card-bg, #fff);
   border-radius: 12px;
   border: 2px solid rgba(100, 150, 200, 0.2);
@@ -504,24 +406,24 @@
   margin-top: 0.5rem;
 }
 
-.section-label {
+.continue-seedling-group-page .section-label {
   font-size: 0.85rem;
   font-weight: 500;
   opacity: 0.7;
   margin-bottom: 0.75rem;
 }
 
-.photo-upload-area {
+.continue-seedling-group-page .photo-upload-area {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 
-.photo-input {
+.continue-seedling-group-page .photo-input {
   display: none;
 }
 
-.photo-upload-btn {
+.continue-seedling-group-page .photo-upload-btn {
   flex: 1;
   min-width: 120px;
   display: flex;
@@ -538,29 +440,29 @@
   color: inherit;
 }
 
-.photo-upload-btn:hover {
+.continue-seedling-group-page .photo-upload-btn:hover {
   background: rgba(100, 150, 200, 0.1);
   border-color: rgba(100, 150, 200, 0.6);
 }
 
-.upload-icon {
+.continue-seedling-group-page .upload-icon {
   font-size: 1.25rem;
 }
 
-.photo-upload-btn span:last-child {
+.continue-seedling-group-page .photo-upload-btn span:last-child {
   font-size: 0.85rem;
   font-weight: 500;
 }
 
 /* Photo Previews */
-.photo-previews {
+.continue-seedling-group-page .photo-previews {
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
   margin-top: 1rem;
 }
 
-.photo-preview {
+.continue-seedling-group-page .photo-preview {
   position: relative;
   width: 80px;
   height: 80px;
@@ -568,13 +470,13 @@
   overflow: hidden;
 }
 
-.photo-preview img {
+.continue-seedling-group-page .photo-preview img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.remove-photo {
+.continue-seedling-group-page .remove-photo {
   position: absolute;
   top: 4px;
   right: 4px;
@@ -592,18 +494,18 @@
   justify-content: center;
 }
 
-.remove-photo:hover {
+.continue-seedling-group-page .remove-photo:hover {
   background: rgba(0, 0, 0, 0.8);
 }
 
 /* Observation Footer */
-.observation-footer {
+.continue-seedling-group-page .observation-footer {
   display: flex;
   gap: 0.75rem;
   margin-top: 1.5rem;
 }
 
-.nav-btn {
+.continue-seedling-group-page .nav-btn {
   flex: 1;
   padding: 1rem;
   border-radius: 10px;
@@ -613,38 +515,42 @@
   transition: all 0.2s;
 }
 
-.prev-btn {
+.continue-seedling-group-page .nav-btn-placeholder {
+  flex: 1;
+}
+
+.continue-seedling-group-page .prev-btn {
   background: transparent;
   border: 2px solid rgba(100, 150, 200, 0.3);
   color: inherit;
 }
 
-.prev-btn:hover:not(:disabled) {
+.continue-seedling-group-page .prev-btn:hover:not(:disabled) {
   background: rgba(100, 150, 200, 0.1);
 }
 
-.prev-btn:disabled {
+.continue-seedling-group-page .prev-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
-.next-btn {
+.continue-seedling-group-page .next-btn {
   background: rgba(100, 150, 200, 0.3);
   border: 2px solid rgba(100, 150, 200, 0.4);
   color: inherit;
 }
 
-.next-btn:hover:not(:disabled) {
+.continue-seedling-group-page .next-btn:hover:not(:disabled) {
   background: rgba(100, 150, 200, 0.45);
 }
 
-.next-btn:disabled {
+.continue-seedling-group-page .next-btn:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
 /* Save and Exit Button */
-.save-exit-btn {
+.continue-seedling-group-page .save-exit-btn {
   width: 100%;
   padding: 1rem;
   margin-top: 0.75rem;
@@ -658,81 +564,40 @@
   transition: all 0.2s;
 }
 
-.save-exit-btn:hover {
+.continue-seedling-group-page .save-exit-btn:hover {
   background: rgba(100, 150, 200, 0.1);
 }
 
-.save-exit-btn.primary {
+.continue-seedling-group-page .save-exit-btn.primary {
   background: rgba(100, 150, 200, 0.3);
   border-color: rgba(100, 150, 200, 0.4);
 }
 
-.save-exit-btn.primary:hover {
+.continue-seedling-group-page .save-exit-btn.primary:hover {
   background: rgba(100, 150, 200, 0.45);
 }
 
-/* Page Footer */
-.add-seedling-group-page .page-footer {
-  display: flex;
-  gap: 0.75rem;
-  padding: 1.25rem;
-  margin: 1rem -1.25rem 0;
-  margin-bottom: 80px;
-  background: var(--card-bg, #fff);
-  border-top: 1px solid rgba(100, 150, 200, 0.2);
-}
-
-.cancel-btn {
-  flex: 1;
-  padding: 1rem;
-  border-radius: 10px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s;
-  background: transparent;
-  border: 2px solid rgba(100, 150, 200, 0.3);
-  color: inherit;
-}
-
-.cancel-btn:hover {
-  background: rgba(100, 150, 200, 0.1);
-}
-
-.page-footer .next-btn {
-  flex: 1;
-}
-
 /* Dark mode */
-.dark .add-seedling-group-page {
+.dark .continue-seedling-group-page {
   background: var(--bg-color, #0f0f1a);
 }
 
-.dark .add-seedling-group-page .page-header,
-.dark .add-seedling-group-page .page-footer,
-.dark .add-seedling-group-page .year-btn,
-.dark .add-seedling-group-page .cross-btn,
-.dark .form-input,
-.dark .count-input,
-.dark .count-btn,
-.dark .photo-upload-btn,
-.dark .trait-area,
-.dark .photo-section,
-.dark .toggle-option.active {
+.dark .continue-seedling-group-page .page-header,
+.dark .continue-seedling-group-page .search-input,
+.dark .continue-seedling-group-page .group-item,
+.dark .continue-seedling-group-page .photo-upload-btn,
+.dark .continue-seedling-group-page .trait-area,
+.dark .continue-seedling-group-page .photo-section,
+.dark .continue-seedling-group-page .toggle-option.active {
   background: var(--card-bg, #1a1a2e);
 }
 
 /* Responsive */
 @media (min-width: 768px) {
-  .add-seedling-group-page .page-content {
+  .continue-seedling-group-page .page-content {
     max-width: 600px;
     margin: 0 auto;
     padding: 2rem 1.5rem;
     padding-bottom: 100px;
-  }
-
-  .add-seedling-group-page .page-footer {
-    margin: 1rem -1.5rem 0;
-    margin-bottom: 80px;
   }
 }

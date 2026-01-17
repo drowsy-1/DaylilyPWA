@@ -234,8 +234,8 @@
 .save-btn {
   width: 100%;
   padding: 1rem;
-  background: rgba(100, 180, 100, 0.25);
-  border: 2px solid rgba(100, 180, 100, 0.4);
+  background: rgba(100, 150, 200, 0.25);
+  border: 2px solid rgba(100, 150, 200, 0.4);
   border-radius: 10px;
   font-size: 1rem;
   font-weight: 600;
@@ -245,8 +245,8 @@
 }
 
 .save-btn:hover {
-  background: rgba(100, 180, 100, 0.4);
-  border-color: rgba(100, 180, 100, 0.6);
+  background: rgba(100, 150, 200, 0.4);
+  border-color: rgba(100, 150, 200, 0.6);
 }
 
 /* Dark mode */
@@ -279,11 +279,11 @@
 }
 
 .dark .save-btn {
-  background: rgba(100, 180, 100, 0.2);
-  border-color: rgba(100, 180, 100, 0.35);
+  background: rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.35);
 }
 
 .dark .save-btn:hover {
-  background: rgba(100, 180, 100, 0.35);
-  border-color: rgba(100, 180, 100, 0.5);
+  background: rgba(100, 150, 200, 0.35);
+  border-color: rgba(100, 150, 200, 0.5);
 }

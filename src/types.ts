@@ -8,6 +8,7 @@ export type Page =
   | 'add-variety'
   | 'add-seedling'
   | 'add-seedling-group'
+  | 'continue-variety'
+  | 'continue-seedling'
   | 'continue-seedling-group'
-  | 'continue-observation'
   | 'trait-observation';

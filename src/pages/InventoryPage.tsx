@@ -293,19 +293,19 @@ function InventoryPage({ onNavigate }: InventoryPageProps) {
 
       <div className="inventory-controls">
         <div className="filter-controls">
-          <button 
+          <button
             className={`filter-btn ${filter === 'all' ? 'active' : ''}`}
             onClick={() => setFilter('all')}
           >
             All ({mockInventoryData.length})
           </button>
-          <button 
+          <button
             className={`filter-btn ${filter === 'varieties' ? 'active' : ''}`}
             onClick={() => setFilter('varieties')}
           >
             Varieties ({mockInventoryData.filter(item => item.observationData.type === 'Registered Variety').length})
           </button>
-          <button 
+          <button
             className={`filter-btn ${filter === 'seedlings' ? 'active' : ''}`}
             onClick={() => setFilter('seedlings')}
           >
@@ -313,15 +313,13 @@ function InventoryPage({ onNavigate }: InventoryPageProps) {
           </button>
         </div>
 
-        <div className="search-control">
-          <input
-            type="text"
-            placeholder="Search varieties, hybridizers, or seedling numbers..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="search-input"
-          />
-        </div>
+        <input
+          type="text"
+          placeholder="Search varieties, hybridizers, or seedling numbers..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="search-input"
+        />
       </div>
 
       <div className="advanced-filters-section">
