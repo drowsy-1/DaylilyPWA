@@ -17,12 +17,13 @@ import ContinueVarietyPage from './pages/ContinueVarietyPage';
 import ContinueSeedlingPage from './pages/ContinueSeedlingPage';
 import ContinueSeedlingGroupPage from './pages/ContinueSeedlingGroupPage';
 import TraitObservationPage from './pages/TraitObservationPage';
+import CrossesPage from './pages/CrossesPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
 import type { SeedlingData } from './pages/AddSeedlingPage';
 import type { SeedlingGroupData } from './pages/AddSeedlingGroupPage';
-import type { Page } from './types';
+import type { Page, CrossData } from './types';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
 
@@ -41,6 +42,7 @@ function App() {
   const [varieties, setVarieties] = useState<VarietyData[]>([]);
   const [seedlings, setSeedlings] = useState<SeedlingData[]>([]);
   const [seedlingGroups, setSeedlingGroups] = useState<SeedlingGroupData[]>([]);
+  const [crosses, setCrosses] = useState<CrossData[]>([]);
   const [observationContext, setObservationContext] = useState<ObservationContext | null>(null);
 
   // Get real inventory stats
@@ -64,6 +66,11 @@ function App() {
   const handleSaveSeedlingGroup = (seedlingsData: SeedlingGroupData[]) => {
     setSeedlingGroups([...seedlingsData, ...seedlingGroups]);
     console.log('Seedling group saved:', seedlingsData);
+  };
+
+  const handleSaveCross = (cross: CrossData) => {
+    setCrosses([cross, ...crosses]);
+    console.log('Cross saved:', cross);
   };
 
   const handleUpdateSeedlingGroup = (updatedSeedlings: SeedlingGroupData[]) => {
@@ -105,6 +112,8 @@ function App() {
   const handleTabChange = (tab: Tab) => {
     if (tab === 'inventory') {
       handleNavigate('inventory');
+    } else if (tab === 'breeding') {
+      handleNavigate('crosses');
     } else {
       setActiveTab(tab);
     }
@@ -144,6 +153,12 @@ function App() {
           <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
           <InventoryPage onNavigate={handleNavigate} />
         </>
+      ) : currentPage === 'crosses' ? (
+        <CrossesPage
+          onNavigate={handleNavigate}
+          crosses={crosses}
+          onSaveCross={handleSaveCross}
+        />
       ) : currentPage === 'add-note' ? (
         <AddNotePage onNavigate={handleNavigate} onSave={handleSaveNote} />
       ) : currentPage === 'add-plant' ? (

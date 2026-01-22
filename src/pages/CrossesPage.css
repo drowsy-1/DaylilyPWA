@@ -1,0 +1,538 @@
+.crosses-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-color, #f5f5f5);
+}
+
+/* Header */
+.crosses-page .page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.crosses-page .page-header h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.crosses-page .back-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.crosses-page .back-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.crosses-page .header-spacer {
+  width: 40px;
+}
+
+/* Page Content */
+.crosses-page .page-content {
+  flex: 1;
+  padding: 1.5rem 1.25rem;
+  padding-bottom: 100px;
+  overflow-y: auto;
+}
+
+/* Cross Form */
+.cross-form {
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+  margin-bottom: 1rem;
+}
+
+/* Main Cross Container - Vertical Layout */
+.main-cross-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.main-cross-row {
+  width: 100%;
+}
+
+.main-cross-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0;
+}
+
+.cross-symbol-main {
+  font-size: 1.5rem;
+  font-weight: 300;
+  opacity: 0.6;
+}
+
+/* Parent Input Wrapper */
+.parent-input-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Input Header with expand button */
+.input-header,
+.expanded-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.input-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+/* Expand/Collapse Buttons */
+.expand-btn,
+.collapse-btn {
+  width: 26px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 6px;
+  background: rgba(100, 150, 200, 0.1);
+  color: inherit;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.expand-btn:hover,
+.collapse-btn:hover {
+  background: rgba(100, 150, 200, 0.25);
+  border-color: rgba(100, 150, 200, 0.5);
+  opacity: 1;
+}
+
+/* Autocomplete Container */
+.autocomplete-container {
+  position: relative;
+  width: 100%;
+}
+
+.parent-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid rgba(100, 150, 200, 0.25);
+  border-radius: 8px;
+  font-size: 1rem;
+  background: var(--card-bg, #fff);
+  color: inherit;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.parent-input:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.parent-input::placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+/* Expanded Parent (nested cross) - Vertical Layout */
+.parent-input-wrapper.expanded {
+  padding: 0.75rem;
+  background: rgba(100, 150, 200, 0.08);
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+}
+
+/* Nested Cross Container - Always Vertical */
+.nested-cross-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 3px solid rgba(100, 150, 200, 0.3);
+}
+
+.nested-cross-row {
+  width: 100%;
+}
+
+.nested-cross-divider {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+  padding-left: 0.5rem;
+}
+
+.cross-symbol-nested {
+  font-size: 1.25rem;
+  font-weight: 300;
+  opacity: 0.5;
+}
+
+/* Depth-based styling - visual hierarchy through color intensity */
+.parent-input-wrapper.depth-1.expanded {
+  background: rgba(100, 150, 200, 0.12);
+}
+
+.parent-input-wrapper.depth-1 .nested-cross-container {
+  border-left-color: rgba(100, 150, 200, 0.4);
+}
+
+.parent-input-wrapper.depth-2.expanded {
+  background: rgba(100, 150, 200, 0.16);
+}
+
+.parent-input-wrapper.depth-2 .nested-cross-container {
+  border-left-color: rgba(100, 150, 200, 0.5);
+}
+
+.parent-input-wrapper.depth-3.expanded {
+  background: rgba(100, 150, 200, 0.20);
+}
+
+.parent-input-wrapper.depth-3 .nested-cross-container {
+  border-left-color: rgba(100, 150, 200, 0.6);
+}
+
+/* Slightly smaller inputs at deeper levels */
+.parent-input-wrapper.depth-1 .parent-input,
+.parent-input-wrapper.depth-2 .parent-input,
+.parent-input-wrapper.depth-3 .parent-input {
+  padding: 0.7rem 0.85rem;
+  font-size: 0.95rem;
+}
+
+.parent-input-wrapper.depth-1 .input-label,
+.parent-input-wrapper.depth-2 .input-label,
+.parent-input-wrapper.depth-3 .input-label {
+  font-size: 0.75rem;
+}
+
+/* Suggestions Dropdown */
+.suggestions-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--card-bg, #fff);
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  margin-top: 4px;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.suggestion-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  transition: background 0.15s;
+}
+
+.suggestion-item:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.suggestion-item:not(:last-child) {
+  border-bottom: 1px solid rgba(100, 150, 200, 0.1);
+}
+
+.suggestion-name {
+  flex: 1;
+  font-size: 0.95rem;
+  font-weight: 500;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.suggestion-hybridizer {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.suggestion-tag {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.2rem 0.5rem;
+  background: rgba(100, 150, 200, 0.2);
+  border-radius: 4px;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.suggestion-item.seedling .suggestion-tag {
+  background: rgba(150, 200, 100, 0.25);
+}
+
+.suggestion-item.unknown .suggestion-tag {
+  background: rgba(200, 150, 100, 0.25);
+}
+
+/* Cross Preview */
+.cross-preview {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border-radius: 8px;
+}
+
+.preview-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  opacity: 0.6;
+  margin-bottom: 0.35rem;
+}
+
+.preview-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+/* Error Message */
+.error-message {
+  color: #d32f2f;
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(211, 47, 47, 0.1);
+  border-radius: 6px;
+}
+
+/* Create Button */
+.create-cross-btn {
+  width: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  background: rgba(100, 150, 200, 0.3);
+  border: 2px solid rgba(100, 150, 200, 0.4);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.create-cross-btn:hover:not(:disabled) {
+  background: rgba(100, 150, 200, 0.45);
+}
+
+.create-cross-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* Crosses List Section */
+.crosses-list-section {
+  margin-top: 1rem;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.section-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.section-count {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  background: rgba(100, 150, 200, 0.2);
+  border-radius: 12px;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  background: var(--card-bg, #fff);
+  border-radius: 12px;
+  border: 2px dashed rgba(100, 150, 200, 0.25);
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.empty-hint {
+  margin-top: 0.5rem !important;
+  font-size: 0.85rem !important;
+  opacity: 0.5 !important;
+}
+
+/* Crosses List */
+.crosses-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cross-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+
+.cross-item:hover {
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+.cross-number {
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+  padding: 0.35rem 0.6rem;
+  background: rgba(100, 150, 200, 0.15);
+  border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.cross-parents {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 0;
+}
+
+.cross-label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  word-break: break-word;
+  line-height: 1.4;
+}
+
+.cross-date {
+  font-size: 0.8rem;
+  opacity: 0.5;
+}
+
+/* Dark mode */
+.dark .crosses-page {
+  background: var(--bg-color, #0f0f1a);
+}
+
+.dark .crosses-page .page-header,
+.dark .cross-form,
+.dark .cross-item,
+.dark .parent-input,
+.dark .suggestions-dropdown,
+.dark .empty-state {
+  background: var(--card-bg, #1a1a2e);
+}
+
+.dark .error-message {
+  background: rgba(211, 47, 47, 0.2);
+}
+
+.dark .parent-input-wrapper.expanded {
+  background: rgba(100, 150, 200, 0.12);
+  border-color: rgba(100, 150, 200, 0.25);
+}
+
+.dark .parent-input-wrapper.depth-1.expanded {
+  background: rgba(100, 150, 200, 0.16);
+}
+
+.dark .parent-input-wrapper.depth-2.expanded {
+  background: rgba(100, 150, 200, 0.20);
+}
+
+.dark .parent-input-wrapper.depth-3.expanded {
+  background: rgba(100, 150, 200, 0.24);
+}
+
+.dark .cross-preview {
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.dark .expand-btn,
+.dark .collapse-btn {
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.dark .nested-cross-container {
+  border-left-color: rgba(100, 150, 200, 0.35);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .crosses-page .page-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+    padding-bottom: 100px;
+  }
+}
