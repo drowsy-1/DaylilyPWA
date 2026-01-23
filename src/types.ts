@@ -4,6 +4,7 @@ export type Page =
   | 'observation-cycles'
   | 'inventory'
   | 'crosses'
+  | 'assigned-crosses'
   | 'add-note'
   | 'add-plant'
   | 'add-variety'
@@ -24,5 +25,16 @@ export interface CrossData {
   podParentType: ParentType;
   pollenParentType: ParentType;
   dateCreated: string;
+  lastUsed?: string;
   notes?: string;
+}
+
+export interface CrossAssignment {
+  id: string;
+  crossId: string;
+  year: number;
+  crossCount: number;
+  dateAssigned: string;
+  dateCompleted?: string;
+  completed: boolean;
 }

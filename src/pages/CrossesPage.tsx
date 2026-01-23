@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { mockInventoryData } from '../data/mockInventory';
-import type { Page, CrossData, ParentType } from '../types';
+import type { Page, CrossData, ParentType, CrossAssignment } from '../types';
 import './CrossesPage.css';
 
 interface CrossesPageProps {
-  onNavigate: (page: Page) => void;
+  onNavigate: (page: Page, data?: unknown) => void;
   crosses: CrossData[];
+  crossAssignments: CrossAssignment[];
   onSaveCross: (cross: CrossData) => void;
+  onAssignCrosses: (crossIds: string[], year: number) => void;
 }
 
 interface AutocompleteSuggestion {
@@ -299,10 +301,47 @@ function ParentInput({ label, value, onChange, depth = 0, autoFocus }: ParentInp
   );
 }
 
-export default function CrossesPage({ onNavigate, crosses, onSaveCross }: CrossesPageProps) {
+export default function CrossesPage({ onNavigate, crosses, crossAssignments, onSaveCross, onAssignCrosses }: CrossesPageProps) {
   const [podParent, setPodParent] = useState<ParentValue>(createEmptySimple());
   const [pollenParent, setPollenParent] = useState<ParentValue>(createEmptySimple());
   const [error, setError] = useState<string | null>(null);
+
+  // Search state
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Assign mode state
+  const [isAssignMode, setIsAssignMode] = useState(false);
+  const [selectedCrossIds, setSelectedCrossIds] = useState<Set<string>>(new Set());
+  const [selectedAssignYear, setSelectedAssignYear] = useState<number | null>(null);
+
+  // Generate year options
+  const currentYear = new Date().getFullYear();
+  const yearOptions = useMemo(() => {
+    const years: number[] = [];
+    // Next year first, then current year, then 5 years back
+    years.push(currentYear + 1);
+    years.push(currentYear);
+    for (let i = 1; i <= 5; i++) {
+      years.push(currentYear - i);
+    }
+    return years;
+  }, [currentYear]);
+
+  // Get years that have assignments
+  const yearsWithAssignments = useMemo(() => {
+    const years = new Set<number>();
+    crossAssignments.forEach(a => years.add(a.year));
+    return years;
+  }, [crossAssignments]);
+
+  // Get assignment count per year
+  const assignmentCountByYear = useMemo(() => {
+    const counts = new Map<number, number>();
+    crossAssignments.forEach(a => {
+      counts.set(a.year, (counts.get(a.year) || 0) + 1);
+    });
+    return counts;
+  }, [crossAssignments]);
 
   const handlePodChange = useCallback((value: ParentValue) => {
     setPodParent(value);
@@ -380,6 +419,58 @@ export default function CrossesPage({ onNavigate, crosses, onSaveCross }: Crosse
     return [...crosses].sort((a, b) => b.crossNumber - a.crossNumber);
   }, [crosses]);
 
+  // Filtered crosses based on search
+  const filteredCrosses = useMemo(() => {
+    if (!searchQuery.trim()) return sortedCrosses;
+    const query = searchQuery.toLowerCase().trim();
+    return sortedCrosses.filter(cross =>
+      cross.podParent.toLowerCase().includes(query) ||
+      cross.pollenParent.toLowerCase().includes(query) ||
+      `${cross.podParent} × ${cross.pollenParent}`.toLowerCase().includes(query)
+    );
+  }, [sortedCrosses, searchQuery]);
+
+  // Toggle cross selection in assign mode
+  const toggleCrossSelection = (crossId: string) => {
+    setSelectedCrossIds(prev => {
+      const newSet = new Set(prev);
+      if (newSet.has(crossId)) {
+        newSet.delete(crossId);
+      } else {
+        newSet.add(crossId);
+      }
+      return newSet;
+    });
+  };
+
+  // Handle assign button click
+  const handleAssignClick = () => {
+    if (isAssignMode && selectedCrossIds.size > 0 && selectedAssignYear !== null) {
+      onAssignCrosses(Array.from(selectedCrossIds), selectedAssignYear);
+      setIsAssignMode(false);
+      setSelectedCrossIds(new Set());
+      setSelectedAssignYear(null);
+    } else {
+      setIsAssignMode(!isAssignMode);
+      if (!isAssignMode) {
+        setSelectedCrossIds(new Set());
+        setSelectedAssignYear(currentYear);
+      }
+    }
+  };
+
+  // Cancel assign mode
+  const handleCancelAssign = () => {
+    setIsAssignMode(false);
+    setSelectedCrossIds(new Set());
+    setSelectedAssignYear(null);
+  };
+
+  // Navigate to assigned crosses for a year
+  const handleYearClick = (year: number) => {
+    onNavigate('assigned-crosses', { year });
+  };
+
   // Check if we have any nested content for showing preview
   const hasNestedContent = podParent.kind === 'cross' || pollenParent.kind === 'cross' ||
                           podPreview !== '?' || pollenPreview !== '?';
@@ -396,6 +487,31 @@ export default function CrossesPage({ onNavigate, crosses, onSaveCross }: Crosse
       </div>
 
       <div className="page-content">
+        {/* Assigned Crosses Section */}
+        <div className="assigned-crosses-section">
+          <div className="section-header">
+            <span className="section-title">Assigned Crosses</span>
+          </div>
+          <div className="year-buttons-row">
+            {yearOptions.map(year => {
+              const count = assignmentCountByYear.get(year) || 0;
+              const isCurrentYear = year === currentYear;
+              const hasAssignments = yearsWithAssignments.has(year);
+              return (
+                <button
+                  key={year}
+                  className={`year-btn ${isCurrentYear ? 'current' : ''} ${hasAssignments ? 'has-assignments' : ''}`}
+                  onClick={() => handleYearClick(year)}
+                >
+                  <span className="year-label">{year}</span>
+                  {count > 0 && <span className="year-count">{count}</span>}
+                  {isCurrentYear && <span className="current-badge">Current</span>}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
         {/* Cross Input Form */}
         <div className="cross-form">
           <div className="form-title">New Cross</div>
@@ -444,11 +560,71 @@ export default function CrossesPage({ onNavigate, crosses, onSaveCross }: Crosse
           </button>
         </div>
 
+        {/* Assign Crosses Button */}
+        {crosses.length > 0 && (
+          <div className="assign-section">
+            {isAssignMode ? (
+              <div className="assign-mode-controls">
+                <div className="assign-year-selector">
+                  <span className="assign-label">Assign to:</span>
+                  <div className="assign-year-buttons">
+                    {yearOptions.slice(0, 4).map(year => (
+                      <button
+                        key={year}
+                        className={`assign-year-btn ${selectedAssignYear === year ? 'selected' : ''} ${year === currentYear ? 'current' : ''}`}
+                        onClick={() => setSelectedAssignYear(year)}
+                      >
+                        {year}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+                <div className="assign-actions">
+                  <button
+                    className="assign-confirm-btn"
+                    onClick={handleAssignClick}
+                    disabled={selectedCrossIds.size === 0}
+                  >
+                    Assign {selectedCrossIds.size > 0 ? `(${selectedCrossIds.size})` : ''}
+                  </button>
+                  <button className="assign-cancel-btn" onClick={handleCancelAssign}>
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button className="assign-crosses-btn" onClick={handleAssignClick}>
+                Assign Crosses
+              </button>
+            )}
+          </div>
+        )}
+
         {/* Crosses List */}
         <div className="crosses-list-section">
           <div className="section-header">
             <span className="section-title">All Crosses</span>
-            <span className="section-count">{crosses.length}</span>
+            <span className="section-count">{filteredCrosses.length}{searchQuery && ` / ${crosses.length}`}</span>
+          </div>
+
+          {/* Search Field */}
+          <div className="search-container">
+            <input
+              type="text"
+              className="crosses-search-input"
+              placeholder="Search crosses..."
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button
+                className="search-clear-btn"
+                onClick={() => setSearchQuery('')}
+                type="button"
+              >
+                ×
+              </button>
+            )}
           </div>
 
           {crosses.length === 0 ? (
@@ -456,18 +632,41 @@ export default function CrossesPage({ onNavigate, crosses, onSaveCross }: Crosse
               <p>No crosses yet</p>
               <p className="empty-hint">Create your first cross above</p>
             </div>
+          ) : filteredCrosses.length === 0 ? (
+            <div className="empty-state">
+              <p>No matches found</p>
+              <p className="empty-hint">Try a different search term</p>
+            </div>
           ) : (
             <div className="crosses-list">
-              {sortedCrosses.map(cross => (
-                <div key={cross.id} className="cross-item">
+              {filteredCrosses.map(cross => (
+                <div
+                  key={cross.id}
+                  className={`cross-item ${isAssignMode ? 'selectable' : ''} ${selectedCrossIds.has(cross.id) ? 'selected' : ''}`}
+                  onClick={isAssignMode ? () => toggleCrossSelection(cross.id) : undefined}
+                >
+                  {isAssignMode && (
+                    <div className="cross-checkbox">
+                      <div className={`checkbox ${selectedCrossIds.has(cross.id) ? 'checked' : ''}`}>
+                        {selectedCrossIds.has(cross.id) && '✓'}
+                      </div>
+                    </div>
+                  )}
                   <span className="cross-number">{formatCrossNumber(cross.crossNumber)}</span>
                   <div className="cross-parents">
                     <span className="cross-label">
                       ({cross.podParent} × {cross.pollenParent})
                     </span>
-                    <span className="cross-date">
-                      {new Date(cross.dateCreated).toLocaleDateString()}
-                    </span>
+                    <div className="cross-dates">
+                      <span className="cross-date">
+                        Added: {new Date(cross.dateCreated).toLocaleDateString()}
+                      </span>
+                      {cross.lastUsed && (
+                        <span className="cross-date last-used">
+                          Last used: {new Date(cross.lastUsed).toLocaleDateString()}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               ))}

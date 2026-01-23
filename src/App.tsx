@@ -18,14 +18,19 @@ import ContinueSeedlingPage from './pages/ContinueSeedlingPage';
 import ContinueSeedlingGroupPage from './pages/ContinueSeedlingGroupPage';
 import TraitObservationPage from './pages/TraitObservationPage';
 import CrossesPage from './pages/CrossesPage';
+import AssignedCrossesPage from './pages/AssignedCrossesPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
 import type { SeedlingData } from './pages/AddSeedlingPage';
 import type { SeedlingGroupData } from './pages/AddSeedlingGroupPage';
-import type { Page, CrossData } from './types';
+import type { Page, CrossData, CrossAssignment } from './types';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
+
+interface NavigationData {
+  year?: number;
+}
 
 interface ObservationContext {
   plantType: 'variety' | 'seedling';
@@ -43,6 +48,8 @@ function App() {
   const [seedlings, setSeedlings] = useState<SeedlingData[]>([]);
   const [seedlingGroups, setSeedlingGroups] = useState<SeedlingGroupData[]>([]);
   const [crosses, setCrosses] = useState<CrossData[]>([]);
+  const [crossAssignments, setCrossAssignments] = useState<CrossAssignment[]>([]);
+  const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
   const [observationContext, setObservationContext] = useState<ObservationContext | null>(null);
 
   // Get real inventory stats
@@ -73,6 +80,39 @@ function App() {
     console.log('Cross saved:', cross);
   };
 
+  const handleAssignCrosses = (crossIds: string[], year: number) => {
+    const newAssignments: CrossAssignment[] = crossIds
+      .filter(crossId => !crossAssignments.some(a => a.crossId === crossId && a.year === year))
+      .map(crossId => ({
+        id: crypto.randomUUID(),
+        crossId,
+        year,
+        crossCount: 0,
+        dateAssigned: new Date().toISOString(),
+        completed: false,
+      }));
+    setCrossAssignments([...crossAssignments, ...newAssignments]);
+    console.log('Crosses assigned:', newAssignments);
+  };
+
+  const handleUpdateCrossCount = (assignmentId: string, count: number) => {
+    setCrossAssignments(crossAssignments.map(a =>
+      a.id === assignmentId
+        ? { ...a, crossCount: count }
+        : a
+    ));
+    // Update lastUsed on the cross
+    const assignment = crossAssignments.find(a => a.id === assignmentId);
+    if (assignment) {
+      setCrosses(crosses.map(c =>
+        c.id === assignment.crossId
+          ? { ...c, lastUsed: new Date().toISOString() }
+          : c
+      ));
+    }
+  };
+
+  
   const handleUpdateSeedlingGroup = (updatedSeedlings: SeedlingGroupData[]) => {
     // Update existing seedlings in the seedlingGroups array
     const updatedIds = new Set(updatedSeedlings.map(s => s.id));
@@ -104,9 +144,12 @@ function App() {
     };
   }, [isMenuOpen]);
 
-  const handleNavigate = (page: Page) => {
+  const handleNavigate = (page: Page, data?: unknown) => {
     setCurrentPage(page);
     setIsMenuOpen(false);
+    if (data && typeof data === 'object' && 'year' in data) {
+      setSelectedYear((data as NavigationData).year!);
+    }
   };
 
   const handleTabChange = (tab: Tab) => {
@@ -157,7 +200,19 @@ function App() {
         <CrossesPage
           onNavigate={handleNavigate}
           crosses={crosses}
+          crossAssignments={crossAssignments}
           onSaveCross={handleSaveCross}
+          onAssignCrosses={handleAssignCrosses}
+        />
+      ) : currentPage === 'assigned-crosses' ? (
+        <AssignedCrossesPage
+          year={selectedYear}
+          crosses={crosses}
+          crossAssignments={crossAssignments}
+          onNavigate={handleNavigate}
+          onSaveCross={handleSaveCross}
+          onUpdateCrossCount={handleUpdateCrossCount}
+          onAssignCrosses={handleAssignCrosses}
         />
       ) : currentPage === 'add-note' ? (
         <AddNotePage onNavigate={handleNavigate} onSave={handleSaveNote} />
