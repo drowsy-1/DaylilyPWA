@@ -1,0 +1,442 @@
+.observation-history-page {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-x: hidden;
+}
+
+/* Integrated Page Header */
+.observation-history-page .page-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  margin: -1rem -1rem 1.5rem -1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background: inherit;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.observation-history-page .back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.observation-history-page .back-btn:hover {
+  background: rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+.observation-history-page .page-title {
+  flex: 1;
+  text-align: center;
+}
+
+.observation-history-page .page-title h1 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.observation-history-page .theme-toggle {
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: inherit;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.observation-history-page .theme-toggle:hover {
+  background: rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+/* Basic Filters */
+.basic-filters {
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 16px;
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.filters-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.filters-row:last-of-type {
+  margin-bottom: 0;
+}
+
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  width: 100%;
+  min-width: 0;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: inherit;
+  opacity: 0.9;
+}
+
+.filter-input {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  background: rgba(100, 150, 200, 0.05);
+  color: inherit;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.6);
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.filter-input::placeholder {
+  opacity: 0.6;
+}
+
+.clear-filters-btn {
+  margin-top: 1rem;
+  padding: 0.6rem 1rem;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.clear-filters-btn:hover {
+  background: rgba(239, 68, 68, 0.25);
+}
+
+/* Advanced Filters Section */
+.advanced-filters-section {
+  margin-bottom: 1.5rem;
+  width: 100%;
+  overflow: hidden;
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 16px;
+  border: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.advanced-filters-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(100, 150, 200, 0.15);
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: left;
+  transition: background-color 0.2s;
+  box-sizing: border-box;
+}
+
+.advanced-filters-toggle:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.advanced-filters-toggle .expand-icon {
+  font-size: 0.8rem;
+  width: 16px;
+  display: inline-block;
+}
+
+.advanced-filters-toggle .section-name {
+  flex: 1;
+}
+
+.advanced-filters-toggle .section-count {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.advanced-filters-panel {
+  padding: 1.25rem;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.trait-selector-hint {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin: 0 0 1rem 0;
+}
+
+.trait-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trait-area {
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.trait-area-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 0.75rem;
+}
+
+.trait-area-toggle {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+.trait-area-toggle:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.trait-area-toggle .expand-icon {
+  font-size: 0.7rem;
+  width: 12px;
+}
+
+.trait-area-toggle .area-name {
+  flex: 1;
+}
+
+.trait-area-toggle .area-count {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.select-all-btn {
+  padding: 0.4rem 0.75rem;
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 6px;
+  color: inherit;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.select-all-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+}
+
+.trait-checkboxes {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.4rem;
+  padding: 0 0.75rem 0.75rem 2rem;
+}
+
+.checkbox-option {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.8rem;
+  padding: 0.25rem;
+  min-width: 0;
+}
+
+.checkbox-option input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-custom {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(100, 150, 200, 0.5);
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: transparent;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.checkbox-option input[type="checkbox"]:checked + .checkbox-custom {
+  background: rgba(100, 150, 200, 0.8);
+  border-color: rgba(100, 150, 200, 0.8);
+  color: white;
+}
+
+.checkbox-option span:last-child {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Results Summary */
+.results-summary {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.filtered-notice {
+  opacity: 0.6;
+}
+
+/* Observation List */
+.observation-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  opacity: 0.6;
+}
+
+.empty-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-state p {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .observation-history-page {
+    padding: 0.75rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .basic-filters {
+    padding: 1rem;
+  }
+
+  .advanced-filters-toggle {
+    padding: 1rem;
+    font-size: 0.9rem;
+    gap: 0.75rem;
+  }
+
+  .advanced-filters-panel {
+    padding: 1rem;
+  }
+
+  .trait-checkboxes {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .filters-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .trait-checkboxes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  .observation-history-page {
+    padding: 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 2.5rem;
+  }
+
+  .filters-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .basic-filters {
+    padding: 1.5rem;
+  }
+
+  .advanced-filters-panel {
+    padding: 1.5rem;
+  }
+
+  .trait-checkboxes {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .trait-checkboxes {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

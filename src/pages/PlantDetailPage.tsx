@@ -17,7 +17,7 @@ interface PlantDetailPageProps {
   plantType: PlantType;
   plantId: string;
   summaryFields: string[];
-  onNavigate: (page: Page) => void;
+  onNavigate: (page: Page, data?: unknown) => void;
   isDark: boolean;
   onToggleTheme: () => void;
 }
@@ -276,6 +276,27 @@ function PlantDetailPage({
           onSetThumbnail={setThumbnailUrl}
         />
       </section>
+
+      {/* View Observation History Button */}
+      <button
+        className="view-history-btn"
+        onClick={() => onNavigate('observation-history', {
+          varietyName: plant.name,
+          returnTo: {
+            page: 'plant-detail',
+            data: { plantId: plant.name, plantType: isSeedling ? 'seedling' : 'variety' }
+          }
+        })}
+      >
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+        <span>View Observation History for {displayName}</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </button>
 
       {/* All Observations Section */}
       <section className="detail-section observations-section">

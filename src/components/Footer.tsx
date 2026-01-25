@@ -3,13 +3,13 @@ import './Footer.css';
 interface FooterProps {
   isMenuOpen: boolean;
   onToggleMenu: () => void;
-  onNavigate: (page: 'home' | 'trait-fields' | 'observation-cycles' | 'summary-fields' | 'inventory') => void;
+  onNavigate: (page: 'home' | 'trait-fields' | 'observation-cycles' | 'summary-fields' | 'inventory' | 'observation-history') => void;
 }
 
 function Footer({ isMenuOpen, onToggleMenu, onNavigate }: FooterProps) {
   const menuItems = [
     { label: 'Home', action: () => onNavigate('home') },
-    { label: 'Observations', action: () => onNavigate('home') },
+    { label: 'Observation History', action: () => onNavigate('observation-history') },
     { label: 'Inventory', action: () => onNavigate('inventory') },
     { label: 'Breeding', action: () => console.log('Breeding') },
     { label: 'Store', action: () => console.log('Store') },

@@ -15,7 +15,8 @@ export type Page =
   | 'continue-variety'
   | 'continue-seedling'
   | 'continue-seedling-group'
-  | 'trait-observation';
+  | 'trait-observation'
+  | 'observation-history';
 
 export type PlantType = 'variety' | 'seedling' | 'seedling-group';
 

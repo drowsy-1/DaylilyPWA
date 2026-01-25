@@ -1,0 +1,303 @@
+.observation-history-card {
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 16px;
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  margin-bottom: 1rem;
+  transition: all 0.2s;
+  overflow: hidden;
+}
+
+.observation-history-card:hover {
+  background: rgba(100, 150, 200, 0.12);
+  border-color: rgba(100, 150, 200, 0.3);
+}
+
+.observation-history-card.expanded {
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+/* Card Header */
+.card-header {
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.card-header-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.date-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.observation-date {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: inherit;
+}
+
+.source-badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+
+.source-badge.cycle {
+  background: rgba(34, 197, 94, 0.2);
+  color: rgba(34, 197, 94, 0.9);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.source-badge.individual {
+  background: rgba(100, 150, 200, 0.2);
+  color: rgba(100, 150, 200, 0.9);
+  border: 1px solid rgba(100, 150, 200, 0.3);
+}
+
+.plant-info {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.plant-name {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.plant-name:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.plant-nickname {
+  font-size: 0.9rem;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.card-header-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.type-badge {
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+}
+
+.type-badge.variety {
+  background: rgba(139, 92, 246, 0.2);
+  color: rgba(139, 92, 246, 0.9);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.type-badge.seedling {
+  background: rgba(251, 191, 36, 0.2);
+  color: rgba(251, 191, 36, 0.9);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.trait-count {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.expand-icon {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  transition: transform 0.2s;
+}
+
+.expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+/* Card Content (expanded) */
+.card-content {
+  padding: 0 1.25rem 1.25rem;
+  border-top: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.plant-metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.15);
+}
+
+.metadata-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+}
+
+.metadata-label {
+  opacity: 0.7;
+}
+
+.metadata-value {
+  font-weight: 500;
+}
+
+/* Trait Values */
+.trait-values {
+  padding: 1rem 0;
+}
+
+.traits-heading {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  opacity: 0.8;
+}
+
+.traits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+.trait-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.5rem 0.75rem;
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 8px;
+  gap: 1rem;
+}
+
+.trait-label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+  flex-shrink: 0;
+}
+
+.trait-value {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: right;
+  word-break: break-word;
+}
+
+/* Notes and Conditions */
+.observation-notes,
+.observation-conditions {
+  padding: 0.75rem;
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+}
+
+.notes-label,
+.conditions-label {
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.notes-text,
+.conditions-text {
+  opacity: 0.9;
+}
+
+/* Photos Indicator */
+.photos-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(100, 150, 200, 0.1);
+  border-radius: 8px;
+  margin-top: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.photos-icon {
+  font-size: 1rem;
+}
+
+/* Show Full Observation Button */
+.show-full-btn {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background: rgba(100, 150, 200, 0.2);
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  color: inherit;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.show-full-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+  transform: translateY(-1px);
+}
+
+.show-full-btn.secondary {
+  background: transparent;
+  border-color: rgba(100, 150, 200, 0.2);
+}
+
+.show-full-btn.secondary:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .card-header {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .card-header-meta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .plant-metadata {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .traits-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .traits-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

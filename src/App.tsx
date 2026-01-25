@@ -19,6 +19,7 @@ import ContinueSeedlingGroupPage from './pages/ContinueSeedlingGroupPage';
 import TraitObservationPage from './pages/TraitObservationPage';
 import CrossesPage from './pages/CrossesPage';
 import AssignedCrossesPage from './pages/AssignedCrossesPage';
+import ObservationHistoryPage from './pages/ObservationHistoryPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
@@ -56,6 +57,8 @@ function App() {
   const [observationContext, setObservationContext] = useState<ObservationContext | null>(null);
   const [summaryFields, setSummaryFields] = useState<string[]>(DEFAULT_SUMMARY_FIELDS);
   const [plantDetailContext, setPlantDetailContext] = useState<PlantDetailContext | null>(null);
+  const [observationHistoryFilters, setObservationHistoryFilters] = useState<Record<string, string> | null>(null);
+  const [observationHistoryReturnTo, setObservationHistoryReturnTo] = useState<{ page: Page; data?: unknown } | null>(null);
 
   // Get real inventory stats
   const inventoryStats = getInventoryStats();
@@ -163,8 +166,28 @@ function App() {
   const handleNavigate = (page: Page, data?: unknown) => {
     setCurrentPage(page);
     setIsMenuOpen(false);
-    if (data && typeof data === 'object' && 'year' in data) {
-      setSelectedYear((data as NavigationData).year!);
+    if (data && typeof data === 'object') {
+      if ('year' in data) {
+        setSelectedYear((data as NavigationData).year!);
+      }
+      if (page === 'plant-detail' && 'plantId' in data && 'plantType' in data) {
+        setPlantDetailContext(data as PlantDetailContext);
+      }
+      if (page === 'observation-history') {
+        if ('varietyName' in data) {
+          setObservationHistoryFilters(data as Record<string, string>);
+        } else {
+          setObservationHistoryFilters(null);
+        }
+        if ('returnTo' in data) {
+          setObservationHistoryReturnTo((data as { returnTo: { page: Page; data?: unknown } }).returnTo);
+        } else {
+          setObservationHistoryReturnTo(null);
+        }
+      }
+    } else if (page === 'observation-history') {
+      setObservationHistoryFilters(null);
+      setObservationHistoryReturnTo(null);
     }
   };
 
@@ -232,6 +255,13 @@ function App() {
           onNavigate={handleNavigate}
           isDark={isDark}
           onToggleTheme={() => setIsDark(!isDark)}
+        />
+      ) : currentPage === 'observation-history' ? (
+        <ObservationHistoryPage
+          onNavigate={handleNavigate}
+          isDark={isDark}
+          onToggleTheme={() => setIsDark(!isDark)}
+          initialFilters={observationHistoryFilters || undefined}
         />
       ) : currentPage === 'crosses' ? (
         <CrossesPage
