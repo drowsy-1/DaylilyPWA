@@ -24,7 +24,10 @@ import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
 import type { SeedlingData } from './pages/AddSeedlingPage';
 import type { SeedlingGroupData } from './pages/AddSeedlingGroupPage';
-import type { Page, CrossData, CrossAssignment } from './types';
+import type { Page, CrossData, CrossAssignment, PlantDetailContext } from './types';
+import { DEFAULT_SUMMARY_FIELDS } from './types';
+import SummaryFieldsPage from './pages/SummaryFieldsPage';
+import PlantDetailPage from './pages/PlantDetailPage';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
 
@@ -51,6 +54,8 @@ function App() {
   const [crossAssignments, setCrossAssignments] = useState<CrossAssignment[]>([]);
   const [selectedYear, setSelectedYear] = useState<number>(new Date().getFullYear());
   const [observationContext, setObservationContext] = useState<ObservationContext | null>(null);
+  const [summaryFields, setSummaryFields] = useState<string[]>(DEFAULT_SUMMARY_FIELDS);
+  const [plantDetailContext, setPlantDetailContext] = useState<PlantDetailContext | null>(null);
 
   // Get real inventory stats
   const inventoryStats = getInventoryStats();
@@ -132,6 +137,17 @@ function App() {
     setIsMenuOpen(false);
   };
 
+  const handleNavigateToPlantDetail = (context: PlantDetailContext) => {
+    setPlantDetailContext(context);
+    setCurrentPage('plant-detail');
+    setIsMenuOpen(false);
+  };
+
+  const handleSaveSummaryFields = (fields: string[]) => {
+    setSummaryFields(fields);
+    // TODO: Persist to localStorage
+  };
+
   useEffect(() => {
     if (isMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -191,11 +207,32 @@ function App() {
           <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
           <ObservationCyclesPage />
         </>
+      ) : currentPage === 'summary-fields' ? (
+        <SummaryFieldsPage
+          selectedFields={summaryFields}
+          onSave={handleSaveSummaryFields}
+          onNavigate={handleNavigate}
+          isDark={isDark}
+          onToggleTheme={() => setIsDark(!isDark)}
+        />
       ) : currentPage === 'inventory' ? (
         <>
           <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
-          <InventoryPage onNavigate={handleNavigate} />
+          <InventoryPage
+            onNavigate={handleNavigate}
+            onNavigateToPlantDetail={handleNavigateToPlantDetail}
+            summaryFields={summaryFields}
+          />
         </>
+      ) : currentPage === 'plant-detail' && plantDetailContext ? (
+        <PlantDetailPage
+          plantType={plantDetailContext.plantType}
+          plantId={plantDetailContext.plantId}
+          summaryFields={summaryFields}
+          onNavigate={handleNavigate}
+          isDark={isDark}
+          onToggleTheme={() => setIsDark(!isDark)}
+        />
       ) : currentPage === 'crosses' ? (
         <CrossesPage
           onNavigate={handleNavigate}

@@ -2,7 +2,9 @@ export type Page =
   | 'home'
   | 'trait-fields'
   | 'observation-cycles'
+  | 'summary-fields'
   | 'inventory'
+  | 'plant-detail'
   | 'crosses'
   | 'assigned-crosses'
   | 'add-note'
@@ -14,6 +16,35 @@ export type Page =
   | 'continue-seedling'
   | 'continue-seedling-group'
   | 'trait-observation';
+
+export type PlantType = 'variety' | 'seedling' | 'seedling-group';
+
+export interface PlantDetailContext {
+  plantType: PlantType;
+  plantId: string;
+}
+
+// Default summary fields based on AHS database + rust resistance
+export const DEFAULT_SUMMARY_FIELDS = [
+  'name',
+  'hybridizer',
+  'year',
+  'scape_height',
+  'bloom_size',
+  'bloom_season',
+  'ploidy',
+  'foliage_type',
+  'bloom_habit',
+  'bud_count',
+  'branches',
+  'color_description',
+  'parentage',
+  'form',
+  'awards',
+  'sculpting',
+  'rebloom',
+  'rust_resistance'
+];
 
 export type ParentType = 'inventory' | 'seedling' | 'unknown' | 'manual';
 

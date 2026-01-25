@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react';
 import './InventoryPage.css';
 import { mockInventoryData, type MockVariety } from '../data/mockInventory';
 import TabGroup from '../components/TabGroup';
+import type { PlantDetailContext } from '../types';
 
 type FilterType = 'all' | 'varieties' | 'seedlings';
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
@@ -23,9 +24,11 @@ interface AdvancedFilters {
 
 interface InventoryPageProps {
   onNavigate?: (page: 'home' | 'trait-fields' | 'observation-cycles' | 'inventory') => void;
+  onNavigateToPlantDetail?: (context: PlantDetailContext) => void;
+  summaryFields?: string[];
 }
 
-function InventoryPage({ onNavigate }: InventoryPageProps) {
+function InventoryPage({ onNavigate, onNavigateToPlantDetail }: InventoryPageProps) {
   const [filter, setFilter] = useState<FilterType>('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState<Tab>('inventory');
@@ -323,12 +326,13 @@ function InventoryPage({ onNavigate }: InventoryPageProps) {
       </div>
 
       <div className="advanced-filters-section">
-        <button 
+        <button
           className="advanced-filters-toggle"
           onClick={() => setShowAdvancedFilters(!showAdvancedFilters)}
         >
-          <span>Advanced Filters</span>
-          <span className={`toggle-icon ${showAdvancedFilters ? 'expanded' : ''}`}>▼</span>
+          <span className="expand-icon">{showAdvancedFilters ? '▼' : '▶'}</span>
+          <span className="section-name">Advanced Filters</span>
+          <span className="section-count">({Object.values(advancedFilters).filter(v => v && (Array.isArray(v) ? v.length > 0 : true)).length} active)</span>
         </button>
 
         {showAdvancedFilters && (
@@ -509,7 +513,18 @@ function InventoryPage({ onNavigate }: InventoryPageProps) {
 
       <div className="inventory-list">
         {filteredInventory.map((variety, index) => (
-          <div key={index} className="inventory-item">
+          <div
+            key={index}
+            className="inventory-item clickable"
+            onClick={() => {
+              if (onNavigateToPlantDetail) {
+                onNavigateToPlantDetail({
+                  plantType: variety.observationData.type === 'Seedling' ? 'seedling' : 'variety',
+                  plantId: variety.name
+                });
+              }
+            }}
+          >
             <div className="item-image">
               <div className="placeholder-image">
                 <svg width="60" height="60" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">

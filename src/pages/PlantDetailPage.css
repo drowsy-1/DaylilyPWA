@@ -1,0 +1,576 @@
+.plant-detail-page {
+  padding: 1rem;
+  padding-bottom: 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Page Header - styled like SummaryFieldsPage */
+.plant-detail-page .page-header {
+  margin-bottom: 2rem;
+}
+
+.plant-detail-page .header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plant-detail-page .page-header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.plant-detail-page .header-description {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  margin: 0.5rem 0 0;
+  opacity: 0.8;
+}
+
+.plant-detail-page .back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(100, 150, 200, 0.15);
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 10px;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+  margin-top: 1rem;
+}
+
+.plant-detail-page .back-btn:hover {
+  background: rgba(100, 150, 200, 0.25);
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.plant-detail-page .theme-toggle {
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: var(--text-primary);
+  transition: all 0.2s;
+}
+
+.plant-detail-page .theme-toggle:hover {
+  background: rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.4);
+}
+
+/* Hero Section - styled like TraitFieldsPage */
+.hero-section {
+  display: flex;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: rgba(100, 150, 200, 0.08);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 16px;
+}
+
+.hero-image {
+  flex-shrink: 0;
+  position: relative;
+}
+
+.hero-image .placeholder-image {
+  width: 120px;
+  height: 120px;
+  background: rgba(100, 150, 200, 0.15);
+  border: 2px solid rgba(100, 150, 200, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(100, 150, 200, 0.6);
+}
+
+.hero-image .type-tag {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 10px;
+  background: var(--primary);
+  color: white;
+  white-space: nowrap;
+}
+
+.hero-image .type-tag.seedling {
+  background: var(--accent-color, #10b981);
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-content .plant-name {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.hero-content .plant-nickname {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin: 0 0 0.75rem;
+}
+
+.hero-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.detail-row .detail-label {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.detail-row .detail-value {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.detail-row .detail-value.year {
+  font-weight: 600;
+}
+
+.detail-row .detail-separator {
+  color: var(--text-tertiary);
+}
+
+.ploidy-badge.large {
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.75rem 1.5rem;
+  border-radius: 12px;
+  background: rgba(100, 150, 200, 0.2);
+  border: 2px solid rgba(100, 150, 200, 0.4);
+  color: inherit;
+}
+
+.status-badge {
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: 8px;
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  color: inherit;
+  opacity: 0.8;
+}
+
+.status-badge.out-of-stock {
+  background: rgba(100, 150, 200, 0.1);
+  border-color: rgba(100, 150, 200, 0.2);
+}
+
+.status-badge.on-order {
+  background: rgba(100, 150, 200, 0.1);
+  border-color: rgba(100, 150, 200, 0.2);
+}
+
+.location-row {
+  margin-top: 0.25rem;
+}
+
+.location-icon {
+  font-size: 0.9rem;
+}
+
+.location-value {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.parentage-row {
+  margin-top: 0.25rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.parentage-value {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* Color Description Banner */
+.color-description-banner {
+  background: rgba(100, 150, 200, 0.08);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-left: 4px solid rgba(100, 150, 200, 0.6);
+  border-radius: 12px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.color-description-banner p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* Summary Section */
+.summary-section {
+  margin-bottom: 1.5rem;
+}
+
+.summary-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.summary-row.numeric-row {
+  background: rgba(100, 150, 200, 0.08);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 16px;
+  padding: 1.25rem;
+  justify-content: space-around;
+}
+
+.summary-item.numeric {
+  text-align: center;
+  min-width: 70px;
+}
+
+.summary-item.numeric .summary-value {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  line-height: 1.2;
+}
+
+.summary-item.numeric .summary-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 0.25rem;
+}
+
+.summary-row.text-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 0.75rem;
+}
+
+.summary-item.text {
+  background: rgba(100, 150, 200, 0.08);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 12px;
+  padding: 0.875rem;
+}
+
+.summary-item.text .summary-label {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+}
+
+.summary-item.text .summary-value {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+/* Detail Sections */
+.detail-section {
+  margin-bottom: 1.5rem;
+}
+
+.detail-section .section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--text-primary);
+}
+
+.detail-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.detail-section .section-header .section-title {
+  margin: 0;
+}
+
+.detail-section .section-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.detail-section .text-btn {
+  background: none;
+  border: none;
+  color: var(--primary);
+  cursor: pointer;
+  font-size: 0.8rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.detail-section .text-btn:hover {
+  text-decoration: underline;
+}
+
+/* Observations Areas - styled like TraitFieldsPage */
+.observations-areas {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.observation-area {
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(100, 150, 200, 0.2);
+}
+
+.observation-area .area-header {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: rgba(100, 150, 200, 0.15);
+  border: none;
+  color: inherit;
+  text-align: left;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: background-color 0.2s;
+}
+
+.observation-area .area-header:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.observation-area .expand-icon {
+  font-size: 0.9rem;
+  width: 20px;
+  display: inline-block;
+}
+
+.observation-area .area-name {
+  flex: 1;
+}
+
+.observation-area .area-count {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.observation-area .area-traits {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Notes */
+.notes-content {
+  background: rgba(100, 150, 200, 0.08);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.notes-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+
+/* Observation Cycles */
+.cycles-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cycle-card {
+  background: rgba(100, 150, 200, 0.08);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.cycle-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.cycle-header h3 {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.cycle-status {
+  font-size: 0.7rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.cycle-status.completed {
+  background: var(--success-color, #22c55e);
+  color: white;
+}
+
+.cycle-status.active {
+  background: var(--primary);
+  color: white;
+}
+
+.cycle-dates {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.cycle-notes {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Lineage */
+.lineage-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lineage-info .parents,
+.lineage-info .children-placeholder {
+  background: rgba(100, 150, 200, 0.08);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 16px;
+  padding: 1.25rem;
+}
+
+.lineage-info h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+  color: var(--text-primary);
+}
+
+.lineage-info .parents p {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.lineage-info .no-data {
+  color: var(--text-tertiary);
+  font-style: italic;
+}
+
+.children-placeholder .coming-soon {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-tertiary);
+}
+
+.children-placeholder .coming-soon .icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.children-placeholder .coming-soon p {
+  margin: 0.25rem 0;
+}
+
+.children-placeholder .coming-soon .subtext {
+  font-size: 0.8rem;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .hero-section {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-content .plant-name {
+    font-size: 1.4rem;
+  }
+
+  .hero-details {
+    align-items: center;
+  }
+
+  .detail-row {
+    justify-content: center;
+  }
+
+  .summary-row.numeric-row {
+    justify-content: space-between;
+  }
+
+  .summary-item.numeric {
+    min-width: 60px;
+  }
+
+  .summary-item.numeric .summary-value {
+    font-size: 1.25rem;
+  }
+
+  .summary-row.text-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

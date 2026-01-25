@@ -3,7 +3,7 @@ import './Footer.css';
 interface FooterProps {
   isMenuOpen: boolean;
   onToggleMenu: () => void;
-  onNavigate: (page: 'home' | 'trait-fields' | 'observation-cycles' | 'inventory') => void;
+  onNavigate: (page: 'home' | 'trait-fields' | 'observation-cycles' | 'summary-fields' | 'inventory') => void;
 }
 
 function Footer({ isMenuOpen, onToggleMenu, onNavigate }: FooterProps) {
@@ -15,6 +15,7 @@ function Footer({ isMenuOpen, onToggleMenu, onNavigate }: FooterProps) {
     { label: 'Store', action: () => console.log('Store') },
     { label: 'Trait Fields', action: () => onNavigate('trait-fields') },
     { label: 'Observation Cycle', action: () => onNavigate('observation-cycles') },
+    { label: 'Summary Fields', action: () => onNavigate('summary-fields') },
     { label: 'Settings', action: () => console.log('Settings') },
     { label: 'Account', action: () => console.log('Account') },
     { label: 'Logout', action: () => console.log('Logout') },

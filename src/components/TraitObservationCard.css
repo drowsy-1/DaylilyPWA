@@ -1,0 +1,177 @@
+.trait-observation-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.trait-observation-card.has-conflicts {
+  border-left: 3px solid var(--warning-color, #f59e0b);
+}
+
+.trait-observation-card .card-header {
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  cursor: pointer;
+}
+
+.trait-observation-card .card-header:hover {
+  background: var(--bg-hover);
+}
+
+.trait-observation-card .card-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.trait-observation-card .trait-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.trait-observation-card .value-container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.trait-observation-card .trait-value {
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.trait-observation-card .value-type {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.trait-observation-card .card-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.trait-observation-card .range-badge {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  background: var(--bg-tertiary);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.trait-observation-card .conflict-badge {
+  font-size: 0.7rem;
+  color: var(--warning-color, #f59e0b);
+  background: rgba(245, 158, 11, 0.1);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+.trait-observation-card .observation-count {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.trait-observation-card .expand-icon {
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  transition: transform 0.2s;
+}
+
+.trait-observation-card .expand-icon.expanded {
+  transform: rotate(180deg);
+}
+
+.trait-observation-card .observation-history {
+  border-top: 1px solid var(--border-color);
+  padding: 0.75rem 1rem;
+  background: var(--bg-tertiary);
+}
+
+.trait-observation-card .value-distribution {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.trait-observation-card .distribution-item {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+.trait-observation-card .history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.trait-observation-card .history-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem 1rem;
+  align-items: baseline;
+  padding: 0.5rem;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+.trait-observation-card .history-date {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.trait-observation-card .history-value {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.trait-observation-card .history-meta {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.trait-observation-card .observer {
+  background: var(--bg-tertiary);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+}
+
+.trait-observation-card .conditions {
+  font-style: italic;
+}
+
+.trait-observation-card .history-notes {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  padding-top: 0.25rem;
+}
+
+.trait-observation-card .history-photos {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 0.25rem;
+}
+
+.trait-observation-card .photo-indicator {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
