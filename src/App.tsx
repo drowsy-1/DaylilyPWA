@@ -262,6 +262,7 @@ function App() {
           isDark={isDark}
           onToggleTheme={() => setIsDark(!isDark)}
           initialFilters={observationHistoryFilters || undefined}
+          returnTo={observationHistoryReturnTo || undefined}
         />
       ) : currentPage === 'crosses' ? (
         <CrossesPage
