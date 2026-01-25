@@ -1,4 +1,5 @@
 import type { TraitObservation, MockVariety } from '../data/mockInventory';
+import defaultDaylilyImage from '../assets/default-daylily.svg';
 
 export interface AggregatedObservation {
   traitField: string;
@@ -249,11 +250,12 @@ export function groupObservationsByArea(
  */
 export interface PlantImage {
   url: string;
-  source: 'cycle' | 'observation' | 'note' | 'base';
+  source: 'cycle' | 'observation' | 'note' | 'base' | 'default';
   sourceId?: string;
   sourceName?: string;
   date?: string;
   traitField?: string;
+  isDefault?: boolean; // True for placeholder images - not downloadable/publishable
 }
 
 export function extractAllImages(plant: MockVariety): PlantImage[] {
@@ -287,6 +289,15 @@ export function extractAllImages(plant: MockVariety): PlantImage[] {
       }
     }
   }
+
+  // Always add the default image at the end
+  // This serves as a placeholder and appears last in the gallery
+  images.push({
+    url: defaultDaylilyImage,
+    source: 'default',
+    sourceName: 'Default Placeholder',
+    isDefault: true
+  });
 
   return images;
 }

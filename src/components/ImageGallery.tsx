@@ -16,10 +16,22 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
   const [selectedImage, setSelectedImage] = useState<PlantImage | null>(null);
   const [selectedForDownload, setSelectedForDownload] = useState<Set<string>>(new Set());
   const [selectionMode, setSelectionMode] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Sort images: thumbnail first, then user images, default last
+  const sortedImages = [...images].sort((a, b) => {
+    // Thumbnail always first
+    if (thumbnailUrl === a.url) return -1;
+    if (thumbnailUrl === b.url) return 1;
+    // Default image always last
+    if (a.isDefault && !b.isDefault) return 1;
+    if (!a.isDefault && b.isDefault) return -1;
+    return 0;
+  });
 
   const filteredImages = filter === 'all'
-    ? images
-    : images.filter(img => img.source === filter);
+    ? sortedImages
+    : sortedImages.filter(img => img.source === filter);
 
   // Count by source for filter buttons
   const sourceCounts = images.reduce((acc, img) => {
@@ -47,6 +59,8 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
         return 'Note';
       case 'base':
         return 'Base Image';
+      case 'default':
+        return 'Default Placeholder';
       default:
         return source;
     }
@@ -65,7 +79,8 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
   };
 
   const selectAllImages = () => {
-    setSelectedForDownload(new Set(filteredImages.map(img => img.url)));
+    // Exclude default images from selection
+    setSelectedForDownload(new Set(filteredImages.filter(img => !img.isDefault).map(img => img.url)));
   };
 
   const clearSelection = () => {
@@ -102,6 +117,9 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
     setSelectedImage(null);
   };
 
+  // Count user images (excluding default)
+  const userImageCount = images.filter(img => !img.isDefault).length;
+
   if (images.length === 0) {
     return (
       <div className="image-gallery empty">
@@ -115,7 +133,7 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
     <div className="image-gallery">
       <div className="gallery-header">
         <div className="gallery-title">
-          <h3>{images.length} Photo{images.length !== 1 ? 's' : ''}</h3>
+          <h3>{userImageCount} Photo{userImageCount !== 1 ? 's' : ''}</h3>
           {selectionMode && (
             <span className="selection-count">
               {selectedForDownload.size} selected
@@ -189,20 +207,20 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
         </div>
       )}
 
-      <div className="gallery-grid">
+      <div className={`gallery-grid ${isExpanded ? 'expanded' : 'collapsed'}`}>
         {filteredImages.map((image, idx) => (
           <div
             key={`${image.url}-${idx}`}
-            className={`gallery-item ${selectionMode ? 'selectable' : ''} ${selectedForDownload.has(image.url) ? 'selected' : ''} ${thumbnailUrl === image.url ? 'is-thumbnail' : ''}`}
+            className={`gallery-item ${selectionMode && !image.isDefault ? 'selectable' : ''} ${selectedForDownload.has(image.url) ? 'selected' : ''} ${thumbnailUrl === image.url ? 'is-thumbnail' : ''} ${image.isDefault ? 'is-default' : ''}`}
             onClick={() => {
-              if (selectionMode) {
+              if (selectionMode && !image.isDefault) {
                 toggleImageSelection(image.url);
-              } else {
+              } else if (!selectionMode) {
                 setSelectedImage(image);
               }
             }}
           >
-            {selectionMode && (
+            {selectionMode && !image.isDefault && (
               <div className="selection-checkbox">
                 {selectedForDownload.has(image.url) ? '✓' : ''}
               </div>
@@ -210,29 +228,42 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
             {thumbnailUrl === image.url && (
               <div className="thumbnail-badge">Thumbnail</div>
             )}
-            <div className="image-placeholder">
-              <svg width="40" height="40" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
-                <defs>
-                  <path id="petal" d="M50 5C 42 22, 44 36, 46 52L 54 52C 56 36, 58 22, 50 5 Z" />
-                  <path id="sepal" d="M50 0C 38 18, 40 38, 44 56L 56 56C 60 38, 62 18, 50 0 Z" />
-                </defs>
-                <use href="#petal" transform="rotate(0 50 50)" />
-                <use href="#sepal" transform="rotate(60 50 50)" />
-                <use href="#petal" transform="rotate(120 50 50)" />
-                <use href="#sepal" transform="rotate(180 50 50)" />
-                <use href="#petal" transform="rotate(240 50 50)" />
-                <use href="#sepal" transform="rotate(300 50 50)" />
-                <circle cx="50" cy="50" r="4.5" />
-              </svg>
-              <span className="image-filename">{image.url}</span>
+            {image.isDefault && (
+              <div className="default-badge">Default</div>
+            )}
+            <div className="image-container">
+              <img src={image.url} alt={image.sourceName || 'Plant photo'} />
             </div>
             <div className="image-info">
-              <span className="source-tag">{image.source}</span>
+              <span className={`source-tag ${image.isDefault ? 'default' : ''}`}>{image.source}</span>
               {image.date && <span className="image-date">{formatDate(image.date)}</span>}
             </div>
           </div>
         ))}
       </div>
+
+      {/* Mobile expand/collapse button - only show if more than 2 images */}
+      {filteredImages.length > 2 && (
+        <div className="gallery-expand-toggle">
+          <button onClick={() => setIsExpanded(!isExpanded)}>
+            {isExpanded ? (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="18 15 12 9 6 15" />
+                </svg>
+                Show Less
+              </>
+            ) : (
+              <>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+                See All {filteredImages.length} Photos
+              </>
+            )}
+          </button>
+        </div>
+      )}
 
       {selectedImage && (
         <div className="lightbox" onClick={() => setSelectedImage(null)}>
@@ -241,22 +272,7 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
               ×
             </button>
             <div className="lightbox-image">
-              <div className="image-placeholder large">
-                <svg width="80" height="80" viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2">
-                  <defs>
-                    <path id="petal-lg" d="M50 5C 42 22, 44 36, 46 52L 54 52C 56 36, 58 22, 50 5 Z" />
-                    <path id="sepal-lg" d="M50 0C 38 18, 40 38, 44 56L 56 56C 60 38, 62 18, 50 0 Z" />
-                  </defs>
-                  <use href="#petal-lg" transform="rotate(0 50 50)" />
-                  <use href="#sepal-lg" transform="rotate(60 50 50)" />
-                  <use href="#petal-lg" transform="rotate(120 50 50)" />
-                  <use href="#sepal-lg" transform="rotate(180 50 50)" />
-                  <use href="#petal-lg" transform="rotate(240 50 50)" />
-                  <use href="#sepal-lg" transform="rotate(300 50 50)" />
-                  <circle cx="50" cy="50" r="4.5" />
-                </svg>
-                <span className="image-filename">{selectedImage.url}</span>
-              </div>
+              <img src={selectedImage.url} alt={selectedImage.sourceName || 'Plant photo'} />
             </div>
             <div className="lightbox-details">
               {plantName && <h4>{plantName}</h4>}
@@ -267,33 +283,38 @@ function ImageGallery({ images, plantName, thumbnailUrl, onSetThumbnail }: Image
               {selectedImage.date && (
                 <p className="date">{formatDate(selectedImage.date)}</p>
               )}
-            </div>
-            <div className="lightbox-actions">
-              <button
-                className="lightbox-btn"
-                onClick={() => handleDownloadSingle(selectedImage)}
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                  <polyline points="7 10 12 15 17 10" />
-                  <line x1="12" y1="15" x2="12" y2="3" />
-                </svg>
-                Download
-              </button>
-              {onSetThumbnail && (
-                <button
-                  className={`lightbox-btn ${thumbnailUrl === selectedImage.url ? 'active' : ''}`}
-                  onClick={() => handleSetAsThumbnail(selectedImage.url)}
-                >
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                    <circle cx="8.5" cy="8.5" r="1.5" />
-                    <polyline points="21 15 16 10 5 21" />
-                  </svg>
-                  {thumbnailUrl === selectedImage.url ? 'Current Thumbnail' : 'Set as Thumbnail'}
-                </button>
+              {selectedImage.isDefault && (
+                <p className="default-notice">This is a default placeholder image and cannot be downloaded or published.</p>
               )}
             </div>
+            {!selectedImage.isDefault && (
+              <div className="lightbox-actions">
+                <button
+                  className="lightbox-btn"
+                  onClick={() => handleDownloadSingle(selectedImage)}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Download
+                </button>
+                {onSetThumbnail && (
+                  <button
+                    className={`lightbox-btn ${thumbnailUrl === selectedImage.url ? 'active' : ''}`}
+                    onClick={() => handleSetAsThumbnail(selectedImage.url)}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                    {thumbnailUrl === selectedImage.url ? 'Current Thumbnail' : 'Set as Thumbnail'}
+                  </button>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}

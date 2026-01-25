@@ -36,6 +36,8 @@ function PlantDetailPage({
   // _plantType is available for future use when we support different plant types
   // Initialize with all areas expanded - will be set after groupedObservations is computed
   const [expandedAreas, setExpandedAreas] = useState<string[] | null>(null);
+  // Thumbnail selection state - stores the URL of the selected thumbnail image
+  const [thumbnailUrl, setThumbnailUrl] = useState<string | null>(null);
 
   // Find the plant in mock data
   const plant: MockVariety | undefined = useMemo(() => {
@@ -134,36 +136,31 @@ function PlantDetailPage({
 
   return (
     <div className="plant-detail-page">
-      {/* Header - styled like SummaryFieldsPage */}
+      {/* Header - sticky with back button and theme toggle */}
       <div className="page-header">
-        <div className="header-content">
-          <h1>{displayName}</h1>
-          <button className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
-            {isDark ? (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <circle cx="12" cy="12" r="5" />
-                <line x1="12" y1="1" x2="12" y2="3" />
-                <line x1="12" y1="21" x2="12" y2="23" />
-                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                <line x1="1" y1="12" x2="3" y2="12" />
-                <line x1="21" y1="12" x2="23" y2="12" />
-                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-              </svg>
-            ) : (
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-              </svg>
-            )}
-          </button>
-        </div>
-        <p className="header-description">
-          {!isSeedling && `${plant.hybridizer}${plant.year ? `, ${plant.year}` : ''}`}
-          {isSeedling && nickname && `"${nickname}"`}
-        </p>
-        <button className="back-btn" onClick={() => onNavigate('inventory')}>
-          ← Back to Inventory
+        <button className="back-btn" onClick={() => onNavigate('inventory')} aria-label="Back to Inventory">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <button className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle theme">
+          {isDark ? (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="5" />
+              <line x1="12" y1="1" x2="12" y2="3" />
+              <line x1="12" y1="21" x2="12" y2="23" />
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+              <line x1="1" y1="12" x2="3" y2="12" />
+              <line x1="21" y1="12" x2="23" y2="12" />
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+            </svg>
+          ) : (
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          )}
         </button>
       </div>
 
@@ -272,7 +269,12 @@ function PlantDetailPage({
       {/* Images Section */}
       <section className="detail-section">
         <h2 className="section-title">Photos</h2>
-        <ImageGallery images={images} plantName={displayName} />
+        <ImageGallery
+          images={images}
+          plantName={displayName}
+          thumbnailUrl={thumbnailUrl || undefined}
+          onSetThumbnail={setThumbnailUrl}
+        />
       </section>
 
       {/* All Observations Section */}
