@@ -3,7 +3,9 @@ import { mockInventoryData } from '../data/mockInventory';
 import { useTraitData } from '../contexts/TraitDataContext';
 import type { MergedTrait } from '../utils/traitMerger';
 import TraitField from '../components/TraitField';
-import type { Page } from '../types';
+import type { Page, PlantLocation } from '../types';
+import { useLocationConfig } from '../hooks/useLocationConfig';
+import LocationSelector from '../components/LocationSelector';
 import './AddSeedlingGroupPage.css';
 
 interface AddSeedlingGroupPageProps {
@@ -89,7 +91,8 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
   const [manualYear, setManualYear] = useState('');
 
   // Location
-  const [location, setLocation] = useState('');
+  const [plantLocation, setPlantLocation] = useState<PlantLocation>({});
+  const { formatLocationShort } = useLocationConfig();
 
   // Seedling count
   const [seedlingCount, setSeedlingCount] = useState<number>(1);
@@ -216,6 +219,7 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
 
   // Save current seedling and move to next/previous
   const saveCurrentSeedling = (): SeedlingGroupData => {
+    const locationString = formatLocationShort(plantLocation);
     return {
       id: crypto.randomUUID(),
       seedlingNumber: generateSeedlingNumber(currentSeedlingIndex),
@@ -223,7 +227,7 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
       podParent: selectedCross?.podParent || podParent,
       pollenParent: selectedCross?.pollenParent || pollenParent,
       crossId: selectedCross?.id || 'manual',
-      location,
+      location: locationString,
       photos: currentPhotos,
       observations: currentObservations,
       dateAdded: new Date().toISOString()
@@ -442,14 +446,11 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
         {step === 'location' && (
           <div className="step-content">
             <div className="step-label">Enter Location</div>
-            <p className="step-hint">Where are these seedlings planted? (e.g., Bed 3, Row 2)</p>
+            <p className="step-hint">Where are these seedlings planted?</p>
 
-            <input
-              type="text"
-              className="form-input location-input"
-              value={location}
-              onChange={e => setLocation(e.target.value)}
-              placeholder="Enter location"
+            <LocationSelector
+              value={plantLocation}
+              onChange={setPlantLocation}
             />
           </div>
         )}
@@ -500,7 +501,7 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
               <div className="seedling-cross">
                 {selectedCross?.label || `${podParent} × ${pollenParent}`}
               </div>
-              {location && <div className="seedling-location">{location}</div>}
+              {formatLocationShort(plantLocation) && <div className="seedling-location">{formatLocationShort(plantLocation)}</div>}
             </div>
 
             {/* Season Toggle */}

@@ -1,0 +1,203 @@
+.location-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.location-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.location-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.location-field .field-label {
+  font-size: 0.9rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+
+.select-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.location-select {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+  color: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.location-select:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.4);
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.add-new-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: rgba(100, 150, 200, 0.2);
+  border-radius: 10px;
+  color: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.add-new-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+}
+
+/* New value input row */
+.new-value-input-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.new-value-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.15);
+  border: 1px solid rgba(100, 150, 200, 0.3);
+  border-radius: 10px;
+  color: inherit;
+  font-size: 1rem;
+}
+
+.new-value-input:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.new-value-input::placeholder {
+  opacity: 0.5;
+}
+
+.confirm-new-btn,
+.cancel-new-btn {
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirm-new-btn {
+  background: rgba(100, 180, 100, 0.3);
+  color: inherit;
+}
+
+.confirm-new-btn:hover:not(:disabled) {
+  background: rgba(100, 180, 100, 0.4);
+}
+
+.confirm-new-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancel-new-btn {
+  background: rgba(100, 150, 200, 0.15);
+  color: inherit;
+}
+
+.cancel-new-btn:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+/* Location preview */
+.location-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border-radius: 10px;
+  font-size: 0.95rem;
+}
+
+.preview-label {
+  opacity: 0.7;
+}
+
+.preview-value {
+  font-weight: 500;
+}
+
+/* No levels message */
+.no-levels-message {
+  padding: 1rem;
+  background: rgba(200, 150, 100, 0.1);
+  border-radius: 10px;
+  border-left: 3px solid rgba(200, 150, 100, 0.5);
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Compact mode */
+.location-selector.compact {
+  gap: 0.5rem;
+}
+
+.location-display {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  padding: 0.5rem;
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 8px;
+}
+
+.location-fields-compact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.location-field-compact {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.location-field-compact label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.location-field-compact select {
+  padding: 0.5rem 0.75rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 8px;
+  color: inherit;
+  font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .location-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .location-field:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}

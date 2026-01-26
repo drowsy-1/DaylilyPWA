@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { mockInventoryData } from '../data/mockInventory';
-import type { Page } from '../types';
+import type { Page, PlantLocation } from '../types';
+import { useLocationConfig } from '../hooks/useLocationConfig';
+import LocationSelector from '../components/LocationSelector';
 import './AddVarietyPage.css';
 
 interface ObservationContext {
@@ -102,8 +104,9 @@ function AddVarietyPage({ onNavigate, onSave, onNavigateWithContext }: AddVariet
   const [awards, setAwards] = useState('');
   const [notes, setNotes] = useState('');
 
-  const [location, setLocation] = useState('');
+  const [plantLocation, setPlantLocation] = useState<PlantLocation>({});
   const [photos, setPhotos] = useState<File[]>([]);
+  const { formatLocationShort } = useLocationConfig();
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -134,7 +137,10 @@ function AddVarietyPage({ onNavigate, onSave, onNavigateWithContext }: AddVariet
     setRebloom(variety.rebloom || false);
     setAwards(variety.awards || '');
     setNotes(variety.notes || '');
-    setLocation(variety.locationInGarden || '');
+    // Parse existing location if available
+    if (variety.locationInGarden) {
+      setPlantLocation({ section: variety.locationInGarden });
+    }
     setStep('details');
   };
 
@@ -155,6 +161,7 @@ function AddVarietyPage({ onNavigate, onSave, onNavigateWithContext }: AddVariet
   };
 
   const handleSave = () => {
+    const locationString = formatLocationShort(plantLocation);
     const varietyData: VarietyData = {
       id: crypto.randomUUID(),
       name: varietyName,
@@ -182,7 +189,7 @@ function AddVarietyPage({ onNavigate, onSave, onNavigateWithContext }: AddVariet
       city: '',
       state: '',
       country: '',
-      location,
+      location: locationString,
       photos,
       dateAdded: new Date().toISOString()
     };
@@ -191,6 +198,7 @@ function AddVarietyPage({ onNavigate, onSave, onNavigateWithContext }: AddVariet
   };
 
   const handleSaveAndObserve = () => {
+    const locationString = formatLocationShort(plantLocation);
     const varietyData: VarietyData = {
       id: crypto.randomUUID(),
       name: varietyName,
@@ -218,7 +226,7 @@ function AddVarietyPage({ onNavigate, onSave, onNavigateWithContext }: AddVariet
       city: '',
       state: '',
       country: '',
-      location,
+      location: locationString,
       photos,
       dateAdded: new Date().toISOString()
     };
@@ -561,32 +569,13 @@ function AddVarietyPage({ onNavigate, onSave, onNavigateWithContext }: AddVariet
           <div className="step-content">
             <div className="form-section">
               <label className="form-label">Garden Location</label>
-              <input
-                type="text"
-                className="form-input"
-                value={location}
-                onChange={e => setLocation(e.target.value)}
-                placeholder="e.g., Section A-1, Bed 3, Row 2"
-                autoFocus
-              />
               <p className="form-hint">
-                Enter the location where this variety is planted in your garden.
+                Select the location where this variety is planted in your garden.
               </p>
-            </div>
-
-            <div className="location-suggestions">
-              <div className="suggestions-label">Quick select:</div>
-              <div className="suggestion-chips">
-                {['Section A', 'Section B', 'Section C', 'Bed 1', 'Bed 2', 'Bed 3'].map(loc => (
-                  <button
-                    key={loc}
-                    className={`suggestion-chip ${location.includes(loc) ? 'active' : ''}`}
-                    onClick={() => setLocation(prev => prev ? `${prev}, ${loc}` : loc)}
-                  >
-                    {loc}
-                  </button>
-                ))}
-              </div>
+              <LocationSelector
+                value={plantLocation}
+                onChange={setPlantLocation}
+              />
             </div>
           </div>
         )}

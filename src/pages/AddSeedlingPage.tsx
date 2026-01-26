@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { mockInventoryData } from '../data/mockInventory';
-import type { Page } from '../types';
+import type { Page, PlantLocation } from '../types';
+import { useLocationConfig } from '../hooks/useLocationConfig';
+import LocationSelector from '../components/LocationSelector';
 import './AddSeedlingPage.css';
 
 interface ObservationContext {
@@ -87,9 +89,10 @@ function AddSeedlingPage({ onNavigate, onSave, onNavigateWithContext }: AddSeedl
   const [pollenParent, setPollenParent] = useState('');
 
   const [seedlingNumber, setSeedlingNumber] = useState('');
-  const [location, setLocation] = useState('');
+  const [plantLocation, setPlantLocation] = useState<PlantLocation>({});
   const [nickname, setNickname] = useState('');
   const [photos, setPhotos] = useState<File[]>([]);
+  const { formatLocationShort } = useLocationConfig();
 
   // Load crosses when year changes
   useEffect(() => {
@@ -148,6 +151,7 @@ function AddSeedlingPage({ onNavigate, onSave, onNavigateWithContext }: AddSeedl
   };
 
   const handleSave = () => {
+    const locationString = formatLocationShort(plantLocation);
     const seedlingData: SeedlingData = {
       id: crypto.randomUUID(),
       seedlingNumber,
@@ -155,7 +159,7 @@ function AddSeedlingPage({ onNavigate, onSave, onNavigateWithContext }: AddSeedl
       podParent,
       pollenParent,
       crossId: selectedCross?.id || 'manual',
-      location,
+      location: locationString,
       nickname,
       photos,
       dateAdded: new Date().toISOString()
@@ -165,6 +169,7 @@ function AddSeedlingPage({ onNavigate, onSave, onNavigateWithContext }: AddSeedl
   };
 
   const handleSaveAndObserve = () => {
+    const locationString = formatLocationShort(plantLocation);
     const seedlingData: SeedlingData = {
       id: crypto.randomUUID(),
       seedlingNumber,
@@ -172,7 +177,7 @@ function AddSeedlingPage({ onNavigate, onSave, onNavigateWithContext }: AddSeedl
       podParent,
       pollenParent,
       crossId: selectedCross?.id || 'manual',
-      location,
+      location: locationString,
       nickname,
       photos,
       dateAdded: new Date().toISOString()
@@ -394,12 +399,9 @@ function AddSeedlingPage({ onNavigate, onSave, onNavigateWithContext }: AddSeedl
 
             <div className="form-section">
               <label className="form-label">Location</label>
-              <input
-                type="text"
-                className="form-input"
-                value={location}
-                onChange={e => setLocation(e.target.value)}
-                placeholder="e.g., Seedling Bed A, Row 3"
+              <LocationSelector
+                value={plantLocation}
+                onChange={setPlantLocation}
               />
             </div>
 
@@ -468,7 +470,7 @@ function AddSeedlingPage({ onNavigate, onSave, onNavigateWithContext }: AddSeedl
               </div>
               <div className="summary-details">
                 <span>{podParent} × {pollenParent}</span>
-                {location && <span>📍 {location}</span>}
+                {formatLocationShort(plantLocation) && <span>📍 {formatLocationShort(plantLocation)}</span>}
               </div>
             </div>
 

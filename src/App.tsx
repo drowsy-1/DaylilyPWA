@@ -22,6 +22,7 @@ import AssignedCrossesPage from './pages/AssignedCrossesPage';
 import ObservationHistoryPage from './pages/ObservationHistoryPage';
 import CustomTraitListPage from './pages/CustomTraitListPage';
 import AddCustomTraitPage from './pages/AddCustomTraitPage';
+import LocationConfigPage from './pages/LocationConfigPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
@@ -263,6 +264,12 @@ function App() {
         <SummaryFieldsPage
           selectedFields={summaryFields}
           onSave={handleSaveSummaryFields}
+          onNavigate={handleNavigate}
+          isDark={isDark}
+          onToggleTheme={() => setIsDark(!isDark)}
+        />
+      ) : currentPage === 'location-config' ? (
+        <LocationConfigPage
           onNavigate={handleNavigate}
           isDark={isDark}
           onToggleTheme={() => setIsDark(!isDark)}
