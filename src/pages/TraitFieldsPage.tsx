@@ -1,8 +1,14 @@
 import { useState } from 'react';
 import './TraitFieldsPage.css';
-import { traitData } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
+import type { Page } from '../types';
 
-function TraitFieldsPage() {
+interface TraitFieldsPageProps {
+  onNavigate: (page: Page) => void;
+}
+
+function TraitFieldsPage({ onNavigate }: TraitFieldsPageProps) {
+  const { mergedTraitData } = useTraitData();
   const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set());
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
 
@@ -34,17 +40,18 @@ function TraitFieldsPage() {
       </div>
 
       <div className="trait-areas">
-        {traitData.map((area) => {
+        {mergedTraitData.map((area) => {
           const isAreaExpanded = expandedAreas.has(area.name);
-          
+
           return (
-            <div key={area.name} className="trait-area">
+            <div key={area.name} className={`trait-area ${area.isCustom ? 'custom-area' : ''}`}>
               <button
                 className="area-header"
                 onClick={() => toggleArea(area.name)}
               >
                 <span className="expand-icon">{isAreaExpanded ? '▼' : '▶'}</span>
                 <span className="area-name">{area.name}</span>
+                {area.isCustom && <span className="custom-badge">Custom</span>}
                 <span className="area-count">({area.groups.reduce((sum, g) => sum + g.traits.length, 0)} traits)</span>
               </button>
 
@@ -55,27 +62,31 @@ function TraitFieldsPage() {
                     const isGroupExpanded = expandedGroups.has(groupKey);
 
                     return (
-                      <div key={groupKey} className="trait-group">
+                      <div key={groupKey} className={`trait-group ${group.isCustom ? 'custom-group' : ''}`}>
                         <button
                           className="group-header"
                           onClick={() => toggleGroup(groupKey)}
                         >
                           <span className="expand-icon">{isGroupExpanded ? '▼' : '▶'}</span>
                           <span className="group-name">{group.name}</span>
+                          {group.isCustom && !area.isCustom && <span className="custom-badge">Custom</span>}
                           <span className="group-count">({group.traits.length})</span>
                         </button>
 
                         {isGroupExpanded && (
                           <div className="trait-list">
                             {group.traits.map((trait) => (
-                              <div key={trait.field} className="trait-item">
+                              <div key={trait.field} className={`trait-item ${trait.isCustom ? 'custom-trait' : ''}`}>
                                 <div className="trait-info">
                                   <span className="trait-name">{trait.label}</span>
                                   <span className="trait-field">{trait.field}</span>
                                 </div>
-                                {trait.type && (
-                                  <span className="trait-type">{trait.type}</span>
-                                )}
+                                <div className="trait-meta">
+                                  {trait.isCustom && <span className="custom-badge small">Custom</span>}
+                                  {trait.type && (
+                                    <span className="trait-type">{trait.type}</span>
+                                  )}
+                                </div>
                               </div>
                             ))}
                           </div>
@@ -91,7 +102,7 @@ function TraitFieldsPage() {
       </div>
 
       <div className="trait-actions">
-        <button className="add-edit-btn" onClick={() => console.log('Add/Edit trait')}>
+        <button className="add-edit-btn" onClick={() => onNavigate('custom-trait-list')}>
           + Add / Edit Custom Trait
         </button>
       </div>

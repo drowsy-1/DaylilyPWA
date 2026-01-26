@@ -16,7 +16,10 @@ export type Page =
   | 'continue-seedling'
   | 'continue-seedling-group'
   | 'trait-observation'
-  | 'observation-history';
+  | 'observation-history'
+  | 'custom-trait-list'
+  | 'add-custom-trait'
+  | 'edit-custom-trait';
 
 export type PlantType = 'variety' | 'seedling' | 'seedling-group';
 
@@ -69,4 +72,41 @@ export interface CrossAssignment {
   dateAssigned: string;
   dateCompleted?: string;
   completed: boolean;
+}
+
+// Custom Trait Types
+export interface CustomTrait {
+  field: string;
+  label: string;
+  type: 'text' | 'number' | 'select' | 'rating' | 'boolean';
+  options?: string[];
+  defaultTiming?: {
+    year?: number;
+    season?: string;
+    month?: string;
+    weeks?: string[];
+    excludeFromAutomaticCycle?: boolean;
+  };
+  isCustom: true;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CustomTraitGroup {
+  name: string;
+  traits: CustomTrait[];
+  isCustom: true;
+}
+
+export interface CustomTraitArea {
+  name: string;
+  groups: CustomTraitGroup[];
+  isCustom: true;
+}
+
+export interface CustomTraitsStorage {
+  version: number;
+  customAreas: CustomTraitArea[];
+  customGroups: Record<string, CustomTraitGroup[]>;
+  customTraits: Record<string, CustomTrait[]>;
 }

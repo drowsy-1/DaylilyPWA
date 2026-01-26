@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import { mockInventoryData } from '../data/mockInventory';
-import { traitData } from '../data/traitData';
-import type { Trait } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
+import type { MergedTrait } from '../utils/traitMerger';
 import TraitField from '../components/TraitField';
 import type { Page } from '../types';
 import './AddSeedlingGroupPage.css';
@@ -69,6 +69,7 @@ function getCurrentSeason(): string {
 }
 
 export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }: AddSeedlingGroupPageProps) {
+  const { mergedTraitData } = useTraitData();
   const currentYear = new Date().getFullYear();
   const currentSeason = getCurrentSeason();
 
@@ -103,10 +104,10 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
   const [showAllTraits, setShowAllTraits] = useState(false);
 
   // Expansion state for trait areas/groups
-  const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set(traitData.map(a => a.name)));
+  const [expandedAreas, setExpandedAreas] = useState<Set<string>>(() => new Set(mergedTraitData.map(a => a.name)));
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(() => {
     const allGroupKeys = new Set<string>();
-    traitData.forEach(area => {
+    mergedTraitData.forEach(area => {
       area.groups.forEach(group => {
         allGroupKeys.add(`${area.name}-${group.name}`);
       });
@@ -127,7 +128,7 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
   };
 
   // Filter traits based on seasonality
-  const filterTraits = (traits: Trait[]): Trait[] => {
+  const filterTraits = (traits: MergedTrait[]): MergedTrait[] => {
     if (showAllTraits) {
       return traits.filter(t => !t.defaultTiming?.excludeFromAutomaticCycle);
     }
@@ -140,7 +141,7 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
 
   // Filtered areas for observation form
   const filteredAreas = useMemo(() => {
-    return traitData
+    return mergedTraitData
       .filter(area => area.name !== '1. Basic Identifiers')
       .map(area => ({
         ...area,
@@ -150,7 +151,8 @@ export default function AddSeedlingGroupPage({ onNavigate, onSaveSeedlingGroup }
         })).filter(group => group.traits.length > 0)
       }))
       .filter(area => area.groups.length > 0);
-  }, [showAllTraits, currentSeason]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showAllTraits, currentSeason, mergedTraitData]);
 
   const totalVisibleTraits = filteredAreas.reduce(
     (sum, area) => sum + area.groups.reduce((gSum, g) => gSum + g.traits.length, 0),

@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import './PlantDetailPage.css';
 import type { Page, PlantType } from '../types';
 import { mockInventoryData, type MockVariety } from '../data/mockInventory';
-import { traitData } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
 import {
   extractAllObservations,
   groupObservationsByArea,
@@ -34,6 +34,7 @@ function PlantDetailPage({
   onToggleTheme
 }: PlantDetailPageProps) {
   // _plantType is available for future use when we support different plant types
+  const { mergedTraitData } = useTraitData();
   // Initialize with all areas expanded - will be set after groupedObservations is computed
   const [expandedAreas, setExpandedAreas] = useState<string[] | null>(null);
   // Thumbnail selection state - stores the URL of the selected thumbnail image
@@ -57,8 +58,8 @@ function PlantDetailPage({
   // Group observations by area
   const groupedObservations = useMemo(() => {
     if (!plant) return [];
-    return groupObservationsByArea(observationMap, traitData);
-  }, [observationMap, plant]);
+    return groupObservationsByArea(observationMap, mergedTraitData);
+  }, [observationMap, plant, mergedTraitData]);
 
   // Initialize all areas as expanded by default
   useEffect(() => {

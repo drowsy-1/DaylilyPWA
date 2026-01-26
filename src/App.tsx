@@ -20,6 +20,8 @@ import TraitObservationPage from './pages/TraitObservationPage';
 import CrossesPage from './pages/CrossesPage';
 import AssignedCrossesPage from './pages/AssignedCrossesPage';
 import ObservationHistoryPage from './pages/ObservationHistoryPage';
+import CustomTraitListPage from './pages/CustomTraitListPage';
+import AddCustomTraitPage from './pages/AddCustomTraitPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
@@ -29,6 +31,7 @@ import type { Page, CrossData, CrossAssignment, PlantDetailContext } from './typ
 import { DEFAULT_SUMMARY_FIELDS } from './types';
 import SummaryFieldsPage from './pages/SummaryFieldsPage';
 import PlantDetailPage from './pages/PlantDetailPage';
+import { TraitDataProvider } from './contexts/TraitDataContext';
 
 type Tab = 'observations' | 'inventory' | 'breeding' | 'store';
 
@@ -59,6 +62,7 @@ function App() {
   const [plantDetailContext, setPlantDetailContext] = useState<PlantDetailContext | null>(null);
   const [observationHistoryFilters, setObservationHistoryFilters] = useState<Record<string, string> | null>(null);
   const [observationHistoryReturnTo, setObservationHistoryReturnTo] = useState<{ page: Page; data?: unknown } | null>(null);
+  const [editCustomTraitContext, setEditCustomTraitContext] = useState<{ areaName: string; groupName: string; traitField: string } | null>(null);
 
   // Get real inventory stats
   const inventoryStats = getInventoryStats();
@@ -185,9 +189,14 @@ function App() {
           setObservationHistoryReturnTo(null);
         }
       }
+      if (page === 'edit-custom-trait' && 'areaName' in data && 'groupName' in data && 'traitField' in data) {
+        setEditCustomTraitContext(data as { areaName: string; groupName: string; traitField: string });
+      }
     } else if (page === 'observation-history') {
       setObservationHistoryFilters(null);
       setObservationHistoryReturnTo(null);
+    } else if (page === 'edit-custom-trait') {
+      setEditCustomTraitContext(null);
     }
   };
 
@@ -202,6 +211,7 @@ function App() {
   };
 
   return (
+    <TraitDataProvider>
     <div className={`app ${isDark ? 'dark' : 'light'}`}>
       {currentPage === 'home' ? (
         <>
@@ -223,8 +233,27 @@ function App() {
       ) : currentPage === 'trait-fields' ? (
         <>
           <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
-          <TraitFieldsPage />
+          <TraitFieldsPage onNavigate={handleNavigate} />
         </>
+      ) : currentPage === 'custom-trait-list' ? (
+        <CustomTraitListPage
+          onNavigate={handleNavigate}
+          isDark={isDark}
+          onToggleTheme={() => setIsDark(!isDark)}
+        />
+      ) : currentPage === 'add-custom-trait' ? (
+        <AddCustomTraitPage
+          onNavigate={handleNavigate}
+          isDark={isDark}
+          onToggleTheme={() => setIsDark(!isDark)}
+        />
+      ) : currentPage === 'edit-custom-trait' && editCustomTraitContext ? (
+        <AddCustomTraitPage
+          onNavigate={handleNavigate}
+          isDark={isDark}
+          onToggleTheme={() => setIsDark(!isDark)}
+          editContext={editCustomTraitContext}
+        />
       ) : currentPage === 'observation-cycles' ? (
         <>
           <Header isDark={isDark} onToggleTheme={() => setIsDark(!isDark)} />
@@ -331,12 +360,13 @@ function App() {
         />
       ) : null}
 
-      <Footer 
-        isMenuOpen={isMenuOpen} 
+      <Footer
+        isMenuOpen={isMenuOpen}
         onToggleMenu={() => setIsMenuOpen(!isMenuOpen)}
         onNavigate={handleNavigate}
       />
     </div>
+    </TraitDataProvider>
   );
 }
 

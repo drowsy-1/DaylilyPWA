@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import { traitData } from '../data/traitData';
-import type { Trait } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
+import type { MergedTrait } from '../utils/traitMerger';
 import TraitField from '../components/TraitField';
 import type { VarietyData } from './AddVarietyPage';
 import type { SeedlingData } from './AddSeedlingPage';
@@ -30,12 +30,13 @@ export default function TraitObservationPage({
   onNavigate,
   onSave
 }: TraitObservationPageProps) {
+  const { mergedTraitData } = useTraitData();
   const [showAllTraits, setShowAllTraits] = useState(false);
-  const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set(traitData.map(a => a.name)));
+  const [expandedAreas, setExpandedAreas] = useState<Set<string>>(() => new Set(mergedTraitData.map(a => a.name)));
   // Initialize all groups as expanded
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(() => {
     const allGroupKeys = new Set<string>();
-    traitData.forEach(area => {
+    mergedTraitData.forEach(area => {
       area.groups.forEach(group => {
         allGroupKeys.add(`${area.name}-${group.name}`);
       });
@@ -47,7 +48,7 @@ export default function TraitObservationPage({
   const currentSeason = getCurrentSeason();
 
   // Filter traits based on seasonality toggle
-  const filterTraits = (traits: Trait[]): Trait[] => {
+  const filterTraits = (traits: MergedTrait[]): MergedTrait[] => {
     if (showAllTraits) {
       // Show all except excludeFromAutomaticCycle
       return traits.filter(t => !t.defaultTiming?.excludeFromAutomaticCycle);
@@ -62,7 +63,7 @@ export default function TraitObservationPage({
 
   // Filter areas and groups to only show those with visible traits
   const filteredAreas = useMemo(() => {
-    return traitData
+    return mergedTraitData
       .filter(area => area.name !== '1. Basic Identifiers') // Exclude basic identifiers (shown in header)
       .map(area => ({
         ...area,
@@ -72,7 +73,8 @@ export default function TraitObservationPage({
         })).filter(group => group.traits.length > 0)
       }))
       .filter(area => area.groups.length > 0);
-  }, [showAllTraits, currentSeason]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showAllTraits, currentSeason, mergedTraitData]);
 
   const toggleArea = (areaName: string) => {
     const newExpanded = new Set(expandedAreas);

@@ -1,0 +1,435 @@
+.add-custom-trait-page {
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+.add-custom-trait-page .page-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: inherit;
+}
+
+.add-custom-trait-page .back-btn,
+.add-custom-trait-page .theme-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(100, 150, 200, 0.15);
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.add-custom-trait-page .back-btn:hover,
+.add-custom-trait-page .theme-toggle:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.add-custom-trait-page .page-content {
+  padding: 0 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.add-custom-trait-page .page-title {
+  margin-bottom: 1.5rem;
+}
+
+.add-custom-trait-page .page-title h1 {
+  font-size: 1.75rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.add-custom-trait-page .page-title p {
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* Progress bar */
+.progress-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.progress-step {
+  flex: 1;
+  height: 4px;
+  background: rgba(100, 150, 200, 0.2);
+  border-radius: 2px;
+  transition: background-color 0.3s;
+}
+
+.progress-step.active {
+  background: rgba(100, 150, 200, 0.6);
+}
+
+.progress-step.completed {
+  background: rgba(100, 200, 150, 0.6);
+}
+
+/* Step content */
+.step-content {
+  min-height: 300px;
+}
+
+/* Form sections */
+.form-section {
+  margin-bottom: 1.5rem;
+}
+
+.section-label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+}
+
+.section-desc {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  margin: -0.5rem 0 1rem 0;
+}
+
+/* Location options */
+.location-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.location-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(100, 150, 200, 0.08);
+  border: 2px solid transparent;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.location-option:hover {
+  background: rgba(100, 150, 200, 0.12);
+}
+
+.location-option.selected {
+  border-color: rgba(100, 150, 200, 0.5);
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.location-option input[type="radio"] {
+  margin-top: 0.25rem;
+}
+
+.option-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.option-title {
+  font-weight: 500;
+}
+
+.option-desc {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+/* Form groups */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 8px;
+  color: inherit;
+  font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.5);
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.form-group input:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.form-hint {
+  display: block;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin-top: 0.5rem;
+}
+
+/* Type options */
+.type-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.type-option {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.type-option:hover {
+  background: rgba(100, 150, 200, 0.15);
+}
+
+.type-option.selected {
+  border-color: rgba(100, 150, 200, 0.5);
+  background: rgba(100, 150, 200, 0.2);
+}
+
+.type-option input[type="radio"] {
+  display: none;
+}
+
+.type-name {
+  font-size: 0.9rem;
+  text-transform: capitalize;
+}
+
+/* Options list (for select type) */
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.option-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.option-row input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border: 1px solid rgba(100, 150, 200, 0.2);
+  border-radius: 8px;
+  color: inherit;
+  font-size: 1rem;
+}
+
+.option-row input:focus {
+  outline: none;
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+.remove-option-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(220, 80, 80, 0.15);
+  color: #dc5050;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.remove-option-btn:hover {
+  background: rgba(220, 80, 80, 0.25);
+}
+
+.add-option-btn {
+  padding: 0.75rem 1rem;
+  background: rgba(100, 150, 200, 0.15);
+  border: 2px dashed rgba(100, 150, 200, 0.3);
+  border-radius: 8px;
+  color: inherit;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-option-btn:hover {
+  background: rgba(100, 150, 200, 0.25);
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+/* Info box */
+.info-box {
+  padding: 1rem;
+  background: rgba(100, 150, 200, 0.1);
+  border-radius: 12px;
+  border-left: 4px solid rgba(100, 150, 200, 0.5);
+}
+
+.info-box p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+/* Toggle row */
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 1rem;
+}
+
+.toggle-row:last-child {
+  margin-bottom: 0;
+}
+
+.toggle-row input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.toggle-row span {
+  font-size: 0.95rem;
+}
+
+/* Review section */
+.review-section {
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+.review-section h3 {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.1rem;
+}
+
+.review-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(100, 150, 200, 0.1);
+}
+
+.review-item:last-child {
+  border-bottom: none;
+}
+
+.review-label {
+  font-size: 0.9rem;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.review-value {
+  font-weight: 500;
+  text-align: right;
+  word-break: break-word;
+}
+
+.review-value.code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.85rem;
+  background: rgba(100, 150, 200, 0.15);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Navigation buttons */
+.step-navigation {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(100, 150, 200, 0.15);
+}
+
+.nav-btn {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.nav-btn.secondary {
+  background: rgba(100, 150, 200, 0.15);
+  color: inherit;
+}
+
+.nav-btn.secondary:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.nav-btn.primary {
+  background: rgba(100, 150, 200, 0.3);
+  color: inherit;
+}
+
+.nav-btn.primary:hover:not(:disabled) {
+  background: rgba(100, 150, 200, 0.4);
+}
+
+.nav-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .add-custom-trait-page .page-content {
+    padding: 0 2rem;
+  }
+
+  .add-custom-trait-page .page-title h1 {
+    font-size: 2rem;
+  }
+
+  .type-options {
+    gap: 0.75rem;
+  }
+
+  .type-option {
+    padding: 0.75rem 1.25rem;
+  }
+}

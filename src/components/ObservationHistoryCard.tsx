@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { traitData } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
+import { getTraitLabel as getTraitLabelFromMerged } from '../utils/traitMerger';
 import './ObservationHistoryCard.css';
 
 export interface FlattenedObservation {
@@ -24,21 +25,6 @@ interface ObservationHistoryCardProps {
   observation: FlattenedObservation;
   selectedTraits: string[];
   onNavigateToPlant?: (plantId: string) => void;
-}
-
-// Get human-readable label for a trait field
-function getTraitLabel(field: string): string {
-  for (const area of traitData) {
-    for (const group of area.groups) {
-      for (const trait of group.traits) {
-        if (trait.field === field) {
-          return trait.label;
-        }
-      }
-    }
-  }
-  // Fallback: convert field name to title case
-  return field.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 }
 
 // Format value for display
@@ -70,8 +56,14 @@ function ObservationHistoryCard({
   selectedTraits,
   onNavigateToPlant
 }: ObservationHistoryCardProps) {
+  const { mergedTraitData } = useTraitData();
   const [isExpanded, setIsExpanded] = useState(false);
   const [showFullObservation, setShowFullObservation] = useState(false);
+
+  // Get human-readable label for a trait field
+  const getTraitLabel = (field: string): string => {
+    return getTraitLabelFromMerged(mergedTraitData, field);
+  };
 
   const { date } = formatObservationDate(observation.observationDate);
   const traitCount = Object.keys(observation.traitValues).length;

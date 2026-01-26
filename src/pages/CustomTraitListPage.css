@@ -1,0 +1,452 @@
+.custom-trait-list-page {
+  min-height: 100vh;
+  padding-bottom: 100px;
+}
+
+.custom-trait-list-page .page-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: inherit;
+}
+
+.custom-trait-list-page .back-btn,
+.custom-trait-list-page .theme-toggle {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(100, 150, 200, 0.15);
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.custom-trait-list-page .back-btn:hover,
+.custom-trait-list-page .theme-toggle:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.custom-trait-list-page .page-content {
+  padding: 0 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.custom-trait-list-page .page-title {
+  margin-bottom: 2rem;
+}
+
+.custom-trait-list-page .page-title h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+}
+
+.custom-trait-list-page .page-title p {
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* Empty state */
+.custom-trait-list-page .empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+.custom-trait-list-page .empty-icon {
+  opacity: 0.4;
+  margin-bottom: 1rem;
+}
+
+.custom-trait-list-page .empty-state h2 {
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem 0;
+}
+
+.custom-trait-list-page .empty-state p {
+  margin: 0;
+  opacity: 0.7;
+}
+
+/* List sections */
+.custom-traits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.list-section {
+  background: rgba(100, 150, 200, 0.05);
+  border-radius: 16px;
+  padding: 1rem;
+  border: 1px solid rgba(100, 150, 200, 0.15);
+}
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Custom area items */
+.custom-area-item {
+  background: rgba(150, 100, 200, 0.1);
+  border-radius: 12px;
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(150, 100, 200, 0.2);
+}
+
+.custom-area-item:last-child {
+  margin-bottom: 0;
+}
+
+.custom-area-item .area-header {
+  width: 100%;
+  padding: 1rem;
+  background: transparent;
+  border: none;
+  color: inherit;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.custom-area-item > .area-actions {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.custom-area-item {
+  position: relative;
+}
+
+.custom-area-item .area-header {
+  padding-right: 3rem;
+}
+
+.area-actions {
+  position: absolute;
+  right: 0.75rem;
+  top: 1rem;
+}
+
+.expand-icon {
+  font-size: 0.8rem;
+  width: 16px;
+}
+
+.area-name {
+  flex: 1;
+}
+
+.area-count {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  font-weight: 400;
+}
+
+.area-content {
+  padding: 0.75rem;
+  border-top: 1px solid rgba(150, 100, 200, 0.15);
+}
+
+/* Default area additions */
+.default-area-additions {
+  margin-bottom: 1rem;
+}
+
+.default-area-additions:last-child {
+  margin-bottom: 0;
+}
+
+.area-name-header {
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 0 0 0.75rem 0;
+  padding-left: 0.5rem;
+  border-left: 3px solid rgba(100, 150, 200, 0.5);
+}
+
+/* Group items */
+.group-item {
+  background: rgba(100, 150, 200, 0.08);
+  border-radius: 10px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.group-item:last-child {
+  margin-bottom: 0;
+}
+
+.group-header-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.group-name {
+  font-weight: 500;
+  flex: 1;
+}
+
+.group-count {
+  font-size: 0.8rem;
+  opacity: 0.6;
+}
+
+/* Default group additions */
+.default-group-additions {
+  margin-bottom: 1rem;
+}
+
+.default-group-additions:last-child {
+  margin-bottom: 0;
+}
+
+.location-header {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin: 0 0 0.75rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.area-part {
+  opacity: 0.7;
+}
+
+.separator {
+  opacity: 0.4;
+}
+
+.group-part {
+  color: inherit;
+}
+
+/* Traits list */
+.traits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.trait-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background: rgba(100, 150, 200, 0.1);
+  border-radius: 8px;
+  gap: 1rem;
+}
+
+.trait-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.trait-label {
+  display: block;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.trait-field {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.5;
+  font-family: 'Courier New', monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.trait-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.trait-type {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(100, 150, 200, 0.2);
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+/* Action buttons */
+.custom-trait-list-page .action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: rgba(100, 150, 200, 0.15);
+  color: inherit;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.custom-trait-list-page .action-btn.small {
+  width: 28px;
+  height: 28px;
+}
+
+.custom-trait-list-page .action-btn:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.custom-trait-list-page .action-btn.edit:hover {
+  background: rgba(100, 150, 200, 0.3);
+}
+
+.custom-trait-list-page .action-btn.delete:hover {
+  background: rgba(220, 80, 80, 0.2);
+  color: #dc5050;
+}
+
+/* Add actions */
+.add-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: rgba(100, 150, 200, 0.2);
+  border: 2px dashed rgba(100, 150, 200, 0.4);
+  border-radius: 12px;
+  color: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  background: rgba(100, 150, 200, 0.3);
+  border-color: rgba(100, 150, 200, 0.6);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.modal-content {
+  background: var(--bg-primary, #1a1a2e);
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.light .modal-content {
+  background: #fff;
+}
+
+.modal-content h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.25rem;
+}
+
+.modal-content p {
+  margin: 0 0 1.5rem 0;
+  opacity: 0.8;
+  line-height: 1.5;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
+.modal-btn {
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.modal-btn.cancel {
+  background: rgba(100, 150, 200, 0.15);
+  color: inherit;
+}
+
+.modal-btn.cancel:hover {
+  background: rgba(100, 150, 200, 0.25);
+}
+
+.modal-btn.delete {
+  background: rgba(220, 80, 80, 0.2);
+  color: #dc5050;
+}
+
+.modal-btn.delete:hover {
+  background: rgba(220, 80, 80, 0.3);
+}
+
+@media (min-width: 768px) {
+  .custom-trait-list-page .page-content {
+    padding: 0 2rem;
+  }
+
+  .custom-trait-list-page .page-title h1 {
+    font-size: 2.5rem;
+  }
+
+  .custom-trait-list-page .list-section {
+    padding: 1.5rem;
+  }
+}

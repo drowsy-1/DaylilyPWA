@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './ObservationCyclesPage.css';
-import { traitData } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
 
 interface ObservationTiming {
   year?: number;
@@ -15,11 +15,13 @@ interface TraitObservationConfig {
 }
 
 function ObservationCyclesPage() {
-  // Initialize default timing from traitData
+  const { mergedTraitData } = useTraitData();
+
+  // Initialize default timing from mergedTraitData
   const initializeDefaultTiming = (): TraitObservationConfig => {
     const defaultConfigs: TraitObservationConfig = {};
-    
-    traitData.forEach(area => {
+
+    mergedTraitData.forEach(area => {
       area.groups.forEach(group => {
         group.traits.forEach(trait => {
           if (trait.defaultTiming) {
@@ -35,13 +37,13 @@ function ObservationCyclesPage() {
         });
       });
     });
-    
+
     return defaultConfigs;
   };
 
   const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set());
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(new Set());
-  const [traitConfigs, setTraitConfigs] = useState<TraitObservationConfig>(initializeDefaultTiming());
+  const [traitConfigs, setTraitConfigs] = useState<TraitObservationConfig>(() => initializeDefaultTiming());
   const [showTimeSelector, setShowTimeSelector] = useState<string | null>(null);
   const [hiddenFields, setHiddenFields] = useState<Set<string>>(new Set());
   const [showHiddenFields, setShowHiddenFields] = useState(false);
@@ -148,8 +150,8 @@ function ObservationCyclesPage() {
 
   const findTraitByField = (fieldName?: string) => {
     if (!fieldName) return null;
-    
-    for (const area of traitData) {
+
+    for (const area of mergedTraitData) {
       for (const group of area.groups) {
         const trait = group.traits.find(t => t.field === fieldName);
         if (trait) return trait;
@@ -188,7 +190,7 @@ function ObservationCyclesPage() {
         
         <div className="control-stats">
           <span className="stat-item">
-            Total Traits: {traitData.reduce((sum, area) => sum + area.groups.reduce((groupSum, group) => groupSum + group.traits.length, 0), 0)}
+            Total Traits: {mergedTraitData.reduce((sum, area) => sum + area.groups.reduce((groupSum, group) => groupSum + group.traits.length, 0), 0)}
           </span>
           <span className="stat-item">
             Hidden: {hiddenFields.size}
@@ -200,7 +202,7 @@ function ObservationCyclesPage() {
       </div>
 
       <div className="trait-areas">
-        {traitData.map((area) => {
+        {mergedTraitData.map((area) => {
           const isAreaExpanded = expandedAreas.has(area.name);
           
           return (
@@ -317,6 +319,7 @@ function ObservationCyclesPage() {
           traitKey={showHideConfirmation}
           onConfirm={() => toggleHideField(showHideConfirmation)}
           onCancel={cancelHideConfirmation}
+          mergedTraitData={mergedTraitData}
         />
       )}
 
@@ -337,15 +340,16 @@ interface HideConfirmationDialogProps {
   traitKey: string;
   onConfirm: () => void;
   onCancel: () => void;
+  mergedTraitData: import('../utils/traitMerger').MergedTraitArea[];
 }
 
-function HideConfirmationDialog({ traitKey, onConfirm, onCancel }: HideConfirmationDialogProps) {
+function HideConfirmationDialog({ traitKey, onConfirm, onCancel, mergedTraitData }: HideConfirmationDialogProps) {
   // Extract trait name from traitKey (format: "trait-field_name")
   const traitField = traitKey.replace('trait-', '');
-  
-  // Find the trait label from traitData
+
+  // Find the trait label from mergedTraitData
   let traitLabel = traitField;
-  for (const area of traitData) {
+  for (const area of mergedTraitData) {
     for (const group of area.groups) {
       const trait = group.traits.find(t => t.field === traitField);
       if (trait) {

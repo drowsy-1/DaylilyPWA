@@ -162,6 +162,52 @@
   white-space: nowrap;
 }
 
+.trait-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Custom trait badges */
+.custom-badge {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  background: rgba(150, 100, 200, 0.3);
+  color: inherit;
+  border-radius: 8px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.custom-badge.small {
+  font-size: 0.7rem;
+  padding: 0.15rem 0.4rem;
+}
+
+.custom-area {
+  border-color: rgba(150, 100, 200, 0.3);
+}
+
+.custom-area > .area-header {
+  background: rgba(150, 100, 200, 0.15);
+}
+
+.custom-area > .area-header:hover {
+  background: rgba(150, 100, 200, 0.25);
+}
+
+.custom-group > .group-header {
+  background: rgba(150, 100, 200, 0.1);
+}
+
+.custom-group > .group-header:hover {
+  background: rgba(150, 100, 200, 0.2);
+}
+
+.custom-trait {
+  border-left: 3px solid rgba(150, 100, 200, 0.5);
+}
+
 @media (min-width: 768px) {
   .trait-fields-page {
     padding: 2rem;

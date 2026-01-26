@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import './SummaryFieldsPage.css';
-import { traitData } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
+import { getAllMergedTraitFields } from '../utils/traitMerger';
 import { DEFAULT_SUMMARY_FIELDS } from '../types';
 import type { Page } from '../types';
 
@@ -17,33 +18,11 @@ interface SummaryFieldsPageProps {
   onToggleTheme: () => void;
 }
 
-// Get all trait fields from traitData only
-function getAllTraitFields() {
-  const fields: { field: string; label: string; area: string; group: string; isNumeric?: boolean }[] = [];
-
-  // Only add traits from traitData
-  traitData.forEach(area => {
-    area.groups.forEach(group => {
-      group.traits.forEach(trait => {
-        if (!fields.find(f => f.field === trait.field)) {
-          fields.push({
-            field: trait.field,
-            label: trait.label,
-            area: area.name,
-            group: group.name,
-            isNumeric: trait.type === 'number' || trait.type === 'rating'
-          });
-        }
-      });
-    });
-  });
-
-  return fields;
-}
-
 function SummaryFieldsPage({ selectedFields, onSave, onNavigate, isDark, onToggleTheme }: SummaryFieldsPageProps) {
-  // Initialize with row info (numeric fields default to row 1, others to row 2)
-  const allFields = getAllTraitFields();
+  const { mergedTraitData } = useTraitData();
+
+  // Get all trait fields from merged data
+  const allFields = useMemo(() => getAllMergedTraitFields(mergedTraitData), [mergedTraitData]);
 
   const initializeFieldConfigs = (fields: string[]): SummaryFieldConfig[] => {
     return fields.map(field => {

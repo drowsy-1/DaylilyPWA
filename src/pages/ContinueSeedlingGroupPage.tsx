@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
-import { traitData } from '../data/traitData';
-import type { Trait } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
+import type { MergedTrait } from '../utils/traitMerger';
 import TraitField from '../components/TraitField';
 import type { Page } from '../types';
 import type { SeedlingGroupData } from './AddSeedlingGroupPage';
@@ -29,6 +29,7 @@ function getCurrentSeason(): string {
 }
 
 function ContinueSeedlingGroupPage({ onNavigate, seedlingGroups, onUpdateSeedlingGroup }: ContinueSeedlingGroupPageProps) {
+  const { mergedTraitData } = useTraitData();
   const currentSeason = getCurrentSeason();
 
   // Step management
@@ -48,10 +49,10 @@ function ContinueSeedlingGroupPage({ onNavigate, seedlingGroups, onUpdateSeedlin
   const [showAllTraits, setShowAllTraits] = useState(false);
 
   // Expansion state for trait areas/groups
-  const [expandedAreas, setExpandedAreas] = useState<Set<string>>(new Set(traitData.map(a => a.name)));
+  const [expandedAreas, setExpandedAreas] = useState<Set<string>>(() => new Set(mergedTraitData.map(a => a.name)));
   const [expandedGroups, setExpandedGroups] = useState<Set<string>>(() => {
     const allGroupKeys = new Set<string>();
-    traitData.forEach(area => {
+    mergedTraitData.forEach(area => {
       area.groups.forEach(group => {
         allGroupKeys.add(`${area.name}-${group.name}`);
       });
@@ -92,7 +93,7 @@ function ContinueSeedlingGroupPage({ onNavigate, seedlingGroups, onUpdateSeedlin
   });
 
   // Filter traits based on seasonality
-  const filterTraits = (traits: Trait[]): Trait[] => {
+  const filterTraits = (traits: MergedTrait[]): MergedTrait[] => {
     if (showAllTraits) {
       return traits.filter(t => !t.defaultTiming?.excludeFromAutomaticCycle);
     }
@@ -105,7 +106,7 @@ function ContinueSeedlingGroupPage({ onNavigate, seedlingGroups, onUpdateSeedlin
 
   // Filtered areas for observation form
   const filteredAreas = useMemo(() => {
-    return traitData
+    return mergedTraitData
       .filter(area => area.name !== '1. Basic Identifiers')
       .map(area => ({
         ...area,
@@ -115,7 +116,8 @@ function ContinueSeedlingGroupPage({ onNavigate, seedlingGroups, onUpdateSeedlin
         })).filter(group => group.traits.length > 0)
       }))
       .filter(area => area.groups.length > 0);
-  }, [showAllTraits, currentSeason]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showAllTraits, currentSeason, mergedTraitData]);
 
   const totalVisibleTraits = filteredAreas.reduce(
     (sum, area) => sum + area.groups.reduce((gSum, g) => gSum + g.traits.length, 0),

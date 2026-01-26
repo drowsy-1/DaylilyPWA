@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { mockInventoryData } from '../data/mockInventory';
-import { traitData } from '../data/traitData';
+import { useTraitData } from '../contexts/TraitDataContext';
+import type { MergedTraitArea } from '../utils/traitMerger';
 import ObservationHistoryCard from '../components/ObservationHistoryCard';
 import type { FlattenedObservation } from '../components/ObservationHistoryCard';
 import type { Page } from '../types';
@@ -109,7 +110,7 @@ function getAvailableYears(observations: FlattenedObservation[]): string[] {
 }
 
 // Get all trait options grouped by area
-function getAllTraitOptions(): Array<{ field: string; label: string; area: string }> {
+function getAllTraitOptions(traitData: MergedTraitArea[]): Array<{ field: string; label: string; area: string }> {
   const options: Array<{ field: string; label: string; area: string }> = [];
 
   for (const area of traitData) {
@@ -128,6 +129,7 @@ function getAllTraitOptions(): Array<{ field: string; label: string; area: strin
 }
 
 function ObservationHistoryPage({ onNavigate, isDark, onToggleTheme, initialFilters, returnTo }: ObservationHistoryPageProps) {
+  const { mergedTraitData } = useTraitData();
   const [filters, setFilters] = useState<ObservationHistoryFilters>({
     year: initialFilters?.year || '',
     season: initialFilters?.season || '',
@@ -146,7 +148,7 @@ function ObservationHistoryPage({ onNavigate, isDark, onToggleTheme, initialFilt
   // Aggregate all observations
   const allObservations = useMemo(() => aggregateAllObservations(), []);
   const availableYears = useMemo(() => getAvailableYears(allObservations), [allObservations]);
-  const traitOptions = useMemo(() => getAllTraitOptions(), []);
+  const traitOptions = useMemo(() => getAllTraitOptions(mergedTraitData), [mergedTraitData]);
 
   // Group trait options by area
   const traitsByArea = useMemo(() => {
