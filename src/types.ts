@@ -20,7 +20,8 @@ export type Page =
   | 'observation-history'
   | 'custom-trait-list'
   | 'add-custom-trait'
-  | 'edit-custom-trait';
+  | 'edit-custom-trait'
+  | 'observation-actions';
 
 export type PlantType = 'variety' | 'seedling' | 'seedling-group';
 

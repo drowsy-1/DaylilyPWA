@@ -3,23 +3,24 @@ import './Footer.css';
 interface FooterProps {
   isMenuOpen: boolean;
   onToggleMenu: () => void;
-  onNavigate: (page: 'home' | 'trait-fields' | 'observation-cycles' | 'summary-fields' | 'location-config' | 'inventory' | 'observation-history') => void;
+  onNavigate: (page: 'home' | 'trait-fields' | 'observation-cycles' | 'summary-fields' | 'location-config' | 'inventory' | 'observation-history' | 'observation-actions') => void;
+  onOpenCamera: () => void;
 }
 
-function Footer({ isMenuOpen, onToggleMenu, onNavigate }: FooterProps) {
+function Footer({ isMenuOpen, onToggleMenu, onNavigate, onOpenCamera }: FooterProps) {
   const menuItems = [
-    { label: 'Home', action: () => onNavigate('home') },
-    { label: 'Observation History', action: () => onNavigate('observation-history') },
-    { label: 'Inventory', action: () => onNavigate('inventory') },
-    { label: 'Breeding', action: () => console.log('Breeding') },
-    { label: 'Store', action: () => console.log('Store') },
-    { label: 'Trait Fields', action: () => onNavigate('trait-fields') },
-    { label: 'Observation Cycle', action: () => onNavigate('observation-cycles') },
-    { label: 'Summary Fields', action: () => onNavigate('summary-fields') },
-    { label: 'Location Setup', action: () => onNavigate('location-config') },
-    { label: 'Settings', action: () => console.log('Settings') },
-    { label: 'Account', action: () => console.log('Account') },
-    { label: 'Logout', action: () => console.log('Logout') },
+    { label: 'Home', action: () => onNavigate('home'), disabled: false },
+    { label: 'Observation History', action: () => onNavigate('observation-history'), disabled: false },
+    { label: 'Inventory', action: () => onNavigate('inventory'), disabled: false },
+    { label: 'Breeding', action: () => {}, disabled: true },
+    { label: 'Store', action: () => {}, disabled: true },
+    { label: 'Trait Fields', action: () => onNavigate('trait-fields'), disabled: false },
+    { label: 'Observation Cycle', action: () => onNavigate('observation-cycles'), disabled: false },
+    { label: 'Summary Fields', action: () => onNavigate('summary-fields'), disabled: false },
+    { label: 'Location Setup', action: () => onNavigate('location-config'), disabled: false },
+    { label: 'Settings', action: () => console.log('Settings'), disabled: false },
+    { label: 'Account', action: () => console.log('Account'), disabled: false },
+    { label: 'Logout', action: () => console.log('Logout'), disabled: false },
   ];
 
   return (
@@ -36,7 +37,11 @@ function Footer({ isMenuOpen, onToggleMenu, onNavigate }: FooterProps) {
             <ul className="menu-list">
               {menuItems.map((item, index) => (
                 <li key={index}>
-                  <button className="menu-item" onClick={item.action}>
+                  <button
+                    className={`menu-item ${item.disabled ? 'menu-item-disabled' : ''}`}
+                    onClick={item.disabled ? undefined : item.action}
+                    disabled={item.disabled}
+                  >
                     {item.label}
                   </button>
                 </li>
@@ -75,22 +80,22 @@ function Footer({ isMenuOpen, onToggleMenu, onNavigate }: FooterProps) {
           </svg>
         </button>
         
-        <button className="footer-btn" aria-label="Camera">
+        <button className="footer-btn" aria-label="Camera" onClick={onOpenCamera}>
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2">
             <rect x="4" y="8" width="24" height="18" rx="2" />
             <circle cx="16" cy="17" r="5" />
             <circle cx="24" cy="11" r="1" fill="currentColor" />
           </svg>
         </button>
-        
-        <button className="footer-btn footer-btn-add" aria-label="Add">
+
+        <button className="footer-btn footer-btn-add" aria-label="Add" onClick={() => onNavigate('observation-actions')}>
           <svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2">
             <line x1="20" y1="8" x2="20" y2="32" />
             <line x1="8" y1="20" x2="32" y2="20" />
           </svg>
         </button>
-        
-        <button className="footer-btn" aria-label="Search">
+
+        <button className="footer-btn" aria-label="Search" onClick={() => onNavigate('inventory')}>
           <svg width="32" height="32" viewBox="0 0 32 32" fill="none" stroke="currentColor" strokeWidth="2">
             <circle cx="14" cy="14" r="8" />
             <line x1="20" y1="20" x2="26" y2="26" />

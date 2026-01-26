@@ -1,0 +1,144 @@
+.observation-actions-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: var(--bg-color, #f5f5f5);
+}
+
+.observation-actions-page .page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  background: var(--card-bg, #fff);
+  border-bottom: 1px solid rgba(100, 150, 200, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.observation-actions-page .page-header h1 {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.observation-actions-page .back-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: inherit;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.observation-actions-page .back-btn:hover {
+  background: rgba(100, 150, 200, 0.1);
+}
+
+.observation-actions-page .back-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.observation-actions-page .header-spacer {
+  width: 40px;
+}
+
+.observation-actions-page .page-content {
+  flex: 1;
+  padding: 1.5rem 1.25rem;
+}
+
+.actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.action-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--card-bg, #fff);
+  border: 2px solid rgba(100, 150, 200, 0.2);
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  color: inherit;
+}
+
+.action-card:hover {
+  background: rgba(100, 150, 200, 0.08);
+  border-color: rgba(100, 150, 200, 0.4);
+  transform: translateY(-2px);
+}
+
+.action-card:active {
+  transform: translateY(0);
+}
+
+.action-icon {
+  flex-shrink: 0;
+}
+
+.action-icon .icon-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(100, 150, 200, 0.2);
+  border-radius: 50%;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.action-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.action-label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.action-description {
+  font-size: 0.85rem;
+  opacity: 0.7;
+}
+
+.action-arrow {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+  opacity: 0.5;
+}
+
+/* Dark mode */
+.dark .observation-actions-page {
+  background: var(--bg-color, #0f0f1a);
+}
+
+.dark .observation-actions-page .page-header,
+.dark .action-card {
+  background: var(--card-bg, #1a1a2e);
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .observation-actions-page .page-content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+}

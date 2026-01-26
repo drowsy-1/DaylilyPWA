@@ -164,6 +164,20 @@
   background: rgba(100, 150, 200, 0.25);
 }
 
+.menu-item-disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  color: inherit;
+}
+
+.menu-item-disabled:hover {
+  background: none;
+}
+
+.menu-item-disabled:active {
+  background: none;
+}
+
 @media (min-width: 768px) {
   .menu-panel {
     max-width: 450px;

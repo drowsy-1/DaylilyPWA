@@ -5,6 +5,8 @@ import './AddNotePage.css';
 interface AddNotePageProps {
   onNavigate: (page: 'home') => void;
   onSave: (note: NoteData) => void;
+  initialPhoto?: string | null;
+  onClearInitialPhoto?: () => void;
 }
 
 export interface NoteData {
@@ -20,7 +22,7 @@ export interface NoteData {
   photos: File[];
 }
 
-function AddNotePage({ onNavigate, onSave }: AddNotePageProps) {
+function AddNotePage({ onNavigate, onSave, initialPhoto, onClearInitialPhoto }: AddNotePageProps) {
   const [plantType, setPlantType] = useState<'variety' | 'seedling' | null>(null);
   const [plantSelection, setPlantSelection] = useState('');
   const [location, setLocation] = useState('');
@@ -30,6 +32,7 @@ function AddNotePage({ onNavigate, onSave }: AddNotePageProps) {
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
   const [photos, setPhotos] = useState<File[]>([]);
+  const [photoDataUrls, setPhotoDataUrls] = useState<string[]>(initialPhoto ? [initialPhoto] : []);
 
   // Get varieties and seedlings from mock data
   const varieties = mockInventoryData.filter(item => item.observationData?.type === 'Registered Variety');
@@ -55,12 +58,28 @@ function AddNotePage({ onNavigate, onSave }: AddNotePageProps) {
 
   const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setPhotos([...photos, ...Array.from(e.target.files)]);
+      const newFiles = Array.from(e.target.files);
+      setPhotos([...photos, ...newFiles]);
+      // Also convert to data URLs for preview
+      newFiles.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          setPhotoDataUrls(prev => [...prev, event.target?.result as string]);
+        };
+        reader.readAsDataURL(file);
+      });
     }
   };
 
   const handleRemovePhoto = (index: number) => {
-    setPhotos(photos.filter((_, i) => i !== index));
+    // Remove from data URLs
+    setPhotoDataUrls(photoDataUrls.filter((_, i) => i !== index));
+    // Calculate the corresponding file index (subtract initialPhoto count if present)
+    const initialPhotoCount = initialPhoto ? 1 : 0;
+    const fileIndex = index - initialPhotoCount;
+    if (fileIndex >= 0) {
+      setPhotos(photos.filter((_, i) => i !== fileIndex));
+    }
   };
 
   const handleSave = () => {
@@ -81,6 +100,9 @@ function AddNotePage({ onNavigate, onSave }: AddNotePageProps) {
   };
 
   const handleCancel = () => {
+    if (onClearInitialPhoto) {
+      onClearInitialPhoto();
+    }
     onNavigate('home');
   };
 
@@ -237,11 +259,11 @@ function AddNotePage({ onNavigate, onSave }: AddNotePageProps) {
               <span>Upload / Take Photo</span>
             </label>
           </div>
-          {photos.length > 0 && (
+          {photoDataUrls.length > 0 && (
             <div className="photo-previews">
-              {photos.map((photo, index) => (
+              {photoDataUrls.map((photoUrl, index) => (
                 <div key={index} className="photo-preview">
-                  <img src={URL.createObjectURL(photo)} alt={`Preview ${index + 1}`} />
+                  <img src={photoUrl} alt={`Preview ${index + 1}`} />
                   <button className="remove-photo" onClick={() => handleRemovePhoto(index)}>&times;</button>
                 </div>
               ))}

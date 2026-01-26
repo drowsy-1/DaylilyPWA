@@ -23,6 +23,7 @@ import ObservationHistoryPage from './pages/ObservationHistoryPage';
 import CustomTraitListPage from './pages/CustomTraitListPage';
 import AddCustomTraitPage from './pages/AddCustomTraitPage';
 import LocationConfigPage from './pages/LocationConfigPage';
+import ObservationActionsPage from './pages/ObservationActionsPage';
 import { getInventoryStats } from './data/mockInventory';
 import type { NoteData } from './pages/AddNotePage';
 import type { VarietyData } from './pages/AddVarietyPage';
@@ -64,12 +65,14 @@ function App() {
   const [observationHistoryFilters, setObservationHistoryFilters] = useState<Record<string, string> | null>(null);
   const [observationHistoryReturnTo, setObservationHistoryReturnTo] = useState<{ page: Page; data?: unknown } | null>(null);
   const [editCustomTraitContext, setEditCustomTraitContext] = useState<{ areaName: string; groupName: string; traitField: string } | null>(null);
+  const [cameraPhoto, setCameraPhoto] = useState<string | null>(null);
 
   // Get real inventory stats
   const inventoryStats = getInventoryStats();
 
   const handleSaveNote = (note: NoteData) => {
     setNotes([note, ...notes]);
+    setCameraPhoto(null); // Clear camera photo after saving
     console.log('Note saved:', note);
   };
 
@@ -154,6 +157,31 @@ function App() {
   const handleSaveSummaryFields = (fields: string[]) => {
     setSummaryFields(fields);
     // TODO: Persist to localStorage
+  };
+
+  const handleOpenCamera = () => {
+    // Create a hidden file input for camera capture
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.capture = 'environment'; // Use rear camera on mobile
+
+    input.onchange = (e) => {
+      const file = (e.target as HTMLInputElement).files?.[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          const photoDataUrl = event.target?.result as string;
+          setCameraPhoto(photoDataUrl);
+          // Navigate to add-note page with the photo
+          setCurrentPage('add-note');
+          setIsMenuOpen(false);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+
+    input.click();
   };
 
   useEffect(() => {
@@ -319,7 +347,12 @@ function App() {
           onAssignCrosses={handleAssignCrosses}
         />
       ) : currentPage === 'add-note' ? (
-        <AddNotePage onNavigate={handleNavigate} onSave={handleSaveNote} />
+        <AddNotePage
+          onNavigate={handleNavigate}
+          onSave={handleSaveNote}
+          initialPhoto={cameraPhoto}
+          onClearInitialPhoto={() => setCameraPhoto(null)}
+        />
       ) : currentPage === 'add-plant' ? (
         <AddPlantPage onNavigate={handleNavigate} />
       ) : currentPage === 'add-variety' ? (
@@ -365,12 +398,18 @@ function App() {
           onNavigate={handleNavigate}
           onSave={handleSaveObservations}
         />
+      ) : currentPage === 'observation-actions' ? (
+        <ObservationActionsPage
+          onNavigate={handleNavigate}
+          onOpenCamera={handleOpenCamera}
+        />
       ) : null}
 
       <Footer
         isMenuOpen={isMenuOpen}
         onToggleMenu={() => setIsMenuOpen(!isMenuOpen)}
         onNavigate={handleNavigate}
+        onOpenCamera={handleOpenCamera}
       />
     </div>
     </TraitDataProvider>
