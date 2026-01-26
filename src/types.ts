@@ -146,3 +146,14 @@ export const DEFAULT_LOCATION_CONFIG: LocationConfig = {
     { key: 'position', label: 'Position', enabled: true, values: [] },
   ],
 };
+
+// Todo Item Types
+export interface TodoItem {
+  id: string;
+  text: string;
+  completed: boolean;
+  completedAt?: string;
+  isYearly: boolean;
+  yearlyDates?: string[]; // Array of MM-DD format dates for yearly recurrence
+  createdAt: string;
+}
